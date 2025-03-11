@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:oavltd/bloc/screen_offset.dart';
 import 'package:oavltd/constant/color.dart';
 import 'package:oavltd/screen/widget/plan_item.dart';
+import 'package:oavltd/screen/widget/responsive.dart';
 import 'package:oavltd/screen/widget/text_reveal.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class FifthSection extends StatefulWidget {
   const FifthSection({super.key});
@@ -15,204 +17,210 @@ class FifthSection extends StatefulWidget {
 }
 
 class _FifthSectionState extends State<FifthSection>
-    with TickerProviderStateMixin {
-  late AnimationController controller;
-  late Animation<double> imageRevealAnimation;
-  late Animation<double> textRevealAnimation;
-  late Animation<double> planAnimation;
-  late Animation<double> subImageRevealAnimation;
-  late Animation<Offset> offsetImage;
-  late Animation<Offset> transform;
-
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(
-        milliseconds: 1700,
-      ),
-      reverseDuration: const Duration(
-        milliseconds: 375,
-      ),
-    );
-
-    imageRevealAnimation = Tween<double>(begin: 500.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: controller,
-            curve: const Interval(1.0, 0.40, curve: Curves.easeOut)));
-
-    textRevealAnimation = Tween<double>(begin: 70.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: controller,
-            curve: const Interval(0.30, 0.60, curve: Curves.easeOut)));
-
-    planAnimation = Tween<double>(begin: 1.0, end: 1.0)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
-    offsetImage =
-        Tween<Offset>(begin: const Offset(-1, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
-    transform =
-        Tween<Offset>(begin: const Offset(10, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
-
-    subImageRevealAnimation = Tween<double>(begin: 1.0, end: 90.0).animate(
-        CurvedAnimation(
-            parent: controller,
-            curve: const Interval(0.70, 1.0, curve: Curves.easeOut)));
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    controller.dispose();
-    super.dispose();
-  }
+     {
+  
+   final List<Map<String, String>> testimonials = [
+    {
+      "quote":
+          "Energy Edge helped Collin College develop a comprehensive procurement strategy consistent with our risk tolerance and business needs that resulted in a significant reduction in energy spend.",
+      "name": "Cindy White",
+      "position": "Director of Procurement, Collin College"
+    },
+    {
+      "quote":
+          "Energy Edge provided us with expert insights and strategies that saved our company thousands in energy costs while ensuring sustainability.",
+      "name": "John Doe",
+      "position": "CEO, Green Energy Inc."
+    },
+    {
+      "quote":
+          "Their expertise and guidance helped us navigate complex energy contracts with confidence, securing the best possible rates.",
+      "name": "Sarah Thompson",
+      "position": "Head of Operations, Bright Future Corp."
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
                 var screenSize = MediaQuery.of(context).size;
 
-    return BlocBuilder<DisplayOffset, ScrollOffset>(
-      buildWhen: (previous, current) {
-        if ((current.scrollOffsetValue >= 1200 &&
-                current.scrollOffsetValue <= 2600) ||
-            controller.isAnimating) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-      builder: (context, state) {
-        //print(state.scrollOffsetValue);
-        if (state.scrollOffsetValue > 1200.0) {
-          //print(state.scrollOffsetValue);
-          controller.forward();
-        } else {
-          controller.reverse();
-        }
-        return 
-        
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: AnimatedBuilder(
-                animation: textRevealAnimation,
-                builder: (context, child) {
-                  return Padding(
-                    padding: EdgeInsets.only(left: screenSize.width /50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextReveal(
-                          maxHeight:  screenSize.width /10,
-                          controller: controller,
-                          child:  Text(
-                            'PRICE',
-                            style: TextStyle(
-                              fontSize:  screenSize.width /30,
-                              fontFamily: 'CH',
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        TextReveal(
-                          maxHeight:  screenSize.width /10,
-                          controller: controller,
-                          child:  Text(
-                            'Flexible Pricing ',
-                            style: TextStyle(
-                              fontSize:  screenSize.width /30,
-                              fontFamily: 'CH',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        TextReveal(
-                          maxHeight:  screenSize.width /10,
-                          controller: controller,
-                          child:  Text(
-                            'for Every Product and Service',
-                            style: TextStyle(
-                              fontSize:  screenSize.width /30,
-                              fontFamily: 'CH',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        TextReveal(
-                          maxHeight:  screenSize.width /10,
-                          controller: controller,
-                          child:  ElevatedButton(
-                        onPressed: () {
-                          context.go('/Our_Services');
+      
 
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                            fixedSize: const Size(150, 50),
-                            backgroundColor:  Colors.blueGrey[900],),
-                        child: const Text(
-                          'Learn more  >>',
-                          style: TextStyle(
-                            fontFamily: 'CH',
-                            fontSize: 13,
+    return ResponsiveWidget.isSmallScreen(context)
+        ? Container(
+            height: 850,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black54,
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/images/testimony.png'))),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                         const Text(
+                    'TESTIMONIALS',
+                    style: TextStyle(
+                      fontSize: 22,
+                      color:  Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                                    const SizedBox(height: 10),
+
+                        Container(
+                          height: 500,
+                          width: 500,
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(15),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
-                            fontWeight: FontWeight.w400,
+                          ),
+                            child: Column(
+                            children: [
+                             
+                               CarouselSlider(
+          options: CarouselOptions(
+            height: 450, // Adjust height as needed
+            autoPlay: true,
+            enlargeCenterPage: true,
+            viewportFraction: 0.9,
+            autoPlayInterval: const Duration(seconds: 5),
+          ),
+          items: testimonials.map((testimonial) {
+            return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '"${testimonial["quote"]}"',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xff4779A3),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    '- ${testimonial["name"]}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    testimonial["position"]!,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xff32CD32),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+                            ],
                           ),
                         ),
-                      ),
-                        )
                       ],
                     ),
-                  );
-                },
+            
+          )
+        : Container(
+            height: 800,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.black54,
+                      BlendMode.darken,
+                    ),
+                    image: AssetImage('assets/images/testimony.png'))),
+                  child:   Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                         const Text(
+                    'TESTIMONIALS',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color:  Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                                    const SizedBox(height: 10),
+
+                        Container(
+                          height: 500,
+                          width: 700,
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(15),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                             
+                               CarouselSlider(
+          options: CarouselOptions(
+            height: 450, // Adjust height as needed
+            autoPlay: true,
+            enlargeCenterPage: true,
+            viewportFraction: 0.9,
+            autoPlayInterval: const Duration(seconds: 5),
+          ),
+          items: testimonials.map((testimonial) {
+            return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '"${testimonial["quote"]}"',
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontStyle: FontStyle.italic,
+                      color: Color(0xff4779A3),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    '- ${testimonial["name"]}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    testimonial["position"]!,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xff32CD32),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    planCard(
-                      planAnimation,
-                      Colors.black,
-                      AppColors.scaffoldColor,
-                      Colors.black,
-                      'Starting From',
-                      'NGN 6000',
-                      context
+            );
+          }).toList(),
+        ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                     planCard(
-                      planAnimation,
-                      Colors.black,
-                      AppColors.scaffoldColor,
-                      Colors.black,
-                      'Starting From',
-                      'NGN 6000',
-                      context
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        );
-      },
-    );
+           );
+    
+    
   }
 }

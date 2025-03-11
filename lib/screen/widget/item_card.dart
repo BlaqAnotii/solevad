@@ -74,8 +74,8 @@ class _ItemCardState extends State<ItemCard>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 345,
-      width: 400,
+      height: 425,
+      width: 480,
       child: BlocBuilder<DisplayOffset, ScrollOffset>(
         buildWhen: (previous, current) {
           if ((current.scrollOffsetValue >= 1200 &&
@@ -98,20 +98,26 @@ class _ItemCardState extends State<ItemCard>
                 return Column(
                   children: [
                     SizedBox(
-                      height: 230.0,
-                      width: 230.0,
+                      height: 290.0,
+                      width: 290.0,
                       child: Center(
                         child: SizedBox(
                           height: imageReveal.value,
                           width: imageReveal.value,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.asset(
-                              widget.image,
-                              fit: BoxFit.cover,
-                              filterQuality: FilterQuality.medium,
-                              scale: 0.5,
+                          child: Container(
+                            height: 450,
+                            width: 450,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(image: AssetImage(widget.image),  fit: BoxFit.cover,
+                              )
                             ),
+                            // child: Image.asset(
+                            //   widget.image,
+                            //   fit: BoxFit.cover,
+                            //   filterQuality: FilterQuality.medium,
+                            //   scale: 0.5,
+                            // ),
                           ),
                         ),
                       ),
@@ -127,9 +133,9 @@ class _ItemCardState extends State<ItemCard>
                           child: Text(
                             widget.title,
                             style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'CH',
-                              fontSize: 15,
+                              color: Color(0xff32CD32),
+                              
+                              fontSize: 19,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -143,9 +149,9 @@ class _ItemCardState extends State<ItemCard>
                             widget.subtitle,
                             style: const TextStyle(
                               color: Colors.black,
-                              fontFamily: 'CH',
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
+                              
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         )

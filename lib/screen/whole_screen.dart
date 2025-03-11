@@ -40,7 +40,7 @@ class _WholeScreenState extends State<WholeScreen> {
       controller: controller,
       children: const [
         FirstSection(),
-        SecondScreen(),
+       // SecondScreen(),
         ThirdSection(),
         SizedBox(
           height: 100.0,
@@ -50,10 +50,8 @@ class _WholeScreenState extends State<WholeScreen> {
           height: 50.0,
         ),
         FifthSection(),
-        SizedBox(
-          height: 50.0,
-        ),
-        SeventhSection(),
+       
+       // SeventhSection(),
         SizedBox(
           height: 100.0,
         ),

@@ -110,19 +110,10 @@ class _EighthSectionState extends State<EighthSection>
                 child: Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColors.secondaryColor,
-                          blurRadius: 30,
-                          blurStyle: BlurStyle.outer)
-                    ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(200),
-                    child: Image.asset(
-                      'assets/images/comm.jpg',
-                      height: 300,
-                    ),
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/comm.jpg',),
+                     radius: 150,
                   ),
                 ),
               ),
@@ -132,16 +123,15 @@ class _EighthSectionState extends State<EighthSection>
               right: state.scrollOffsetValue > 4050
                   ? MediaQuery.of(context).size.width * 0.29
                   : 0,
-              top: state.scrollOffsetValue > 4050 ? 120 : 5,
+              top: state.scrollOffsetValue > 2050 ? 120 : 5,
               child: Visibility(
-                visible: state.scrollOffsetValue > 4050,
+                visible: state.scrollOffsetValue > 2050,
                 child: TextReveal(
                   maxHeight: 100,
                   controller: controller,
                   child: const Text(
-                    'Mercy Etso',
-                    style: TextStyle(
-                      fontFamily: 'CH',
+                    'Leroy Ahwinahwi',
+                    style: TextStyle(             
                       fontSize: 25,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -151,25 +141,24 @@ class _EighthSectionState extends State<EighthSection>
               ),
             ),
             Positioned(
-              left: MediaQuery.of(context).size.width * 0.5,
-              top: 160,
+              left: MediaQuery.of(context).size.width * 0.40,
+              top: 260,
               child: AnimatedOpacity(
                 curve: Curves.easeInCubic,
                 opacity: state.scrollOffsetValue > 4100 ? 1 : 0.1,
                 duration: const Duration(milliseconds: 2000),
                 child: const Text(
-                  'Founder',
+                  'CEO',
                   style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'CH',
+                      color: Colors.black,   
                       fontSize: 20,
-                      fontWeight: FontWeight.normal),
+                      fontWeight: FontWeight.w600),
                 ),
               ),
             ),
             Positioned(
-              left: MediaQuery.of(context).size.width * 0.50,
-              top: 200,
+              left: MediaQuery.of(context).size.width * 0.40,
+              top: 300,
               child: AnimatedOpacity(
                 curve: Curves.easeInCubic,
                 opacity: state.scrollOffsetValue > 4100 ? 1 : 0.1,
@@ -177,10 +166,10 @@ class _EighthSectionState extends State<EighthSection>
                 child: const SizedBox(
                   // width: 400,
                   child: Text(
-                    'Enthusiastic Agro Technologist To combat food insecurity in Africa through\nthe provision of quality agro-inputs, feed manufacturing, and reliable food distribution.',
+                    '"Our organization is composed of\nhighly competent engineers, experienced\nproject managers, and experts\nin renewable energy, all of whom\nshare a fervent commitment to sustainability\nand innovation."',
                     style: TextStyle(
                       color: Colors.black,
-                      fontFamily: 'CH',
+                      
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),

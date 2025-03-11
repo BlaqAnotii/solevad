@@ -100,7 +100,7 @@ class _ThirdSectionState extends State<ThirdSection>
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
+              width: MediaQuery.of(context).size.width * 0.05,
             ),
             Flexible(
               flex: 1,
@@ -112,18 +112,18 @@ class _ThirdSectionState extends State<ThirdSection>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: screenSize.width /30,
+                        height: screenSize.width /60,
                       ),
                       TextReveal(
                         maxHeight: 50,
                         controller: controller,
-                        child: Text(
+                        child: const Text(
                           'About us',
                           style: TextStyle(
                             fontSize: 20,
-                            fontFamily: 'CH',
+                           
                             fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey[900],
+                            color: Color(0xff32CD32),
                           ),
                         ),
                       ),
@@ -131,74 +131,41 @@ class _ThirdSectionState extends State<ThirdSection>
                         height: 10,
                       ),
                       TextReveal(
-                        maxHeight: 50,
+                        maxHeight: 230,
                         controller: controller,
                         child:  Text(
-                          'Major Player',
+                          'Solevad Energy is committed to\nempowering businesses and\nhouseholds with reliable, cost-\neffective solar solutions. ',
                           style: TextStyle(
-                            fontSize: screenSize.width /30,
-                            fontFamily: 'CH',
-                            fontWeight: FontWeight.bold,
+                            fontSize: screenSize.width /35,
+                           
+                            fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextReveal(
-                        maxHeight: screenSize.width /10,
-                        controller: controller,
-                        child:  Text(
-                          'player in Nigeria’s livestock sector',
-                          style: TextStyle(
-                            fontSize: screenSize.width /30,
-                            fontFamily: 'CH',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SlideTransition(
-                        position: transform,
-                        // opacity: subTextOpacityAnimation,
-                        child: Text(
-                          'Committed to providing high-quality agro-inputs and innovative solutions to boost productivity and food security.',
-                          style: TextStyle(
-                            fontFamily: 'CH',
-                            fontSize: screenSize.width /60,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
+                     
+                    
                       const SizedBox(
                         height: 30,
                       ),
                       TextReveal(
                         maxHeight: 50,
                         controller: controller,
-                        child:  ElevatedButton(
+                        child:   ElevatedButton(
                         onPressed: () {
-                                                                          context.go('/Our_Services');
-
+                          //context.go('/Our_Services');
+                          //context.go('/whatsapp');
                         },
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                            fixedSize: const Size(150, 50),
-                            backgroundColor:  Colors.blueGrey[900],),
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
                         child: const Text(
-                          'Learn more  >>',
+                          'Learn more',
                           style: TextStyle(
-                            fontFamily: 'CH',
                             fontSize: 13,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

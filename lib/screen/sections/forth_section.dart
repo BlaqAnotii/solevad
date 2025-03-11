@@ -59,33 +59,18 @@ class _ForthSectionState extends State<ForthSection>
               }
             return Column(
               children: [
-                TextReveal(
-                  controller: controller,
-                  maxHeight: 70.0,
-                  child:  Text(
-                    'OUR SERVICES',
-                    style: TextStyle(
-                      fontFamily: 'CH',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey[900],
-                    ),
+                const Text(
+                  'PRODUCTS & SERVICES',
+                  style: TextStyle(
+                    
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                          color: Color(0xff32CD32),
                   ),
                 ),
-                TextReveal(
-                  controller: controller,
-                  maxHeight: 80.0,
-                  child: const Text(
-                    'Innovate with Agriculture',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'CH',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+               const SizedBox(
+                height: 30,
+               ),
                 Wrap(
                   runAlignment: WrapAlignment.center,
                   crossAxisAlignment: WrapCrossAlignment.center,

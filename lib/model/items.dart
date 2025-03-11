@@ -11,24 +11,24 @@ class Item {
 
 List<Item> items = [
   Item(
-      image: 'assets/images/service4.jpg',
-      title: 'Agro-Inputs',
+      image: 'assets/images/serve1.png',
+      title: 'Solar System Design & Installation',
       subtitle:
-          'We supply premium-quality inputs for livestock, poultry, and fish farming, including drugs, vaccines, feeds, vitamins, and other essential agricultural commodities..'),
+          'Custom design and installation of solar photovoltaic (PV) systems\nfor homes, businesses, and large-scale facilities. Expertise in\nrooftop, ground-mounted, and carport solar systems.'),
   Item(
-      image: 'assets/images/service6.jpg',
-      title: 'Feed Manufacturing',
+      image: 'assets/images/serve2.png',
+      title: 'Energy Consulting',
       subtitle:
-          'Onoseke-vwe Agro Ventures Ltd produces high-quality poultry and fish feeds, including pelleted and floating fish feeds, using advanced production techniques that ensure optimal nutrition for livestock.'),
+          'Comprehensive energy assessments and feasibility studies. Expert\nadvice on transitioning to solar energy and maximizing returns.'),
   Item(
-      image: 'assets/images/service2.jpg',
-      title: 'Farming',
+      image: 'assets/images/serve3.png',
+      title: 'Solar Financing',
       subtitle:
-          'We operate poultry and catfish farms, providing fresh, high-quality chicken and fish products. '),
+          'Assistance with financing options, including leasing and Power\nPurchase Agreements (PPA).'),
   Item(
-      image: 'assets/images/service3.jpg',
-      title: 'Food Processing',
+      image: 'assets/images/serve4.png',
+      title: 'Off-Grid and Hybrid Systems',
       subtitle:
-          'We process and distribute frozen chicken and dried catfish, ensuring a consistent supply of hygienic and nutritious food products to meet market demands.'),
+          'Design and implementation of off-grid solar systems for remote\nlocations. Hybrid solutions combining solar with other energy\nsources for uninterrupted power supply.'),
 
 ];
