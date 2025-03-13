@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oavltd/bloc/screen_offset.dart';
@@ -103,7 +102,7 @@ double _scrollPosition = 0;
         ? _scrollPosition / (screenSize.height * 0.40)
         : 1;
       return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       extendBodyBehindAppBar: true,
       appBar: 
       ResponsiveWidget.isSmallScreen(context)
@@ -1161,7 +1160,7 @@ ResponsiveWidget.isSmallScreen(context)
              const SizedBox(
           height: 60.0,
         ),
-        BottomBar(),
+        const BottomBar(),
       ],
     )
     ); 

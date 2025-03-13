@@ -8,8 +8,12 @@ import 'package:oavltd/bloc/screen_offset.dart';
 import 'package:oavltd/model/about_us.dart';
 import 'package:oavltd/screen/about_us.dart';
 import 'package:oavltd/screen/contact_us.dart';
+import 'package:oavltd/screen/energy.dart';
 import 'package:oavltd/screen/our_community.dart';
 import 'package:oavltd/screen/our_service.dart';
+import 'package:oavltd/screen/product.dart';
+import 'package:oavltd/screen/project.dart';
+import 'package:oavltd/screen/solar.dart';
 import 'package:oavltd/screen/whole_screen.dart';
 import 'package:oavltd/screen/widget/responsive.dart';
 
@@ -31,9 +35,27 @@ void main() {
           },
         ),
         GoRoute(
-          path: 'About_Us',
+          path: '/products&services/solar-services',
           builder: (context, GoRouterState state) {
-            return const AboutUsScreen();
+            return const SolarScreen();
+          },
+        ),
+         GoRoute(
+          path: '/products&services/energy-management',
+          builder: (context, GoRouterState state) {
+            return const EnergyScreen();
+          },
+        ),
+       GoRoute(
+          path: '/products&services/project-management',
+          builder: (context, GoRouterState state) {
+            return const ProjectScreen();
+          },
+        ),
+         GoRoute(
+          path: '/products&services/product-supply',
+          builder: (context, GoRouterState state) {
+            return const ProductScreen();
           },
         ),
         GoRoute(
@@ -116,14 +138,20 @@ class _MyHomePageState extends State<MyHomePage> {
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/our-team"},
-    {"title": "Our Vision", "route": "/our-vision"},
-    {"title": "Our Mission", "route": "/our-mission"},
+      {
+        "title": "Our Vision, Mission & Values",
+        "route": "/our-vision"
+      },
+      {
+        "title": "Careers at Solevad",
+        "route": "/our-mission"
+      },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/solar-services"},
-    {"title": "Energy Management Services", "route": "/energy-management"},
-    {"title": "Project Development & Management", "route": "/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/product-supply"},
+    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Energy Management Services", "route": "/products&services/energy-management"},
+    {"title": "Project Development & Management", "route": "/products&services/project-management"},
+    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
   ],
 };
 
@@ -165,13 +193,13 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   return InkWell(
                     onTap: () {
                       _removeOverlay(); // Close menu
-                      Navigator.pushNamed(context, item["route"]!);
+                      context.go( item["route"]!);
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 16),
                       child: Text(item["title"]!,
-                          style: const TextStyle(color: Colors.black)),
+                          style: const TextStyle(color: Colors.black, fontSize: 17)),
                     ),
                   );
                 }).toList(),
@@ -327,7 +355,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                             SizedBox(width: screenSize.width / 12),
                             _buildMenuItem(context, "About Us", 0),
                     SizedBox(width: screenSize.width / 20),
-                    _buildMenuItem(context, "Our Services", 1),
+                    _buildMenuItem(context, "Products & Services", 1),
                             SizedBox(width: screenSize.width / 20),
                             InkWell(
                               onHover: (value) {
@@ -461,7 +489,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   ),
                   ListTile(
                     title: const Text(
-                      'Our Mission',
+                      'Our Vision, Mission & Values',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -475,7 +503,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   ),
                   ListTile(
                     title: const Text(
-                      'Our Vision',
+                      'Careers at Solevad',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -489,20 +517,90 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   ),
                 ],
               ),
-              const ListTile(
-                leading: Icon(
-                  Iconsax.cloud_lightning_bold,
+              ExpansionTile(
+                leading: const Icon(
+                  Iconsax.bag_2_bold,
                   size: 22,
                   color: Color(0xff4779A3),
                 ),
-                title: Text(
-                  'Our Services',
+                title: const Text(
+                  'Products & Services',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
                   ),
                 ),
+                trailing: const Icon(
+                  Iconsax.arrow_down_1_outline,
+                  size: 22,
+                  color: Colors.black,
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: const Text(
+                      'Comprehensive Solar Service',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      //  navigationService.push(const WithdrawMoneyScreen());
+context.go('/products&services/solar-services');
+                      // Navigate or handle logic for withdrawing money
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Energy Management Services',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for viewing withdrawal list
+                      // navigationService
+                      //     .push(const WithdarwalListScreen());
+                      context.go('/products&services/energy-management');
+
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Project Development & Management',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for withdrawal settings
+                      // navigationService
+                      //     .push(const WithdrawalSettingScreen());
+                                            context.go('/products&services/project-management');
+
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Product Supply and Distribution',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for withdrawal settings
+                      // navigationService
+                      //     .push(const WithdrawalSettingScreen());
+                                            context.go('/products&services/product-supply');
+
+                    },
+                  ),
+                ],
               ),
+             
               const ListTile(
                 leading: Icon(
                   Iconsax.call_add_bold,

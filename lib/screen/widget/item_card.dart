@@ -73,7 +73,7 @@ class _ItemCardState extends State<ItemCard>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 425,
       width: 480,
       child: BlocBuilder<DisplayOffset, ScrollOffset>(

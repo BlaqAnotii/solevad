@@ -84,7 +84,7 @@
 //                             widget.news.title,
 //                             style: const TextStyle(
 //                               color: Colors.white,
-//                               fontFamily: 'CH',
+//                              
 //                               fontSize: 15,
 //                               fontWeight: FontWeight.normal,
 //                             ),
@@ -101,7 +101,7 @@
 //                               widget.news.description,
 //                               style: const TextStyle(
 //                                 color: Colors.white,
-//                                 fontFamily: 'CH',
+//                                
 //                                 fontSize: 12,
 //                                 fontWeight: FontWeight.w200,
 //                               ),
@@ -120,7 +120,7 @@
 //                                 'Nov. 28, 2023',
 //                                 style: TextStyle(
 //                                   color: Colors.white,
-//                                   fontFamily: 'CH',
+//                                  
 //                                   fontSize: 12,
 //                                   fontWeight: FontWeight.w200,
 //                                 ),
@@ -132,7 +132,7 @@
 //                                 'See more',
 //                                 style: TextStyle(
 //                                   color: AppColors.secondaryColor,
-//                                   fontFamily: 'CH',
+//                                  
 //                                   fontSize: 12,
 //                                   fontWeight: FontWeight.w200,
 //                                 ),
@@ -166,7 +166,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/constant/color.dart';
 import 'package:oavltd/model/news.dart';
 
 class NewsCard extends StatefulWidget {
@@ -229,32 +228,44 @@ class _NewsCardState extends State<NewsCard>
             secondCurve: Curves.linear,
             firstChild: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: const Color(0xff2A2A2A),
+                  color: Colors.white, // Background color
+                  borderRadius: BorderRadius.circular(10),
+                 
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5), // Light shadow
+                      blurRadius: 3,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 1,
+                    ),
+                  ],
               ),
             ),
             secondChild: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: const Color(0xff2A2A2A),
-                border: Border.all(
-                  width: 1,
-                  color: AppColors.secondaryColor,
-                ),
+              height: 530,
+             decoration: BoxDecoration(
+                  color: Colors.white, // Background color
+                  borderRadius: BorderRadius.circular(10),
+                 
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5), // Light shadow
+                      blurRadius: 3,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 1,
+                    ),
+                  ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const ClipRRect(
-                    borderRadius: BorderRadius.only(
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.person, color: Colors.white, size: 70,),
-                    ),
+                    child: Image.asset(widget.news.image, fit: BoxFit.cover, scale: 2,)
                   ),
                   const SizedBox(
                     height: 30,
@@ -264,27 +275,27 @@ class _NewsCardState extends State<NewsCard>
                     child: Text(
                       widget.news.title,
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'CH',
-                        fontSize: 15,
+                        color: Color(0xff32CD32),
+                       
+                        fontSize: 17,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: SizedBox(
-                      width: 260,
+                      width: 290,
                       child: Text(
                         widget.news.description,
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'CH',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w200,
+                          color: Colors.black,
+                         
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -292,35 +303,7 @@ class _NewsCardState extends State<NewsCard>
                   const SizedBox(
                     height: 20,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Nov. 28, 2023',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'CH',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w200,
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
-                        ),
-                        const Text(
-                          'See more',
-                          style: TextStyle(
-                            color: AppColors.secondaryColor,
-                            fontFamily: 'CH',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w200,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                 
                 ],
               ),
             ),

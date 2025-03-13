@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/constant/color.dart';
 import 'package:oavltd/screen/widget/text_reveal.dart';
 
 class EighthSection extends StatefulWidget {
@@ -97,7 +96,7 @@ class _EighthSectionState extends State<EighthSection>
         return Stack(
           children: [
             Container(
-              height: 400,
+              height: 500,
             ),
             AnimatedPositioned(
               curve: Curves.easeOutCubic,
@@ -165,12 +164,13 @@ class _EighthSectionState extends State<EighthSection>
                 duration: const Duration(milliseconds: 2000),
                 child: const SizedBox(
                   // width: 400,
+                  height: 200,
                   child: Text(
                     '"Our organization is composed of\nhighly competent engineers, experienced\nproject managers, and experts\nin renewable energy, all of whom\nshare a fervent commitment to sustainability\nand innovation."',
                     style: TextStyle(
                       color: Colors.black,
                       
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

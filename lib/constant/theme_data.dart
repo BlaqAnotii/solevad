@@ -15,7 +15,7 @@ var lightThemeData = ThemeData(
     ),
     displayLarge: TextStyle(color: Colors.blueGrey[800]),
   ),
-  iconTheme: IconThemeData(color: Colors.blueGrey),
+  iconTheme: const IconThemeData(color: Colors.blueGrey),
   brightness: Brightness.light, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey).copyWith(surface: Colors.white),
    shadowColor:  Colors.blueGrey[900],
    appBarTheme: AppBarTheme(color: Colors.blueGrey[900],)
@@ -28,16 +28,16 @@ var darkThemeData = ThemeData(
       color: Colors.blueGrey[200],
       decorationColor: Colors.blueGrey[50],
     ),
-    titleSmall: TextStyle(
+    titleSmall: const TextStyle(
       color: Colors.white,
     ),
     titleMedium: TextStyle(
       color: Colors.blueGrey[300],
     ),
-    displayLarge: TextStyle(
+    displayLarge: const TextStyle(
       color: Colors.white70,
     ),
   ),
   iconTheme: IconThemeData(color: Colors.blueGrey[200]),
-  brightness: Brightness.dark, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey).copyWith(surface: Colors.blueGrey[900]), bottomAppBarTheme: BottomAppBarTheme(color: Colors.black),
+  brightness: Brightness.dark, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey).copyWith(surface: Colors.blueGrey[900]), bottomAppBarTheme: const BottomAppBarTheme(color: Colors.black),
 );

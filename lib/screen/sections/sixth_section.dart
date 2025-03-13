@@ -6,7 +6,6 @@ import 'package:oavltd/model/news.dart';
 import 'package:oavltd/screen/widget/news_card.dart';
 import 'package:oavltd/screen/widget/text_reveal.dart';
 
-import '../../constant/color.dart';
 
 class SixthSection extends StatefulWidget {
   const SixthSection({super.key});
@@ -40,6 +39,7 @@ class _SixthSectionState extends State<SixthSection>
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -62,29 +62,17 @@ class _SixthSectionState extends State<SixthSection>
             }
             return Column(
               children: [
+                
                 TextReveal(
                   maxHeight: 70,
                   controller: controller,
                   child: const Text(
-                    'TESTIMONIALS',
+                    'Learn More About Going Solar with Solevad',
                     style: TextStyle(
-                      fontFamily: 'CH',
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                TextReveal(
-                  maxHeight: 70,
-                  controller: controller,
-                  child: const Text(
-                    'Evidence Our Quality Services',
-                    style: TextStyle(
-                      fontFamily: 'CH',
+                      
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color:Color(0xff32CD32),
                     ),
                   ),
                 ),
@@ -92,7 +80,7 @@ class _SixthSectionState extends State<SixthSection>
                   height: 50,
                 ),
                 SizedBox(
-                  height: 400,
+                  height: 600,
                   child: ListView(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,

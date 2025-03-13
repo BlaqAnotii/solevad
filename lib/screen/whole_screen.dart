@@ -5,8 +5,6 @@ import 'package:oavltd/screen/sections/bottom_bar.dart';
 import 'package:oavltd/screen/sections/eighth_section.dart';
 import 'package:oavltd/screen/sections/fifth_section.dart';
 import 'package:oavltd/screen/sections/forth_section.dart';
-import 'package:oavltd/screen/sections/second_section.dart';
-import 'package:oavltd/screen/sections/seventh_section.dart';
 import 'package:oavltd/screen/sections/third_section.dart';
 
 import '../bloc/screen_offset.dart';
@@ -61,7 +59,7 @@ class _WholeScreenState extends State<WholeScreen> {
         ),
         SixthSection(),
         SizedBox(
-          height: 100.0,
+          height: 50.0,
         ),
         BottomBar(),
       ],

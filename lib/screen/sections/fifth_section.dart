@@ -1,12 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/constant/color.dart';
-import 'package:oavltd/screen/widget/plan_item.dart';
 import 'package:oavltd/screen/widget/responsive.dart';
-import 'package:oavltd/screen/widget/text_reveal.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class FifthSection extends StatefulWidget {

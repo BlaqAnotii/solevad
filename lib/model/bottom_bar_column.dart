@@ -5,13 +5,13 @@ class BottomBarColumn extends StatelessWidget {
   final String s1;
   final String s2;
   final String s3;
-  final  String  s4;
+  final   String   s4;
      VoidCallback ? ontap;
 
 
-  BottomBarColumn({
+  BottomBarColumn({super.key, 
     this.ontap,
-   required  this.s4,
+   required this.s4,
     required this.heading,
     required this.s1,
     required this.s2,
@@ -30,7 +30,7 @@ class BottomBarColumn extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
-                                    fontFamily: 'CH',
+                                    
 
               fontWeight: FontWeight.w500,
             ),
@@ -42,11 +42,11 @@ class BottomBarColumn extends StatelessWidget {
             onTap: ontap,
             child: Text(
               s1,
-              style: TextStyle(
-                                      fontFamily: 'CH',
+              style: const TextStyle(
+                                      
             
-                color: Colors.blueGrey[100],
-                fontSize: 12,
+                color: Colors.white,
+                fontSize: 14,
               ),
             ),
           ),
@@ -55,11 +55,11 @@ class BottomBarColumn extends StatelessWidget {
             onTap: ontap,
             child: Text(
               s2,
-              style: TextStyle(
-                                      fontFamily: 'CH',
+              style: const TextStyle(
+                                      
             
-                color: Colors.blueGrey[100],
-                fontSize: 12,
+                color: Colors.white,
+                fontSize: 14,
               ),
             ),
           ),
@@ -68,11 +68,11 @@ class BottomBarColumn extends StatelessWidget {
             onTap: ontap,
             child: Text(
               s3,
-              style: TextStyle(
-                                      fontFamily: 'CH',
+              style: const TextStyle(
+                                      
             
-                color: Colors.blueGrey[100],
-                fontSize: 12,
+                color: Colors.white,
+                fontSize: 14,
               ),
             ),
           ),
@@ -81,11 +81,11 @@ class BottomBarColumn extends StatelessWidget {
             onTap: ontap,
             child: Text(
               s4,
-              style: TextStyle(
-                                      fontFamily: 'CH',
+              style: const TextStyle(
+                                      
             
-                color: Colors.blueGrey[100],
-                fontSize: 12,
+                color: Colors.white,
+                fontSize: 14,
               ),
             ),
           ),

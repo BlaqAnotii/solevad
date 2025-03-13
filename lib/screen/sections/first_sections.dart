@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:oavltd/constant/color.dart';
 import 'package:oavltd/screen/widget/responsive.dart';
 import 'package:oavltd/screen/widget/text_transform.dart';
@@ -124,7 +123,7 @@ class _FirstSectionState extends State<FirstSection>
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),
-                          backgroundColor:  Color(0xffffffff),
+                          backgroundColor:  const Color(0xffffffff),
                         ),
                         child: const Text(
                           'Learn more',
@@ -209,7 +208,7 @@ class _FirstSectionState extends State<FirstSection>
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),
-                          backgroundColor:  Color(0xffffffff),
+                          backgroundColor:  const Color(0xffffffff),
                         ),
                         child: const Text(
                           'Learn more',

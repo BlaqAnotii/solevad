@@ -4,7 +4,7 @@ class InfoText extends StatelessWidget {
   final String type;
   final String text;
 
-  InfoText({required this.type, required this.text});
+  const InfoText({super.key, required this.type, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +15,20 @@ class InfoText extends StatelessWidget {
       children: [
         Text(
           '$type: ',
-          style: TextStyle(
-            color: Colors.blueGrey[300],
+          style: const TextStyle(
+            color:Colors.white,
             fontSize: 12,
-                                                fontFamily: 'CH',
+                                                
 
           ),
         ),
         Flexible(
           child: Text(
             text,
-            style: TextStyle(
-                                                  fontFamily: 'CH',
+            style: const TextStyle(
+                                                  
 
-              color: Colors.blueGrey[100],
+              color: Colors.white,
               fontSize: 12,
             ),
           ),

@@ -100,7 +100,7 @@ double _scrollPosition = 0;
         : 1;
         
           return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           extendBodyBehindAppBar: true,
           appBar: 
           ResponsiveWidget.isSmallScreen(context)
@@ -808,7 +808,7 @@ double _scrollPosition = 0;
             const SizedBox(
               height: 100.0,
             ),
-            BottomBar(),
+            const BottomBar(),
           ],
               )
               );
