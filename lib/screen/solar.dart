@@ -1918,289 +1918,291 @@ class _SolarScreenState extends State<SolarScreen>
                             ),
                           ],
                         ),
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                          children: [
-                            const SizedBox(
-                                height: 20),
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child:
-                                      TextFormField(
-                                    decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                          left:
-                                              10,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment
+                                    .start,
+                            children: [
+                              const SizedBox(
+                                  height: 20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child:
+                                        TextFormField(
+                                      decoration: const InputDecoration(
+                                          contentPadding: EdgeInsets.only(
+                                            left:
+                                                10,
+                                            top: 5,
+                                            bottom:
+                                                5,
+                                          ),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintStyle: TextStyle(
+                                            color: Colors
+                                                .grey,
+                                            fontWeight:
+                                                FontWeight.w400,
+                                          ),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                            color: Colors
+                                                .grey,
+                                            width:
+                                                0.5,
+                                          )),
+                                          hintText: 'First Name'),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      width: 15),
+                                  Expanded(
+                                      child:
+                                          TextFormField(
+                                    decoration:
+                                        const InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets
+                                                    .only(
+                                              left:
+                                                  10,
+                                              top:
+                                                  5,
+                                              bottom:
+                                                  5,
+                                            ),
+                                            filled:
+                                                true,
+                                            fillColor:
+                                                Colors
+                                                    .white,
+                                            hintStyle:
+                                                TextStyle(
+                                              color:
+                                                  Colors.grey,
+                                              fontWeight:
+                                                  FontWeight.w400,
+                                            ),
+                                            border:
+                                                OutlineInputBorder(
+                                                    borderSide:
+                                                        BorderSide(
+                                              color:
+                                                  Colors.grey,
+                                              width:
+                                                  0.5,
+                                            )),
+                                            hintText:
+                                                'Last Name'),
+                                  )),
+                                ],
+                              ),
+                              const SizedBox(
+                                  height: 30),
+                              TextFormField(
+                                decoration:
+                                    const InputDecoration(
+                                        contentPadding:
+                                            EdgeInsets
+                                                .only(
+                                          left: 10,
                                           top: 5,
-                                          bottom:
-                                              5,
+                                          bottom: 5,
                                         ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintStyle: TextStyle(
+                                        filled:
+                                            true,
+                                        fillColor:
+                                            Colors
+                                                .white,
+                                        hintStyle:
+                                            TextStyle(
                                           color: Colors
                                               .grey,
                                           fontWeight:
-                                              FontWeight.w400,
+                                              FontWeight
+                                                  .w400,
                                         ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                        border:
+                                            OutlineInputBorder(
+                                                borderSide:
+                                                    BorderSide(
                                           color: Colors
                                               .grey,
                                           width:
                                               0.5,
                                         )),
-                                        hintText: 'First Name'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                    width: 15),
-                                Expanded(
+                                        hintText:
+                                            'Address'),
+                              ),
+                              const SizedBox(
+                                  height: 30),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceEvenly,
+                                children: [
+                                  Expanded(
                                     child:
                                         TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
+                                      decoration: const InputDecoration(
+                                          contentPadding: EdgeInsets.only(
                                             left:
                                                 10,
-                                            top:
-                                                5,
+                                            top: 5,
                                             bottom:
                                                 5,
                                           ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          hintStyle: TextStyle(
+                                            color: Colors
+                                                .grey,
                                             fontWeight:
                                                 FontWeight.w400,
                                           ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                            color: Colors
+                                                .grey,
                                             width:
                                                 0.5,
                                           )),
-                                          hintText:
-                                              'Last Name'),
-                                )),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 30),
-                            TextFormField(
-                              decoration:
-                                  const InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets
-                                              .only(
-                                        left: 10,
-                                        top: 5,
-                                        bottom: 5,
-                                      ),
-                                      filled:
-                                          true,
-                                      fillColor:
-                                          Colors
-                                              .white,
-                                      hintStyle:
-                                          TextStyle(
+                                          hintText: 'Email'),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      width: 15),
+                                  Expanded(
+                                      child:
+                                          TextFormField(
+                                    decoration:
+                                        const InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets
+                                                    .only(
+                                              left:
+                                                  10,
+                                              top:
+                                                  5,
+                                              bottom:
+                                                  5,
+                                            ),
+                                            filled:
+                                                true,
+                                            fillColor:
+                                                Colors
+                                                    .white,
+                                            hintStyle:
+                                                TextStyle(
+                                              color:
+                                                  Colors.grey,
+                                              fontWeight:
+                                                  FontWeight.w400,
+                                            ),
+                                            border:
+                                                OutlineInputBorder(
+                                                    borderSide:
+                                                        BorderSide(
+                                              color:
+                                                  Colors.grey,
+                                              width:
+                                                  0.5,
+                                            )),
+                                            hintText:
+                                                'Mobile Phone'),
+                                  )),
+                                ],
+                              ),
+                              const SizedBox(
+                                  height: 50),
+                              Row(
+                                children: [
+                                  Transform.scale(
+                                    scale: 2,
+                                    child: Checkbox(
+                                      side:
+                                          const BorderSide(
                                         color: Colors
                                             .grey,
+                                      ),
+                                      activeColor:
+                                          Colors
+                                              .black,
+                                      focusColor:
+                                          Colors
+                                              .black,
+                                      checkColor:
+                                          Colors
+                                              .grey,
+                                      value:
+                                          termsAccepted,
+                                      onChanged:
+                                          (bool?
+                                              value) {
+                                        setState(
+                                            () {
+                                          termsAccepted =
+                                              value ??
+                                                  false;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Expanded(
+                                    child: Text(
+                                      'I own my Home',
+                                      maxLines: 2,
+                                      style:
+                                          TextStyle(
+                                        fontSize:
+                                            19,
                                         fontWeight:
                                             FontWeight
                                                 .w400,
-                                      ),
-                                      border:
-                                          OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(
                                         color: Colors
-                                            .grey,
-                                        width:
-                                            0.5,
-                                      )),
-                                      hintText:
-                                          'Address'),
-                            ),
-                            const SizedBox(
-                                height: 30),
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child:
-                                      TextFormField(
-                                    decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                          left:
-                                              10,
-                                          top: 5,
-                                          bottom:
-                                              5,
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintStyle: TextStyle(
-                                          color: Colors
-                                              .grey,
-                                          fontWeight:
-                                              FontWeight.w400,
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                          color: Colors
-                                              .grey,
-                                          width:
-                                              0.5,
-                                        )),
-                                        hintText: 'Email'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                    width: 15),
-                                Expanded(
-                                    child:
-                                        TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Mobile Phone'),
-                                )),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 50),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
                                             .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          19,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 20),
-                            const Text(
-                              'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
-                              style: TextStyle(),
-                            ),
-                             const SizedBox(
-                                height: 30),
-                                ElevatedButton(
-                        onPressed: () {
-                          //context.go('/Our_Services');
-                          //context.go('/whatsapp');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 45),
-                          backgroundColor: const Color(0xff4779A3),
-                        ),
-                        child: const Text(
-                          'Get a Quote',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.bold,
+                                ],
+                              ),
+                              const SizedBox(
+                                  height: 20),
+                              const Text(
+                                'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
+                                style: TextStyle(),
+                              ),
+                               const SizedBox(
+                                  height: 30),
+                                  ElevatedButton(
+                          onPressed: () {
+                            //context.go('/Our_Services');
+                            //context.go('/whatsapp');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(170, 45),
+                            backgroundColor: const Color(0xff4779A3),
                           ),
-                        ),
-                      ), 
-                          ],
+                          child: const Text(
+                            'Get a Quote',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xffffffff),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                                                ), 
+                            ],
+                          ),
                         ),
                       ),
                     ],

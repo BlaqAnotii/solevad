@@ -111,7 +111,7 @@ class _EighthSectionState extends State<EighthSection>
                     shape: BoxShape.circle,
                   ),
                   child: const CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/comm.jpg',),
+                    backgroundImage: AssetImage('assets/images/ceo.png',),
                      radius: 150,
                   ),
                 ),

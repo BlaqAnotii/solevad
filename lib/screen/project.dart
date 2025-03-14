@@ -987,51 +987,385 @@ class _ProjectScreenState extends State<ProjectScreen> with SingleTickerProvider
             const Divider(),
                           const SizedBox(height: 70,)    ,         
 
-              //                ResponsiveWidget.isSmallScreen(
-              //       context)
+                             ResponsiveWidget.isSmallScreen(
+                    context)
                   
-              //   ?
-              //   Container(
-              //   margin: const EdgeInsets.only(
-              //     left: 20, right: 20
-              //   ),
-              //   child: const Column(
-              //     children: [
-              //       Column(
-              //         crossAxisAlignment: CrossAxisAlignment.center,
-              //         children: [
-              //           Center(
-              //             child: Text(
-              //                               'Advisory & consultancy for energy management system',
-              //                               style: TextStyle(
-              //                                 color: Color(
-              //                                     0xff32CD32),
-              //                                 fontSize: 20,
-              //                                 fontWeight:
-              //                                     FontWeight
-              //                                         .bold,
-              //                               ),
-              //                             ),
-              //           ),
-              //            SizedBox(
-              //                         height: 30,
-              //                       ),
-              //                       Center(
-              //                         child: Text(
-              //                           'Through consultancy and advisory services, we offer Energy Management System to our clients to a remotely host, managed and supported system. Helping customer increase reliability, and optimize energy usage to reduce cost. We are Committed to providing users with system solutions for energy efficiency management and electricity safety.',
-              //                           style: TextStyle(
-              //                             fontSize: 16,
-              //                           ),
-              //                         ),
-              //                       ),
-              //         ],
-              //       ),
-                   
-              //     ],
-              //   ),
-              // )
-              // :
+                ?
+                Container(
+                margin: const EdgeInsets.only(
+                  left: 20, right: 20
+                ),
+                child:  Column(
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                     Center(
+                          child: Text(
+                                            'What We Do',
+                                            style: TextStyle(
+                                              color: Color(
+                                                  0xff32CD32),
+                                              fontSize: 20,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                            ),
+                                          ),
+                        ),
+                         SizedBox(
+                                      height: 20,
+                                    ),
+                                   Row(
+                                    children: [
+                                      Icon(Icons.arrow_forward_ios,
+                                       color:  Color(0xff4779A3),),
+                                       SizedBox(width: 10,),
+                                       Text(
+                                            'Feasibility Study',
+                                            style: TextStyle(
+                                              
+                                              fontSize: 15,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                            ),
+                                          ),
+                                    ],
+                                   ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                   Row(
+                                    children: [
+                                     Icon(Icons.arrow_forward_ios,
+                                       color:  Color(0xff4779A3),),
+                                       SizedBox(width: 10,),
+                                       Text(
+                                            'Project Planning',
+                                            style: TextStyle(
+                                              
+                                              fontSize: 15,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                            ),
+                                          ),
+                                    ],
+                                   ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                   Row(
+                                    children: [
+                                      Icon(Icons.arrow_forward_ios,
+                                       color:  Color(0xff4779A3),),
+                                       SizedBox(width: 10,),
+                                       Text(
+                                            'Financing and Procurement',
+                                            style: TextStyle(
+                                              
+                                              fontSize: 15,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                            ),
+                                          ),
+                                    ],
+                                   ),
+                                     SizedBox(
+                                      height: 10,
+                                    ),
+                                   Row(
+                                    children: [
+                                      Icon(Icons.arrow_forward_ios,
+                                       color:  Color(0xff4779A3),),
+                                       SizedBox(width: 10,),
+                                       Text(
+                                            'Implementation',
+                                            style: TextStyle(
+                                              
+                                              fontSize: 15,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                            ),
+                                          ),
+                                    ],
+                                   ),   
+                                     SizedBox(
+                                      height: 10,
+                                    ),
+                                   Row(
+                                    children: [
+                                      Icon(Icons.arrow_forward_ios,
+                                       color:  Color(0xff4779A3),),
+                                       SizedBox(width: 10,),
+                                       Text(
+                                            'Performance Monitoring',
+                                            style: TextStyle(
+                                              
+                                              fontSize: 15,
+                                              fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                            ),
+                                          ),
+                                    ],
+                                   ),   
+                      ],
+                    ),
+                     const SizedBox(
+                                      height: 30,
+                                    ),
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                        )
+                      ),
+                       child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                                              'Feasibility Study',
+                                              style: TextStyle(
+                                                color: Color(
+                                                    0xff32CD32),
+                                                fontSize: 20,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                              ),
+                                            ),
+                          ),
+                           SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Site Assessment : Evaluating location suitability for solar installation.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Resource Analysis : Measuring solar radiation, shading, and environmental impact.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Financial Viability : Determining ROI, payback period, and overall project cost-effectiveness.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+SizedBox(
+                                        height: 50,
+                                      ),
+
+                                      Center(
+                            child: Text(
+                                              'Project Planning',
+                                              style: TextStyle(
+                                                color: Color(
+                                                    0xff32CD32),
+                                                fontSize: 20,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                              ),
+                                            ),
+                          ),
+                           SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Design and Engineering : Creating optimal system designs based on energy needs.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Permits and Compliance : Securing local, state, and federal approvals for solar installations.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Stakeholder Engagement : Coordinating with utilities, investors, and community members.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+
+                                      Center(
+                            child: Text(
+                                              'Financing and Procurement',
+                                              style: TextStyle(
+                                                color: Color(
+                                                    0xff32CD32),
+                                                fontSize: 20,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                              ),
+                                            ),
+                          ),
+                           SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Funding Acquisition : Arranging capital through loans, grants, or Power Purchase\nAgreements (PPAs).',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Equipment Procurement : Selecting reliable solar panels, inverters, and other\ncomponents.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    SizedBox(
+                                        height: 50,
+                                      ),
+
+                                      Center(
+                            child: Text(
+                                              'Implementation',
+                                              style: TextStyle(
+                                                color: Color(
+                                                    0xff32CD32),
+                                                fontSize: 20,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                              ),
+                                            ),
+                          ),
+                           SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Installation: Managing on-site activities, including mounting, wiring, and\nconnecting systems.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Project Management: Overseeing schedules, budgets, and quality\nassurance.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+
+                                      Center(
+                            child: Text(
+                                              'Performance Monitoring',
+                                              style: TextStyle(
+                                                color: Color(
+                                                    0xff32CD32),
+                                                fontSize: 20,
+                                                fontWeight:
+                                                    FontWeight
+                                                        .bold,
+                                              ),
+                                            ),
+                          ),
+                           SizedBox(
+                                        height: 30,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Testing: Verifying system performance and efficiency post-installation.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Maintenance Plans: Establishing long-term operation and maintenance protocols.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                       SizedBox(
+                                        height: 10,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          '- Data Monitoring: Implementing real-time tracking systems to monitor\nenergy output.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 190,
+                                      ),
+                                      
+                                      
+                        ],
+                                           ),
+                     ),
+                  ],
+                ),
+              )
+              :
             SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               child: Container(
                 margin: const EdgeInsets.only(
                   left: 120, right: 20
@@ -1412,474 +1746,37 @@ SizedBox(
                 ),
               ),
             ),
-                           
-              const SizedBox(height: 70,)    ,         
-            ResponsiveWidget.isSmallScreen(
+                  const SizedBox(
+              height: 85,
+            ),            
+              Padding(
+               padding: const EdgeInsets.only(
+                left: 5,
+                right: 5,
+              ),
+               child: Text(
+                          'Power Purchase Agreements (PPA) and Project Financing.',
+                          style: TextStyle(
+                            fontSize:  ResponsiveWidget.isSmallScreen(
                     context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn1.png'))),
-                            ),
-                          ],
+                ? 20: 35,
+                            fontWeight:
+                                FontWeight.w700,
+                            color:
+                                const Color(0xff32CD32),
+                          ),
+                          textAlign:
+                              TextAlign.center,
                         ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Load Audit and system design',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'At Solevad Energy, we specialize in providing comprehensive Load Audit and System Design solutions to meet your energy needs efficiently and sustainably. By performing a detailed load audit and designing a solar system to meet our client’s unique energy needs, organizations can maximize efficiency, minimize costs, and contribute to environmental sustainability.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 600,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn1.png'))),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Load Audit and system design',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'At Solevad Energy, we specialize in providing comprehensive Load Audit and System\nDesign solutions to meet your energy needs efficiently and sustainably. By performing\na detailed load audit and designing a solar system to meet our client’s unique energy\nneeds, organizations can maximize efficiency, minimize costs, and contribute to\nenvironmental sustainability.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn2.png'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Energy Usage Analysis Service',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'We also specialize on providing Energy Usage Analysis services designed to help individuals, businesses, and organizations understand and optimize their energy consumption. By understanding consumption patterns, the right capacity for solar panels, inverters, and battery storage can be determined, ensuring cost-effectiveness and reliability.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Energy Usage Analysis Service',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'We also specialize on providing Energy Usage Analysis services designed\nto help individuals, businesses, and organizations understand and optimize\ntheir energy consumption. By understanding consumption patterns, the right\ncapacity for solar panels, inverters, and battery storage can be determined,\nensuring cost-effectiveness and reliability.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 70,
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 650,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn2.png'))),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn33.jpg'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Energy Efficiency Conversion Studies and Implementation',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'At Solevad we are committed to helping clients transition to more energy-efficient systems through Energy Efficiency Conversion Studies and Implementation Services. Our expertise ensures that you maximize energy savings, enhance system performance, and reduce your environmental footprint.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 600,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn33.jpg'))),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Energy Efficiency Conversion Studies and\nImplementation',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'At Solevad we are committed to helping clients transition to more energy-efficient\nsystems through Energy Efficiency Conversion Studies and Implementation\nServices. Our expertise ensures that you maximize energy savings, enhance\nsystem performance, and reduce your environmental\nfootprint. ',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn4.png'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'After-Sales Support Services',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Customer satisfaction is our top priority. That’s why we provide comprehensive After-Sales Support Services to ensure the smooth operation of your purchased products and solutions long after the initial sale.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'After-Sales Support Services',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'Customer satisfaction is our top priority. That’s why we provide comprehensive\nAfter-Sales Support Services to ensure the smooth operation of your\npurchased products and solutions long after the initial sale.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 650,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn4.png'))),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-          
-            const Padding(
-              padding: EdgeInsets.all(40.0),
-              child: Divider(),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-               child: Row(
-                   children: newss
-                       .map((newss) => NewsCards(
-                             newss,
-                           ))
-                       .toList()),
              ),
                 const SizedBox(
-              height: 15,
+              height: 10,
             ),
             const Padding(
-              padding: EdgeInsets.all(40.0),
+              padding: EdgeInsets.only(
+                left: 75,
+                right: 75,
+              ),
               child: Divider(),
             ),
             const SizedBox(
@@ -1887,662 +1784,30 @@ SizedBox(
             ),
             ResponsiveWidget.isSmallScreen(
                     context)
-                ? Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Questions about Energy Management? Request a free online appointment with Solevad.',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color:
-                              Color(0xff32CD32),
-                        ),
-                        textAlign:
-                            TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 650,
-                        width: 700,
-                        margin:
-                            const EdgeInsets.all(
-                                15),
-                        padding:
-                            const EdgeInsets.all(
-                                15),
-                        decoration: BoxDecoration(
-                          color: Colors
-                              .white, // Background color
-                          borderRadius:
-                              BorderRadius
-                                  .circular(10),
-
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(
-                                      0.5), // Light shadow
-                              blurRadius: 3,
-                              offset:
-                                  const Offset(
-                                      0, 4),
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        child:  Column(
-                          children: [
-                             const SizedBox(
-                                height: 20),
-                                 TextFormField(
-                                    decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                          left:
-                                              10,
-                                          top: 5,
-                                          bottom:
-                                              5,
+                ?
+            const Center(
+                                        child: Padding(
+ padding:  EdgeInsets.only(
+                left: 10,
+                right: 10,
+              ),
+                                   child: Text(
+                                            'We believe that partnerships are key to accelerating the transition of renewable energy. We deliver tailored energy solutions efficient procurement processes & more, through our Power Purchase Agreement ensure the financial viability, legal clarity, and operational success of solar installations, especially in large-scale commercial and utility projects.',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
                                         ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintStyle: TextStyle(
-                                          color: Colors
-                                              .grey,
-                                          fontWeight:
-                                              FontWeight.w400,
+                                      )
+                                      : 
+                                      const Center(
+                                        child: Text(
+                                          'We believe that partnerships are key to accelerating the transition of renewable energy. We deliver tailored energy solutions efficient procurement\nprocesses & more, through our Power Purchase Agreement ensure the financial viability, legal clarity, and operational\nsuccess of solar installations, especially in large-scale commercial and utility projects.',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                          color: Colors
-                                              .grey,
-                                          width:
-                                              0.5,
-                                        )),
-                                        hintText: 'First Name'),
-                                  ), 
-                                  const SizedBox(
-                                height: 20),
-                                   TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Last Name'),
-                                ),
-                                 const SizedBox(
-                                height: 20),
-                                   TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Address'),
-                                ),
-                                const SizedBox(
-                                height: 20),
-                                   TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Email'),
-                                ),
-                                const SizedBox(
-                                height: 20),
-                                   TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Mobile Phone'),
-                                ),
-                                 const SizedBox(
-                                height: 20),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 1,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
-                                            .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          15,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                             const SizedBox(
-                                height: 20),
-                            const Text(
-                              'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
-                              style: TextStyle(),
-                            ),
-                             const SizedBox(
-                                height: 30),
-                                Center(
-                                  child: ElevatedButton(
-                                                          onPressed: () {
-                                                            //context.go('/Our_Services');
-                                                            //context.go('/whatsapp');
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                            fixedSize: const Size(170, 45),
-                                                            backgroundColor: const Color(0xff4779A3),
-                                                          ),
-                                                          child: const Text(
-                                                            'Get a Quote',
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              color: Color(0xffffffff),
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),
-                                                        ),
-                                ), 
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.center,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Questions about Energy Management? Request a free online\nappointment with Solevad.',
-                        style: TextStyle(
-                          fontSize: 35,
-                          fontWeight:
-                              FontWeight.w700,
-                          color:
-                              Color(0xff32CD32),
-                        ),
-                        textAlign:
-                            TextAlign.center,
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        height: 500,
-                        width: 1200,
-                        margin:
-                            const EdgeInsets.all(
-                                15),
-                        padding:
-                            const EdgeInsets.all(
-                                25),
-                        decoration: BoxDecoration(
-                          color: Colors
-                              .white, // Background color
-                          borderRadius:
-                              BorderRadius
-                                  .circular(10),
-
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(
-                                      0.5), // Light shadow
-                              blurRadius: 3,
-                              offset:
-                                  const Offset(
-                                      0, 4),
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .start,
-                          children: [
-                            const SizedBox(
-                                height: 20),
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child:
-                                      TextFormField(
-                                    decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                          left:
-                                              10,
-                                          top: 5,
-                                          bottom:
-                                              5,
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintStyle: TextStyle(
-                                          color: Colors
-                                              .grey,
-                                          fontWeight:
-                                              FontWeight.w400,
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                          color: Colors
-                                              .grey,
-                                          width:
-                                              0.5,
-                                        )),
-                                        hintText: 'First Name'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                    width: 15),
-                                Expanded(
-                                    child:
-                                        TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Last Name'),
-                                )),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 30),
-                            TextFormField(
-                              decoration:
-                                  const InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets
-                                              .only(
-                                        left: 10,
-                                        top: 5,
-                                        bottom: 5,
                                       ),
-                                      filled:
-                                          true,
-                                      fillColor:
-                                          Colors
-                                              .white,
-                                      hintStyle:
-                                          TextStyle(
-                                        color: Colors
-                                            .grey,
-                                        fontWeight:
-                                            FontWeight
-                                                .w400,
-                                      ),
-                                      border:
-                                          OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(
-                                        color: Colors
-                                            .grey,
-                                        width:
-                                            0.5,
-                                      )),
-                                      hintText:
-                                          'Address'),
-                            ),
-                            const SizedBox(
-                                height: 30),
-                            Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment
-                                      .spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child:
-                                      TextFormField(
-                                    decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.only(
-                                          left:
-                                              10,
-                                          top: 5,
-                                          bottom:
-                                              5,
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        hintStyle: TextStyle(
-                                          color: Colors
-                                              .grey,
-                                          fontWeight:
-                                              FontWeight.w400,
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                          color: Colors
-                                              .grey,
-                                          width:
-                                              0.5,
-                                        )),
-                                        hintText: 'Email'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                    width: 15),
-                                Expanded(
-                                    child:
-                                        TextFormField(
-                                  decoration:
-                                      const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets
-                                                  .only(
-                                            left:
-                                                10,
-                                            top:
-                                                5,
-                                            bottom:
-                                                5,
-                                          ),
-                                          filled:
-                                              true,
-                                          fillColor:
-                                              Colors
-                                                  .white,
-                                          hintStyle:
-                                              TextStyle(
-                                            color:
-                                                Colors.grey,
-                                            fontWeight:
-                                                FontWeight.w400,
-                                          ),
-                                          border:
-                                              OutlineInputBorder(
-                                                  borderSide:
-                                                      BorderSide(
-                                            color:
-                                                Colors.grey,
-                                            width:
-                                                0.5,
-                                          )),
-                                          hintText:
-                                              'Mobile Phone'),
-                                )),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 50),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
-                                            .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          19,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 20),
-                            const Text(
-                              'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
-                              style: TextStyle(),
-                            ),
-                             const SizedBox(
-                                height: 30),
-                                ElevatedButton(
-                        onPressed: () {
-                          //context.go('/Our_Services');
-                          //context.go('/whatsapp');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 45),
-                          backgroundColor: const Color(0xff4779A3),
-                        ),
-                        child: const Text(
-                          'Get a Quote',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ), 
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
             const SizedBox(
               height: 100.0,
             ),

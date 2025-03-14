@@ -7,10 +7,13 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:oavltd/bloc/screen_offset.dart';
 import 'package:oavltd/model/about_us.dart';
 import 'package:oavltd/screen/about_us.dart';
+import 'package:oavltd/screen/careers.dart';
 import 'package:oavltd/screen/contact_us.dart';
 import 'package:oavltd/screen/energy.dart';
 import 'package:oavltd/screen/our_community.dart';
 import 'package:oavltd/screen/our_service.dart';
+import 'package:oavltd/screen/our_team.dart';
+import 'package:oavltd/screen/our_values.dart';
 import 'package:oavltd/screen/product.dart';
 import 'package:oavltd/screen/project.dart';
 import 'package:oavltd/screen/solar.dart';
@@ -58,6 +61,24 @@ void main() {
             return const ProductScreen();
           },
         ),
+          GoRoute(
+          path: '/about-us/our-team',
+          builder: (context, GoRouterState state) {
+            return const OurTeamScreen();
+          },
+        ),
+             GoRoute(
+          path: '/about-us/our-mission&vision&values',
+          builder: (context, GoRouterState state) {
+            return const OurValuesScreen();
+          },
+        ),
+          GoRoute(
+          path: '/about-us/careers',
+          builder: (context, GoRouterState state) {
+            return const CareerScreen();
+          },
+        ),
         GoRoute(
           path: 'Our_Services',
           builder: (context, GoRouterState state) {
@@ -65,7 +86,7 @@ void main() {
           },
         ),
          GoRoute(
-          path: 'Contact_us',
+          path: '/contact_us',
           builder: (context, GoRouterState state) {
             return const ContactUsScreen();
           },
@@ -137,14 +158,14 @@ class _MyHomePageState extends State<MyHomePage> {
  // List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
-    {"title": "Our Team", "route": "/our-team"},
+    {"title": "Our Team", "route": "/about-us/our-team"},
       {
         "title": "Our Vision, Mission & Values",
-        "route": "/our-vision"
+        "route": "/about-us/our-mission&vision&values"
       },
       {
         "title": "Careers at Solevad",
-        "route": "/our-mission"
+        "route": "/about-us/careers"
       },
   ],
   1: [
@@ -366,7 +387,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                                 });
                               },
                               onTap: () {
-                                //  context.go('/Contact_us');
+                                context.go('/contact_us');
                               },
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -472,6 +493,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   size: 22,
                   color: Colors.black,
                 ),
+       
                 children: <Widget>[
                   ListTile(
                     title: const Text(
@@ -483,6 +505,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
+                                            context.go('/about-us/our-team');
 
                       // Navigate or handle logic for withdrawing money
                     },
@@ -499,6 +522,8 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                       // Navigate or handle logic for viewing withdrawal list
                       // navigationService
                       //     .push(const WithdarwalListScreen());
+                                            context.go('/about-us/our-mission&vision&values');
+
                     },
                   ),
                   ListTile(
@@ -513,6 +538,8 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
+                      context.go('/about-us/careers');
+
                     },
                   ),
                 ],
@@ -601,13 +628,17 @@ context.go('/products&services/solar-services');
                 ],
               ),
              
-              const ListTile(
-                leading: Icon(
+               ListTile(
+                onTap: () {
+               context.go('/contact_us');
+
+                },
+                leading: const Icon(
                   Iconsax.call_add_bold,
                   size: 22,
                   color: Color(0xff4779A3),
                 ),
-                title: Text(
+                title: const Text(
                   'Contact Us',
                   style: TextStyle(
                     fontSize: 15,
