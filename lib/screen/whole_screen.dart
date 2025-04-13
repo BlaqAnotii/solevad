@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/screen/sections/bottom_bar.dart';
-import 'package:oavltd/screen/sections/eighth_section.dart';
-import 'package:oavltd/screen/sections/fifth_section.dart';
-import 'package:oavltd/screen/sections/forth_section.dart';
-import 'package:oavltd/screen/sections/third_section.dart';
+
+import 'package:solevad/screen/sections/bottom_bar.dart';
+import 'package:solevad/screen/sections/eighth_section.dart';
+import 'package:solevad/screen/sections/fifth_section.dart';
+import 'package:solevad/screen/sections/forth_section.dart';
+import 'package:solevad/screen/sections/third_section.dart';
 
 import '../bloc/screen_offset.dart';
 import 'sections/first_sections.dart';

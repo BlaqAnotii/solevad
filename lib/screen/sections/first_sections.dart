@@ -1,8 +1,12 @@
 
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:oavltd/constant/color.dart';
-import 'package:oavltd/screen/widget/responsive.dart';
-import 'package:oavltd/screen/widget/text_transform.dart';
+import 'package:go_router/go_router.dart';
+
+import 'package:solevad/constant/color.dart';
+import 'package:solevad/screen/widget/responsive.dart';
+import 'package:solevad/screen/widget/text_transform.dart';
 
 import '../widget/text_reveal.dart';
 
@@ -53,183 +57,327 @@ class _FirstSectionState extends State<FirstSection>
     super.dispose();
   }
 
+    int _currentIndex = 0;
+
+
+  final List<String> imageList = [
+    'assets/images/section1.png',
+    'assets/images/energy1.png',
+    'assets/images/news5.png',
+  ];
+
+  // final List<Map<String, String>> carouselItems = [
+  //   {
+  //     'title': 'Empowering the future through Clean Energy',
+  //     'subtitle':
+  //         'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+  //     'image': 'assets/images/section1.png',
+  //   },
+  //   {
+  //     'title': 'Our Mission',
+  //     'subtitle':
+  //         'To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.',
+  //     'image': 'assets/images/aboutus3.png',
+  //   },
+  //   {
+  //     'title': 'Our Vision',
+  //     'subtitle':
+  //         'To become the foremost partner for solar energy solutions across Sub-Saharan Africa, driven by strategic alliances with global leaders in technology, manufacturing, and finance.',
+  //     'image': 'assets/images/aboutus4.png',
+  //   },
+  // ];
+
   @override
   Widget build(BuildContext context) {
             var screenSize = MediaQuery.of(context).size;
 
     return ResponsiveWidget.isSmallScreen(context)
           ? 
-           Container(
+           SizedBox(
       height: 500,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                      Colors.black45,
+      child: Stack(
+        children: [
+          CarouselSlider.builder(
+            itemCount:                 imageList.length,
+            itemBuilder: (context, index, realIndex) {
+             // final item = carouselItems[index];
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imageList[index]),
+                    fit: BoxFit.cover,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.black54,
                       BlendMode.darken,
                     ),
-          image: AssetImage('assets/images/section1.png'))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 40, top: 110),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextReveal(
-                    maxHeight: 80,
-                    controller: controller,
-                    textOpacityAnimation: textOpacityAnimation,
-                    textRevealAnimation: textRevealAnimation,
-                    child: const Text(
-                      'Empowering the future through Clean Energy ',
-                      style: TextStyle(
-                          
-                          fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800),
+                  ),
+                ),
+                // child: Padding(
+                //   padding: const EdgeInsets.only(left: 70, top: 130, right: 50),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Text(
+                //         item['title']!,
+                //         style: const TextStyle(
+                //           fontSize: 25,
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.w800,
+                //         ),
+                //       ),
+                //       const SizedBox(height: 20),
+                //       Text(
+                //         item['subtitle']!,
+                //         style: const TextStyle(
+                //           fontSize: 14,
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.w500,
+                //         ),
+                //       ),
+                //       const SizedBox(height: 40),
+                //       ElevatedButton(
+                //         onPressed: () {
+                //           context.go('/contact_us');
+                //         },
+                //         style: ElevatedButton.styleFrom(
+                //           fixedSize: const Size(165, 45),
+                //           backgroundColor: Colors.white,
+                //         ),
+                //         child: const Text(
+                //           'Learn more',
+                //           style: TextStyle(
+                //             fontSize: 13,
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              );
+            },
+            options: CarouselOptions(
+              height: 500,
+              viewportFraction: 1.0,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() => _currentIndex = index);
+              },
+            ),
+          ),
+
+           // Static Text on top
+          Positioned(
+            left: 90,
+            top: 130,
+            right: 50,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Empowering the future through Clean Energy',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () {
+                    context.go('/contact_us');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(165, 45),
+                    backgroundColor: Colors.white,
+                  ),
+                  child: const Text(
+                    'Learn more',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                 
-                  const SizedBox(
-                    height: 18,
+                ),
+              ],
+            ),
+          ),
+
+          // Indicator Dots
+          Positioned(
+            bottom: 30,
+            left: 230,
+            child: Row(
+              children: List.generate(
+                imageList.length,
+                (index) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  width: _currentIndex == index ? 11 : 7,
+                  height: _currentIndex == index ? 11 : 7,
+                  decoration: BoxDecoration(
+                    color: _currentIndex == index ? Colors.white : Colors.grey,
+                    shape: BoxShape.circle,
                   ),
-                  TextTransform(
-                    maxHeight: 150,
-                    controller: controller,
-                    textOpacityAnimation: textOpacityAnimation,
-                    //textRevealAnimation: textRevealAnimation,
-                    child: const Text(
-                      'Solevad Energy is a leading innovator in Clean Energy Technologies, specializing in Solar Power and Battery Storage. We provide tailored solutions, including site feasibility studies, precise system sizing, and efficient implementation, to help clients optimize energy use and reduce costs.',
-                      style: TextStyle(
-                          
-                          fontSize: 13,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    children: [
-                       ElevatedButton(
-                        onPressed: () {
-                          //context.go('/Our_Services');
-                          //context.go('/whatsapp');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 45),
-                          backgroundColor:  const Color(0xffffffff),
-                        ),
-                        child: const Text(
-                          'Learn more',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+                ),
               ),
             ),
           ),
-          //const Expanded(flex: 9, child: FirstPageImage())
         ],
       ),
     )
-          : Container(
+          : SizedBox(
       height: 500,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-                      Colors.black45,
+      child: Stack(
+        children: [
+          CarouselSlider.builder(
+            itemCount: imageList.length,
+            itemBuilder: (context, index, realIndex) {
+             // final item = carouselItems[index];
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imageList[index]),
+                    fit: BoxFit.cover,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.black54,
                       BlendMode.darken,
                     ),
-          image: AssetImage('assets/images/section1.png'))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 90, top: 130),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextReveal(
-                    maxHeight: 100,
-                    controller: controller,
-                    textOpacityAnimation: textOpacityAnimation,
-                    textRevealAnimation: textRevealAnimation,
-                    child: const Text(
-                      'Empowering the future through Clean Energy ',
-                      style: TextStyle(
-                          
-                          fontSize: 45,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800),
+                  ),
+                ),
+                // child: Padding(
+                //   padding: const EdgeInsets.only(left: 90, top: 130, right: 50),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       Text(
+                //         item['title']!,
+                //         style: const TextStyle(
+                //           fontSize: 45,
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.w800,
+                //         ),
+                //       ),
+                //       const SizedBox(height: 20),
+                //       Text(
+                //         item['subtitle']!,
+                //         style: const TextStyle(
+                //           fontSize: 18,
+                //           color: Colors.white,
+                //           fontWeight: FontWeight.w500,
+                //         ),
+                //       ),
+                //       const SizedBox(height: 40),
+                //       ElevatedButton(
+                //         onPressed: () {
+                //           context.go('/contact_us');
+                //         },
+                //         style: ElevatedButton.styleFrom(
+                //           fixedSize: const Size(170, 45),
+                //           backgroundColor: Colors.white,
+                //         ),
+                //         child: const Text(
+                //           'Learn more',
+                //           style: TextStyle(
+                //             fontSize: 13,
+                //             color: Colors.black,
+                //             fontWeight: FontWeight.bold,
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              );
+            },
+            options: CarouselOptions(
+              height: 500,
+              viewportFraction: 1.0,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() => _currentIndex = index);
+              },
+            ),
+          ),
+
+            // Static Text on top
+          Positioned(
+            left: 90,
+            top: 130,
+            right: 50,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Empowering the future through Clean Energy',
+                  style: TextStyle(
+                    fontSize: 45,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () {
+                    context.go('/contact_us');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(170, 45),
+                    backgroundColor: Colors.white,
+                  ),
+                  child: const Text(
+                    'Learn more',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  
-                  const SizedBox(
-                    height: 20,
+                ),
+              ],
+            ),
+          ),
+
+          // Indicator Dots
+          Positioned(
+            bottom: 20,
+            left: 650,
+            child: Row(
+              children: List.generate(
+                imageList.length,
+                (index) => Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  width: _currentIndex == index ? 12 : 8,
+                  height: _currentIndex == index ? 12 : 8,
+                  decoration: BoxDecoration(
+                    color: _currentIndex == index ? Colors.white : Colors.grey,
+                    shape: BoxShape.circle,
                   ),
-                  TextTransform(
-                    maxHeight: 120,
-                    controller: controller,
-                    textOpacityAnimation: textOpacityAnimation,
-                    //textRevealAnimation: textRevealAnimation,
-                    child: const Text(
-                      'Solevad Energy is a leading innovator in Clean Energy Technologies, specializing in Solar Power and Battery Storage.\nWe provide tailored solutions, including site feasibility studies, precise system sizing, and\nefficient implementation, to help clients optimize energy use and reduce costs.',
-                      style: TextStyle(
-                          
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    children: [
-                     ElevatedButton(
-                        onPressed: () {
-                          //context.go('/Our_Services');
-                          //context.go('/whatsapp');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 45),
-                          backgroundColor:  const Color(0xffffffff),
-                        ),
-                        child: const Text(
-                          'Learn more',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      
-                    ],
-                  ),
-                    const SizedBox(
-                    height: 40,
-                  ),
-                ],
+                ),
               ),
             ),
           ),
-          //const Expanded(flex: 9, child: FirstPageImage())
         ],
       ),
     );

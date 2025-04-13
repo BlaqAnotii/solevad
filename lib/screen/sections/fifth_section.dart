@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:oavltd/screen/widget/responsive.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:solevad/screen/widget/responsive.dart';
 
 class FifthSection extends StatefulWidget {
   const FifthSection({super.key});

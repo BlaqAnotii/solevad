@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/model/news.dart';
-import 'package:oavltd/screen/sections/bottom_bar.dart';
-import 'package:oavltd/screen/widget/energy_card.dart';
-import 'package:oavltd/screen/widget/responsive.dart';
-import 'package:oavltd/screen/widget/text_reveal.dart';
-import 'package:oavltd/screen/widget/text_transform.dart';
+
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/model/news.dart';
+import 'package:solevad/screen/sections/bottom_bar.dart';
+import 'package:solevad/screen/widget/energy_card.dart';
+import 'package:solevad/screen/widget/responsive.dart';
+import 'package:solevad/screen/widget/text_reveal.dart';
+import 'package:solevad/screen/widget/text_transform.dart';
 
 class EnergyScreen extends StatefulWidget {
   const EnergyScreen({super.key});
@@ -22,46 +23,27 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
   bool _isSubMenuOpen = false;
   int? _hoveredMenuIndex;
 
-  // List of submenu items with routes
-  final Map<int, List<Map<String, String>>>
-      _subMenuItems = {
-    0: [
-      {"title": "Our Team", "route": "/our-team"},
+  
+ // List of submenu items with routes
+final Map<int, List<Map<String, String>>> _subMenuItems = {
+  0: [
+    {"title": "Our Team", "route": "/about-us/our-team"},
       {
         "title": "Our Vision, Mission & Values",
-        "route": "/our-vision"
+        "route": "/about-us/our-mission&vision&values"
       },
       {
         "title": "Careers at Solevad",
-        "route": "/our-mission"
+        "route": "/about-us/careers"
       },
-    ],
-    1: [
-      {
-        "title": "Comprehensive Solar Services",
-        "route":
-            "/products&services/solar-services"
-      },
-      {
-        "title": "Energy Management Services",
-        "route":
-            "/products&services/energy-management"
-      },
-      {
-        "title":
-            "Project Development & Management",
-        "route":
-            "/products&services/project-management"
-      },
-      {
-        "title":
-            "Product Supply and Distribution",
-        "route":
-            "/products&services/product-supply"
-      },
-    ],
-  };
-
+  ],
+  1: [
+    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Energy Management Services", "route": "/products&services/energy-management"},
+    {"title": "Project Development & Management", "route": "/products&services/project-management"},
+    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+  ],
+};
   /// Show submenu on hover
   void _showSubMenu(BuildContext context,
       int index, Offset position) {
@@ -399,7 +381,7 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
                                   });
                                 },
                                 onTap: () {
-                                  //  context.go('/Contact_us');
+                                   context.go('/contact_us');
                                 },
                                 child: Column(
                                   mainAxisSize:
@@ -492,61 +474,61 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
                 ),
               ),
         drawer: Drawer(
-          child: Container(
-            color: const Color(0xfffffffff),
-            child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
-              mainAxisAlignment:
-                  MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30),
-                Center(
-                  child: Image.asset(
-                    'assets/images/newlogo.png',
-                    scale: 6,
-                  ),
+        child: Container(
+          color: const Color(0xfffffffff),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              Center(
+                child: Image.asset(
+                  'assets/images/newlogo.png',
+                  scale: 6,
                 ),
-                const SizedBox(height: 10),
-                Divider(
-                  color: Colors.blueGrey[400],
-                  thickness: 0.5,
+              ),
+              const SizedBox(height: 10),
+              Divider(
+                color: Colors.blueGrey[400],
+                thickness: 0.5,
+              ),
+              const SizedBox(height: 30),
+              ExpansionTile(
+                leading: const Icon(
+                  Iconsax.profile_2user_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
                 ),
-                const SizedBox(height: 30),
-                ExpansionTile(
-                  leading: const Icon(
-                    Iconsax.profile_2user_bold,
-                    size: 22,
-                    color: Color(0xff4779A3),
-                  ),
-                  title: const Text(
-                    'About us',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                  ),
-                  trailing: const Icon(
-                    Iconsax.arrow_down_1_outline,
-                    size: 22,
+                title: const Text(
+                  'About us',
+                  style: TextStyle(
+                    fontSize: 15,
                     color: Colors.black,
                   ),
-                  children: <Widget>[
-                    ListTile(
-                      title: const Text(
-                        'Our Team',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
+                ),
+                trailing: const Icon(
+                  Iconsax.arrow_down_1_outline,
+                  size: 22,
+                  color: Colors.black,
+                ),
+       
+                children: <Widget>[
+                  ListTile(
+                    title: const Text(
+                      'Our Team',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
                       ),
-                      onTap: () {
-                        //  navigationService.push(const WithdrawMoneyScreen());
-
-                        // Navigate or handle logic for withdrawing money
-                      },
                     ),
-                     ListTile(
+                    onTap: () {
+                      //  navigationService.push(const WithdrawMoneyScreen());
+                                            context.go('/about-us/our-team');
+
+                      // Navigate or handle logic for withdrawing money
+                    },
+                  ),
+                  ListTile(
                     title: const Text(
                       'Our Vision, Mission & Values',
                       style: TextStyle(
@@ -558,6 +540,8 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
                       // Navigate or handle logic for viewing withdrawal list
                       // navigationService
                       //     .push(const WithdarwalListScreen());
+                                            context.go('/about-us/our-mission&vision&values');
+
                     },
                   ),
                   ListTile(
@@ -572,127 +556,131 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
+                      context.go('/about-us/careers');
+
                     },
                   ),
-                  ],
+                ],
+              ),
+              ExpansionTile(
+                leading: const Icon(
+                  Iconsax.bag_2_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
                 ),
-                ExpansionTile(
-                  leading: const Icon(
-                    Iconsax.bag_2_bold,
-                    size: 22,
-                    color: Color(0xff4779A3),
-                  ),
-                  title: const Text(
-                    'Products & Services',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                  ),
-                  trailing: const Icon(
-                    Iconsax.arrow_down_1_outline,
-                    size: 22,
+                title: const Text(
+                  'Products & Services',
+                  style: TextStyle(
+                    fontSize: 15,
                     color: Colors.black,
                   ),
-                  children: <Widget>[
-                    ListTile(
-                      title: const Text(
-                        'Comprehensive Solar Service',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                      onTap: () {
-                        //  navigationService.push(const WithdrawMoneyScreen());
-                        context.go(
-                            '/products&services/solar-services');
-                        // Navigate or handle logic for withdrawing money
-                      },
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Energy Management Services',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                      onTap: () {
-                        // Navigate or handle logic for viewing withdrawal list
-                        // navigationService
-                        //     .push(const WithdarwalListScreen());
-                        context.go(
-                            '/products&services/energy-management');
-                      },
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Project Development & Management',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                      onTap: () {
-                        // Navigate or handle logic for withdrawal settings
-                        // navigationService
-                        //     .push(const WithdrawalSettingScreen());
-                        context.go(
-                            '/products&services/project-management');
-                      },
-                    ),
-                    ListTile(
-                      title: const Text(
-                        'Product Supply and Distribution',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      ),
-                      onTap: () {
-                        // Navigate or handle logic for withdrawal settings
-                        // navigationService
-                        //     .push(const WithdrawalSettingScreen());
-                        context.go(
-                            '/products&services/product-supply');
-                      },
-                    ),
-                  ],
                 ),
-                const ListTile(
-                  leading: Icon(
-                    Iconsax.call_add_bold,
-                    size: 22,
-                    color: Color(0xff4779A3),
-                  ),
-                  title: Text(
-                    'Contact Us',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black,
-                    ),
-                  ),
+                trailing: const Icon(
+                  Iconsax.arrow_down_1_outline,
+                  size: 22,
+                  color: Colors.black,
                 ),
-                const Expanded(
-                  child: Align(
-                    alignment:
-                        Alignment.bottomCenter,
-                    child: Text(
-                      'Copyright © 2024 | Solevad Energy',
+                children: <Widget>[
+                  ListTile(
+                    title: const Text(
+                      'Comprehensive Solar Service',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 13,
-                          fontWeight:
-                              FontWeight.w500),
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
                     ),
+                    onTap: () {
+                      //  navigationService.push(const WithdrawMoneyScreen());
+context.go('/products&services/solar-services');
+                      // Navigate or handle logic for withdrawing money
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Energy Management Services',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for viewing withdrawal list
+                      // navigationService
+                      //     .push(const WithdarwalListScreen());
+                      context.go('/products&services/energy-management');
+
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Project Development & Management',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for withdrawal settings
+                      // navigationService
+                      //     .push(const WithdrawalSettingScreen());
+                                            context.go('/products&services/project-management');
+
+                    },
+                  ),
+                  ListTile(
+                    title: const Text(
+                      'Product Supply and Distribution',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigate or handle logic for withdrawal settings
+                      // navigationService
+                      //     .push(const WithdrawalSettingScreen());
+                                            context.go('/products&services/product-supply');
+
+                    },
+                  ),
+                ],
+              ),
+             
+               ListTile(
+                onTap: () {
+               context.go('/contact_us');
+
+                },
+                leading: const Icon(
+                  Iconsax.call_add_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 10),
-              ],
-            ),
+              ),
+              const Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Copyright © 2024 | Solevad Energy',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
           ),
         ),
+      ),
         body: ListView(
           controller: controllers,
           children: [

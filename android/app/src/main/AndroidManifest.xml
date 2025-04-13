@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="OAVLTD"
+        android:label="SOLEVAD ENERGY"
         android:name="${applicationName}"
         android:icon="@mipmap/earth1">
         <activity

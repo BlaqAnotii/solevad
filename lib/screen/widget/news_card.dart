@@ -165,8 +165,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/model/news.dart';
+
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/model/news.dart';
 
 class NewsCard extends StatefulWidget {
   final News news;

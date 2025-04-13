@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
+import 'package:solevad/bloc/screen_offset.dart';
 
 class ItemCard extends StatefulWidget {
   final String image;

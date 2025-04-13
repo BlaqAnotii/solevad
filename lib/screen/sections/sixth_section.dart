@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/model/news.dart';
-import 'package:oavltd/screen/widget/news_card.dart';
-import 'package:oavltd/screen/widget/text_reveal.dart';
+
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/model/news.dart';
+import 'package:solevad/screen/widget/news_card.dart';
+import 'package:solevad/screen/widget/text_reveal.dart';
 
 
 class SixthSection extends StatefulWidget {
@@ -60,37 +61,40 @@ class _SixthSectionState extends State<SixthSection>
             } else {
               controller.reverse();
             }
-            return Column(
-              children: [
-                
-                TextReveal(
-                  maxHeight: 70,
-                  controller: controller,
-                  child: const Text(
-                    'Learn More About Going Solar with Solevad',
-                    style: TextStyle(
-                      
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color:Color(0xff32CD32),
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  
+                  TextReveal(
+                    maxHeight: 90,
+                    controller: controller,
+                    child: const Text(
+                      'Learn More About Going Solar with Solevad',
+                      style: TextStyle(
+                        
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color:Color(0xff32CD32),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                SizedBox(
-                  height: 600,
-                  child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: news
-                          .map((news) => NewsCard(
-                                news,
-                              ))
-                          .toList()),
-                )
-              ],
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 600,
+                    child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: news
+                            .map((news) => NewsCard(
+                                  news,
+                                ))
+                            .toList()),
+                  )
+                ],
+              ),
             );
           },
         ),

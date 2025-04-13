@@ -10,9 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:oavltd/main.dart';
-import 'package:oavltd/screen/about_us.dart';
-import 'package:oavltd/screen/our_service.dart';
+import 'package:solevad/main.dart';
+
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -31,18 +30,18 @@ void main() {
             return const MyHomePage();
           },
         ),
-        GoRoute(
-          path: 'About_Us',
-          builder: (context, GoRouterState state) {
-            return const AboutUsScreen();
-          },
-        ),
-        GoRoute(
-          path: 'Our_Services',
-          builder: (context, GoRouterState state) {
-            return const OurServiceScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: 'About_Us',
+        //   builder: (context, GoRouterState state) {
+        //     return const AboutUsScreen();
+        //   },
+        // ),
+        // GoRoute(
+        //   path: 'Our_Services',
+        //   builder: (context, GoRouterState state) {
+        //     return const OurServiceScreen();
+        //   },
+        // ),
         //  GoRoute(
         //   path: 'login',
         //   builder: (context, GoRouterState state) {

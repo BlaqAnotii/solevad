@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/model/items.dart';
-import 'package:oavltd/screen/widget/item_card.dart';
+
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/model/items.dart';
+import 'package:solevad/screen/widget/item_card.dart';
 
 class ForthSection extends StatefulWidget {
   const ForthSection({super.key});

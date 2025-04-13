@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/screen/widget/text_reveal.dart';
+
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/screen/widget/text_reveal.dart';
 
 class EighthSection extends StatefulWidget {
   const EighthSection({super.key});

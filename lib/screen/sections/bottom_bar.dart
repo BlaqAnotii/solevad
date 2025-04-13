@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oavltd/model/bottom_bar_column.dart';
-import 'package:oavltd/model/info_text.dart';
-import 'package:oavltd/screen/widget/responsive.dart';
+import 'package:solevad/model/bottom_bar_column.dart';
+import 'package:solevad/model/info_text.dart';
+
+import 'package:solevad/screen/widget/responsive.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});

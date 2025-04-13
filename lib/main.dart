@@ -4,21 +4,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:oavltd/bloc/screen_offset.dart';
-import 'package:oavltd/model/about_us.dart';
-import 'package:oavltd/screen/about_us.dart';
-import 'package:oavltd/screen/careers.dart';
-import 'package:oavltd/screen/contact_us.dart';
-import 'package:oavltd/screen/energy.dart';
-import 'package:oavltd/screen/our_community.dart';
-import 'package:oavltd/screen/our_service.dart';
-import 'package:oavltd/screen/our_team.dart';
-import 'package:oavltd/screen/our_values.dart';
-import 'package:oavltd/screen/product.dart';
-import 'package:oavltd/screen/project.dart';
-import 'package:oavltd/screen/solar.dart';
-import 'package:oavltd/screen/whole_screen.dart';
-import 'package:oavltd/screen/widget/responsive.dart';
+import 'package:solevad/bloc/screen_offset.dart';
+import 'package:solevad/screen/blog.dart';
+import 'package:solevad/screen/careers.dart';
+import 'package:solevad/screen/contact_us.dart';
+import 'package:solevad/screen/energy.dart';
+import 'package:solevad/screen/our_community.dart';
+import 'package:solevad/screen/our_service.dart';
+import 'package:solevad/screen/our_team.dart';
+import 'package:solevad/screen/our_values.dart';
+import 'package:solevad/screen/product.dart';
+import 'package:solevad/screen/project.dart';
+import 'package:solevad/screen/solar.dart';
+import 'package:solevad/screen/whole_screen.dart';
+import 'package:solevad/screen/widget/responsive.dart';
+
 
 
 void main() {
@@ -32,13 +32,13 @@ void main() {
       routes: <RouteBase>[
       
         GoRoute(
-          path: 'home',
+          path: '/home',
           builder: (context, GoRouterState state) {
             return const MyHomePage();
           },
         ),
         GoRoute(
-          path: '/products&services/solar-services',
+          path: '/products&services/solar-development',
           builder: (context, GoRouterState state) {
             return const SolarScreen();
           },
@@ -50,13 +50,13 @@ void main() {
           },
         ),
        GoRoute(
-          path: '/products&services/project-management',
+          path: '/products&services/operation&maintenance',
           builder: (context, GoRouterState state) {
             return const ProjectScreen();
           },
         ),
          GoRoute(
-          path: '/products&services/product-supply',
+          path: '/products&services/solar-financing',
           builder: (context, GoRouterState state) {
             return const ProductScreen();
           },
@@ -79,30 +79,36 @@ void main() {
             return const CareerScreen();
           },
         ),
-        GoRoute(
-          path: 'Our_Services',
-          builder: (context, GoRouterState state) {
-            return const OurServiceScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: 'Our_Services',
+        //   builder: (context, GoRouterState state) {
+        //     return const OurServiceScreen();
+        //   },
+        // ),
          GoRoute(
           path: '/contact_us',
           builder: (context, GoRouterState state) {
             return const ContactUsScreen();
           },
         ),
-         GoRoute(
-          path: 'join_community',
+           GoRoute(
+          path: '/blog',
           builder: (context, GoRouterState state) {
-            return const JoinCommunityScreen ();
+            return const BlogScreen();
           },
         ),
-        GoRoute(
-          path: 'whatsapp',
-          builder: (context, GoRouterState state) {
-            return const Link();
-          },
-        ),
+        //  GoRoute(
+        //   path: 'join_community',
+        //   builder: (context, GoRouterState state) {
+        //     return const JoinCommunityScreen ();
+        //   },
+        // ),
+        // GoRoute(
+        //   path: 'whatsapp',
+        //   builder: (context, GoRouterState state) {
+        //     return const Link();
+        //   },
+        // ),
         // GoRoute(
         //   path: 'join-business',
         //   builder: (context, GoRouterState state) {
@@ -135,7 +141,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Solevad Energy',
       theme: ThemeData(
         useMaterial3: true,
-        fontFamily: 'JosefinSans'
+        fontFamily: 'Mulish'
       ),
         routerConfig: widget.router,
 
@@ -169,10 +175,10 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
 
@@ -194,11 +200,11 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
+              width: 350,
               padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -355,9 +361,15 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(width: screenSize.width / 70),
-                      Image.asset(
-                        'assets/images/newlogo.png',
-                        scale: 6,
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
+                          'assets/images/newlogo.png',
+                          scale: 6,
+                        ),
                       ),
 
                       // const Text(
@@ -374,6 +386,45 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                    SizedBox(width: screenSize.width / 20),
                             _buildMenuItem(context, "About Us", 0),
                     SizedBox(width: screenSize.width / 20),
                     _buildMenuItem(context, "Products & Services", 1),
@@ -382,8 +433,8 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                               onHover: (value) {
                                 setState(() {
                                   value
-                                      ? _isHovering[2] = true
-                                      : _isHovering[2] = false;
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
                                 });
                               },
                               onTap: () {
@@ -395,7 +446,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                                   Text(
                                     'Contact Us',
                                     style: TextStyle(
-                                      color: _isHovering[2]
+                                      color: _isHovering[3]
                                           ? Colors.blue[200]
                                           : Colors.black,
                                           fontWeight: FontWeight.bold
@@ -406,7 +457,46 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                                     maintainAnimation: true,
                                     maintainState: true,
                                     maintainSize: true,
-                                    visible: _isHovering[2],
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
                                     child: Container(
                                       height: 2,
                                       width: 20,
@@ -432,7 +522,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                       ElevatedButton(
                         onPressed: () {
                           //context.go('/Our_Services');
-                          //context.go('/whatsapp');
+                          context.go('/contact_us');
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),
@@ -475,6 +565,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -565,7 +673,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -573,7 +681,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -595,7 +703,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -605,13 +713,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -621,7 +729,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -640,6 +748,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
