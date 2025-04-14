@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:solevad/screen/sections/bottom_bar.dart';
 import 'package:solevad/screen/sections/eighth_section.dart';
+import 'package:solevad/screen/sections/faq.dart';
 import 'package:solevad/screen/sections/fifth_section.dart';
 import 'package:solevad/screen/sections/forth_section.dart';
+import 'package:solevad/screen/sections/market.dart';
 import 'package:solevad/screen/sections/ninth_section.dart';
 import 'package:solevad/screen/sections/seventh_section.dart';
 import 'package:solevad/screen/sections/third_section.dart';
@@ -63,8 +65,16 @@ class _WholeScreenState extends State<WholeScreen> {
           height: 100.0,
         ),
         SixthSection(),
+        SizedBox(
+          height: 50.0,
+        ),
+        Market(),
                 EighthSection(),
-
+       FifthSection(),
+ SizedBox(
+          height: 50.0,
+        ),
+        FAQPage(),
         SizedBox(
           height: 50.0,
         ),

@@ -42,15 +42,17 @@ class _FifthSectionState extends State<FifthSection>
 
     return ResponsiveWidget.isSmallScreen(context)
         ? Container(
-            height: 850,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black54,
-                      BlendMode.darken,
-                    ),
-                    image: AssetImage('assets/images/testimony.png'))),
+            height: 600,
+           decoration: const BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.centerLeft, // Start from the left
+    end: Alignment.centerRight,  // End at the right
+    colors: [
+      Color(0xFF1A1A1A), // Dark gray on the left
+      Color(0xFF2C2C2C), // Slightly lighter gray on the right
+    ],
+  ),
+),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -59,85 +61,77 @@ class _FifthSectionState extends State<FifthSection>
                     'TESTIMONIALS',
                     style: TextStyle(
                       fontSize: 22,
-                      color:  Colors.white,
+              color: Colors.white70,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                                    const SizedBox(height: 10),
 
-                        Container(
-                          height: 500,
-                          width: 500,
-                          margin: const EdgeInsets.all(10),
-                          padding: const EdgeInsets.all(15),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                            child: Column(
-                            children: [
-                             
-                               CarouselSlider(
-          options: CarouselOptions(
-            height: 450, // Adjust height as needed
-            autoPlay: true,
-            enlargeCenterPage: true,
-            viewportFraction: 0.9,
-            autoPlayInterval: const Duration(seconds: 5),
-          ),
-          items: testimonials.map((testimonial) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '"${testimonial["quote"]}"',
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontStyle: FontStyle.italic,
-                      color: Color(0xff4779A3),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '- ${testimonial["name"]}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    testimonial["position"]!,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xff32CD32),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-                            ],
-                          ),
-                        ),
+                        Column(
+                        children: [
+                         
+                           CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 250, // Adjust height as needed
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                    viewportFraction: 0.9,
+                                    autoPlayInterval: const Duration(seconds: 3),
+                                  ),
+                                  items: testimonials.map((testimonial) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '"${testimonial["quote"]}"',
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.white,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            '- ${testimonial["name"]}',
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+              color: Colors.white70,
+                                            ),
+                                          ),
+                                          Text(
+                                            testimonial["position"]!,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff32CD32),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                        ],
+                                                  ),
                       ],
                     ),
             
           )
         : Container(
-            height: 800,
+            height: 400,
             decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black54,
-                      BlendMode.darken,
-                    ),
-                    image: AssetImage('assets/images/testimony.png'))),
+  gradient: LinearGradient(
+    begin: Alignment.centerLeft, // Start from the left
+    end: Alignment.centerRight,  // End at the right
+    colors: [
+      Color(0xFF1A1A1A), // Dark gray on the left
+      Color(0xFF2C2C2C), // Slightly lighter gray on the right
+    ],
+  ),
+),
                   child:   Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -146,70 +140,60 @@ class _FifthSectionState extends State<FifthSection>
                     'TESTIMONIALS',
                     style: TextStyle(
                       fontSize: 30,
-                      color:  Colors.white,
+              color: Colors.white70,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                                    const SizedBox(height: 10),
 
-                        Container(
-                          height: 500,
-                          width: 700,
-                          margin: const EdgeInsets.all(10),
-                          padding: const EdgeInsets.all(15),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            children: [
-                             
-                               CarouselSlider(
-          options: CarouselOptions(
-            height: 450, // Adjust height as needed
-            autoPlay: true,
-            enlargeCenterPage: true,
-            viewportFraction: 0.9,
-            autoPlayInterval: const Duration(seconds: 5),
-          ),
-          items: testimonials.map((testimonial) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '"${testimonial["quote"]}"',
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontStyle: FontStyle.italic,
-                      color: Color(0xff4779A3),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '- ${testimonial["name"]}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    testimonial["position"]!,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xff32CD32),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-                            ],
-                          ),
+                        Column(
+                          children: [
+                           
+                             CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 250, // Adjust height as needed
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                    viewportFraction: 0.9,
+                                    autoPlayInterval: const Duration(seconds: 3),
+                                  ),
+                                  items: testimonials.map((testimonial) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '"${testimonial["quote"]}"',
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.white,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            '- ${testimonial["name"]}',
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+              color: Colors.white70,
+                                            ),
+                                          ),
+                                          Text(
+                                            testimonial["position"]!,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff32CD32),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                          ],
                         ),
                       ],
                     ),

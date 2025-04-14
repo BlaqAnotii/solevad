@@ -301,9 +301,14 @@ class _NewsCardState extends State<NewsCard>
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(
+height: widget.news.index == 1
+      ? 50
+      : widget.news.index == 2
+          ? 80
+          : widget.news.index == 3
+              ? 100
+              : 60,                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(

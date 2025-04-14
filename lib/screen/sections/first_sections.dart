@@ -162,6 +162,8 @@ class _FirstSectionState extends State<FirstSection>
               height: 500,
               viewportFraction: 1.0,
               autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 2),
+                autoPlayAnimationDuration: const Duration(seconds: 2),
               onPageChanged: (index, reason) {
                 setState(() => _currentIndex = index);
               },

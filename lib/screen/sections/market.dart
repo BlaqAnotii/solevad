@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class NinthSection extends StatefulWidget {
-  const NinthSection({super.key});
+class Market extends StatefulWidget {
+  const Market({super.key});
 
   @override
-  State<NinthSection> createState() => _NinthSectionState();
+  State<Market> createState() => _MarketState();
 }
 
-class _NinthSectionState extends State<NinthSection> {
+class _MarketState extends State<Market> {
   @override
   Widget build(BuildContext context) {
-                    var screenSize = MediaQuery.of(context).size;
+           var screenSize = MediaQuery.of(context).size;
 
     return Container(
       margin: const EdgeInsets.only(top: 70),// dark background
@@ -31,7 +31,7 @@ class _NinthSectionState extends State<NinthSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Our Core Values",
+            "Market Overview",
             style: TextStyle(
               color: Colors.white70,
               fontSize: 20,
@@ -40,7 +40,7 @@ class _NinthSectionState extends State<NinthSection> {
           ),
           const SizedBox(height: 16),
            Text(
-            "We are driven by sustainability, grounded in integrity, inspired by\ninnovation, committed to customer focus, and dedicated to excellence in all we do.",
+            "The demand for solar energy in Nigeria is growing rapidly due to\nchallengesin the national power supply and rising fossil fuel costs",
             style: TextStyle(
               color: Colors.white,
            fontSize: screenSize.width /38,
@@ -52,7 +52,7 @@ class _NinthSectionState extends State<NinthSection> {
          ElevatedButton(
                         onPressed: () {
                           //context.go('/Our_Services');
-                          context.go('/contact_us');
+                          //context.go('/contact_us');
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),

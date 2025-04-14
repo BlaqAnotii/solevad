@@ -120,11 +120,19 @@ class AboutCard extends StatelessWidget {
           // Image with overlay title
           Stack(
             children: [
-              Image.asset(
-                imagePath,
-                height: 180,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              ColorFiltered(
+                colorFilter: ColorFilter.mode(
+        Colors.black.withOpacity(0.4), // Adjust opacity
+        BlendMode.darken,
+      ),
+                child: Image.asset(
+                  imagePath,
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                
+                  
+                ),
               ),
               Positioned(
                 bottom: 12,
@@ -134,7 +142,7 @@ class AboutCard extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                        color:Colors.white,
                     shadows: [
                       Shadow(blurRadius: 4, color: Colors.black45),
                     ],
