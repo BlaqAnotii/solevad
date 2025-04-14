@@ -15,30 +15,30 @@ class News {
 
 List<News> news = [
   News(
-    image: 'assets/images/learn1.png',
-    title: 'Load Audit and system design',
+    image: 'assets/images/serve1.png',
+    title: 'Solar Development',
     description:
-        "At Solevad Energy, we specialize in providing comprehensive Load Audit and System Design solutions to meet your energy needs efficiently and sustainably. By performing a detailed load audit and designing a solar system to meet our client’s unique energy needs, organizations can maximize efficiency, minimize costs, and contribute to environmental sustainability.",
+        "We specialize in the custom design and installation of solar photovoltaic (PV) systems for homes, businesses, and large-scale facilities. Our expertise spans rooftop, ground-mounted, and carport solar systems.",
     index: 1,
   ),
   News(
-image: 'assets/images/learn2.png',
-      title: 'Energy Usage Analysis Service',
+image: 'assets/images/serve2.png',
+      title: 'Energy Management',
       description:
-          "We also specialize on providing Energy Usage Analysis services designed to help individuals, businesses, and organizations understand and optimize their energy consumption. By understanding consumption patterns, the right capacity for solar panels, inverters, and battery storage can be determined, ensuring cost-effectiveness and reliability.",
+          "We provide consulting and advisory services to help clients optimize energy usage, enhance reliability, and reduce costs.",
       index: 2),
   News(
-   image: 'assets/images/learn33.jpg',
-    title: 'Energy Efficiency Conversion Studies\nand Implementation',
+   image: 'assets/images/serve4.png',
+    title: 'Operation and Maintenance',
     description:
-        "At Solevad we are committed to helping clients transition to more energy-efficient systems through Energy Efficiency Conversion Studies and Implementation Services. Our expertise ensures that you maximize energy savings, enhance system performance, and reduce your environmental footprint.",
+        "To ensure optimal performance and longevity, we provide comprehensive operation and maintenance services.",
     index: 3,
   ),
   News(
-   image: 'assets/images/learn4.png',
-    title: 'After-Sales Support Services',
+   image: 'assets/images/serve3.png',
+    title: 'Solar Financing',
     description:
-        "Customer satisfaction is our top priority. That’s why we provide comprehensive After-Sales Support Services to ensure the smooth operation of your purchased products and solutions long after the initial sale.",
+        "We make solar energy accessible and affordable by offering flexible financing solutions designed to meet diverse needs, through the following key components.",
     index: 4,
   ),
   

@@ -6,6 +6,8 @@ import 'package:solevad/screen/sections/bottom_bar.dart';
 import 'package:solevad/screen/sections/eighth_section.dart';
 import 'package:solevad/screen/sections/fifth_section.dart';
 import 'package:solevad/screen/sections/forth_section.dart';
+import 'package:solevad/screen/sections/ninth_section.dart';
+import 'package:solevad/screen/sections/seventh_section.dart';
 import 'package:solevad/screen/sections/third_section.dart';
 
 import '../bloc/screen_offset.dart';
@@ -39,26 +41,30 @@ class _WholeScreenState extends State<WholeScreen> {
       controller: controller,
       children: const [
         FirstSection(),
+              ThirdSection(),
+
+        SeventhSection(),
+        NinthSection(),
        // SecondScreen(),
-        ThirdSection(),
-        SizedBox(
-          height: 100.0,
-        ),
-        ForthSection(),
-        SizedBox(
-          height: 50.0,
-        ),
-        FifthSection(),
+       // ThirdSection(),
+        // SizedBox(
+        //   height: 100.0,
+        // ),
+       // ForthSection(),
+        // SizedBox(
+        //   height: 50.0,
+        // ),
+       // FifthSection(),
        
-       // SeventhSection(),
-        SizedBox(
-          height: 100.0,
-        ),
-        EighthSection(),
+        // SizedBox(
+        //   height: 100.0,
+        // ),
         SizedBox(
           height: 100.0,
         ),
         SixthSection(),
+                EighthSection(),
+
         SizedBox(
           height: 50.0,
         ),

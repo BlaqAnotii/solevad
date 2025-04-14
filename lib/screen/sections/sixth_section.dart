@@ -24,10 +24,10 @@ class _SixthSectionState extends State<SixthSection>
     controller = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 1000,
+        milliseconds: 1800,
       ),
       reverseDuration: const Duration(
-        milliseconds: 375,
+        milliseconds: 1000,
       ),
     );
     super.initState();
@@ -55,7 +55,7 @@ class _SixthSectionState extends State<SixthSection>
             }
           },
           builder: (context, state) {
-            if (state.scrollOffsetValue > 4200.0) {
+            if (state.scrollOffsetValue > 2200.0) {
               //print(state.scrollOffsetValue);
               controller.forward();
             } else {
@@ -70,7 +70,7 @@ class _SixthSectionState extends State<SixthSection>
                     maxHeight: 90,
                     controller: controller,
                     child: const Text(
-                      'Learn More About Going Solar with Solevad',
+                      'Products & Services',
                       style: TextStyle(
                         
                         fontSize: 30,

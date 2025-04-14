@@ -1,96 +1,65 @@
-// import 'package:flutter/material.dart';
-// import 'package:oavltd/constant/color.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-// class NinthSection extends StatefulWidget {
-//   const NinthSection({super.key});
+class NinthSection extends StatefulWidget {
+  const NinthSection({super.key});
 
-//   @override
-//   State<NinthSection> createState() => _NinthSectionState();
-// }
+  @override
+  State<NinthSection> createState() => _NinthSectionState();
+}
 
-// class _NinthSectionState extends State<NinthSection> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: MediaQuery.of(context).size.width,
-//       decoration: const BoxDecoration(
-//         border: Border(
-//           top: BorderSide(color: AppColors.secondaryColor),
-//         ),
-//       ),
-//       child: Padding(
-//         padding: EdgeInsets.symmetric(
-//             horizontal: MediaQuery.of(context).size.width * 0.1, vertical: 10),
-//         child: Column(
-//           children: [
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Image.asset(
-//                       'assets/images/Frame 19.png',
-//                       height: 40,
-//                     ),
-//                     const SizedBox(
-//                       height: 15,
-//                     ),
-//                     const Text(
-//                       'Lorem ipsum dolor sit amet consectetur. \nFusce nisl lacus elementum neque.',
-//                       style: TextStyle(
-//                         fontFamily: 'CH',
-//                         fontSize: 12,
-//                         color: Colors.white,
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//                 const Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Contact Us',
-//                       style: TextStyle(
-//                         fontFamily: 'CH',
-//                         fontSize: 12,
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 15,
-//                     ),
-//                     Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           '(524) 333 6565',
-//                           style: TextStyle(
-//                             fontFamily: 'CH',
-//                             fontSize: 12,
-//                             color: Colors.white,
-//                           ),
-//                         ),
-//                         Text(
-//                           'example@email.com',
-//                           style: TextStyle(
-//                             fontFamily: 'CH',
-//                             fontSize: 12,
-//                             color: Colors.white,
-//                           ),
-//                         ),
-//                       ],
-//                     )
-//                   ],
-//                 )
-//               ],
-//             ),
-//             const SizedBox(
-//               height: 30,
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class _NinthSectionState extends State<NinthSection> {
+  @override
+  Widget build(BuildContext context) {
+                    var screenSize = MediaQuery.of(context).size;
+
+    return Container(
+      color: const Color(0xFF1A1A1A), 
+      margin: const EdgeInsets.only(top: 70),// dark background
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Our Core Values",
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+           Text(
+            "We are driven by sustainability, grounded in integrity, inspired by innovation, committed to customer focus,\nand dedicated to excellence in all we do.",
+            style: TextStyle(
+              color: Colors.white,
+           fontSize: screenSize.width /35,
+              fontWeight: FontWeight.bold,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 32),
+         ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Learn more',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+        ],
+      ),
+    );
+  }
+}

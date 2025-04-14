@@ -135,7 +135,7 @@ class _ThirdSectionState extends State<ThirdSection>
                         maxHeight: 230,
                         controller: controller,
                         child:  Text(
-                          'Solevad Energy is committed to\nempowering businesses and\nhouseholds with reliable, cost-\neffective solar solutions. ',
+                          'Solevad Energy is a leading innovator in clean energy\ntechnologies, specializing in solar\npower and battery storage. ',
                           style: TextStyle(
                             fontSize: screenSize.width /35,
                            
@@ -176,6 +176,9 @@ class _ThirdSectionState extends State<ThirdSection>
                 ],
               ),
             ),
+            const SizedBox(
+              height: 100,
+            )
           ],
         );
       },

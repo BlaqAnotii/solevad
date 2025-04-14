@@ -204,14 +204,14 @@ class _NewsCardState extends State<NewsCard>
   Widget build(BuildContext context) {
     return BlocBuilder<DisplayOffset, ScrollOffset>(
       buildWhen: (previous, current) {
-        if (current.scrollOffsetValue >= 4200) {
+        if (current.scrollOffsetValue >= 2500) {
           return true;
         } else {
           return false;
         }
       },
       builder: (context, state) {
-        if (state.scrollOffsetValue >= 4600) {
+        if (state.scrollOffsetValue >= 2500) {
           controller.forward();
         } else {
           controller.reverse();
@@ -219,12 +219,12 @@ class _NewsCardState extends State<NewsCard>
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: AnimatedCrossFade(
-            crossFadeState: state.scrollOffsetValue >= 4500
+            crossFadeState: state.scrollOffsetValue >= 2500
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 1000),
             alignment: Alignment.center,
-            reverseDuration: const Duration(milliseconds: 1000),
+            reverseDuration: const Duration(milliseconds: 2000),
             firstCurve: Curves.easeInOut,
             secondCurve: Curves.linear,
             firstChild: Container(
@@ -303,6 +303,27 @@ class _NewsCardState extends State<NewsCard>
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ElevatedButton(
+                          onPressed: () {
+                            //context.go('/Our_Services');
+                           // context.go('/contact_us');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(170, 45),
+                            backgroundColor: const Color(0xff4779A3),
+                          ),
+                          child: const Text(
+                            'Learn more',
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xffffffff),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                   ),
                  
                 ],
