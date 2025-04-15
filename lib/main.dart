@@ -182,6 +182,9 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
   ],
 };
 
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
   void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
@@ -216,20 +219,39 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _subMenuItems[index]!.map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go( item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(color: Colors.black, fontSize: 17)),
-                    ),
-                  );
-                }).toList(),
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),

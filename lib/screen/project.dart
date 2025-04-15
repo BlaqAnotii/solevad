@@ -21,7 +21,8 @@ class _ProjectScreenState extends State<ProjectScreen> with SingleTickerProvider
   bool _isSubMenuOpen = false;
   int? _hoveredMenuIndex;
 
- // List of submenu items with routes
+  
+// List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/about-us/our-team"},
@@ -35,15 +36,18 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
+
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
-  void _showSubMenu(BuildContext context,
-      int index, Offset position) {
+  void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
 
     _overlayEntry = OverlayEntry(
@@ -51,27 +55,20 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
         left: position.dx,
         top: position.dy + 30,
         child: MouseRegion(
-          onEnter: (_) => _isSubMenuOpen =
-              true, // Keep submenu open
+          onEnter: (_) => _isSubMenuOpen = true, // Keep submenu open
           onExit: (_) {
-            Future.delayed(
-                const Duration(milliseconds: 300),
-                () {
-              if (!_isSubMenuOpen) {
-                _removeOverlay();
-              }
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!_isSubMenuOpen) _removeOverlay();
             });
           },
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5),
+              width: 350,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -82,28 +79,40 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: _subMenuItems[index]!
-                    .map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go(item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets
-                          .symmetric(
-                          vertical: 12,
-                          horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(
-                            fontSize: 17,
-                              color:
-                                  Colors.black)),
-                    ),
-                  );
-                }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),
@@ -113,6 +122,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
 
     Overlay.of(context).insert(_overlayEntry!);
   }
+
 
   /// Removes overlay menu
   void _removeOverlay() {
@@ -309,168 +319,200 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 ),
               )
             : PreferredSize(
-                preferredSize:
-                    Size(screenSize.width, 1000),
-                child: Container(
-                  color: const Color(0xfffffffff),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(10),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center,
-                      children: [
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    70),
-                        Image.asset(
+              preferredSize: Size(screenSize.width, 1000),
+              child: Container(
+                color: const Color(0xfffffffff),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: screenSize.width / 70),
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
                           'assets/images/newlogo.png',
                           scale: 6,
                         ),
+                      ),
 
-                        // const Text(
-                        //   'Solevad Energy',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.w500,
-                        //     letterSpacing: 3,
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                            children: [
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      12),
-                              _buildMenuItem(
-                                  context,
-                                  "About Us",
-                                  0),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              _buildMenuItem(
-                                  context,
-                                  "Products & Services",
-                                  1),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              InkWell(
-                                onHover: (value) {
-                                  setState(() {
-                                    value
-                                        ? _isHovering[
-                                                2] =
-                                            true
-                                        : _isHovering[
-                                                2] =
-                                            false;
-                                  });
-                                },
-                                onTap: () {
-                                   context.go('/contact_us');
-                                },
-                                child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize
-                                          .min,
-                                  children: [
-                                    Text(
-                                      'Contact Us',
-                                      style: TextStyle(
-                                          color: _isHovering[2]
-                                              ? Colors.blue[
-                                                  200]
-                                              : Colors
-                                                  .black,
-                                          fontWeight:
-                                              FontWeight.bold),
+                      // const Text(
+                      //   'Solevad Energy',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w500,
+                      //     letterSpacing: 3,
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
                                     ),
-                                    const SizedBox(
-                                        height:
-                                            5),
-                                    Visibility(
-                                      maintainAnimation:
-                                          true,
-                                      maintainState:
-                                          true,
-                                      maintainSize:
-                                          true,
-                                      visible:
-                                          _isHovering[
-                                              2],
-                                      child:
-                                          Container(
-                                        height: 2,
-                                        width: 20,
-                                        color: Colors
-                                            .white,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        // IconButton(
-                        //   icon: const Icon(Icons.brightness_6),
-                        //   splashColor: Colors.transparent,
-                        //   highlightColor: Colors.transparent,
-                        //   color: Colors.white,
-                        //   onPressed: () {
-                        //     EasyDynamicTheme.of(context).changeTheme();
-                        //   },
-                        // ),
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    20),
-                        ElevatedButton(
-                          onPressed: () {
-                            //context.go('/Our_Services');
-                          context.go('/contact_us');
-                          },
-                          style: ElevatedButton
-                              .styleFrom(
-                            fixedSize: const Size(
-                                170, 45),
-                            backgroundColor:
-                                const Color(
-                                    0xff4779A3),
-                          ),
-                          child: const Text(
-                            'Get Started',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(
-                                  0xffffffff),
-                              fontWeight:
-                                  FontWeight.bold,
                             ),
+                    SizedBox(width: screenSize.width / 20),
+                            _buildMenuItem(context, "About Us", 0),
+                    SizedBox(width: screenSize.width / 20),
+                    _buildMenuItem(context, "Products & Services", 1),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/contact_us');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Contact Us',
+                                    style: TextStyle(
+                                      color: _isHovering[3]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // IconButton(
+                      //   icon: const Icon(Icons.brightness_6),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: Colors.white,
+                      //   onPressed: () {
+                      //     EasyDynamicTheme.of(context).changeTheme();
+                      //   },
+                      // ),
+                      SizedBox(width: screenSize.width / 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Get Started',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width:
-                              screenSize.width /
-                                  20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: screenSize.width / 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
-        drawer: Drawer(
+            ), 
+      drawer: Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -490,6 +532,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -580,7 +640,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -588,7 +648,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -610,7 +670,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -620,13 +680,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -636,7 +696,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -655,6 +715,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -700,7 +778,7 @@ context.go('/products&services/solar-services');
                                           .darken,
                                     ),
                                     image: AssetImage(
-                                        'assets/images/testimony.png'))),
+                                        'assets/images/operation.jpg'))),
                     child: Row(
                       mainAxisAlignment:
                           MainAxisAlignment
@@ -729,7 +807,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Project Development & Management',
+                                    'Operation and Maintenance',
                                     style: TextStyle(
                                         fontSize:
                                             22,
@@ -752,7 +830,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Our Extensive Project Development and Management involves a comprehensive approach to conceptualizing, planning, implementing, and maintaining solar energy projects. These projects can range from small residential solar installations to large-scale commercial solar, Mini Grid Projects, large home system, solar street project, energy efficiency housing projects.',
+                                    'To ensure optimal performance and longevity, we provide comprehensive operation and maintenance services.',
                                     style: TextStyle(
                                         fontSize:
                                             13,
@@ -791,7 +869,7 @@ context.go('/products&services/solar-services');
                                           .darken,
                                     ),
                                     image: AssetImage(
-                                        'assets/images/testimony.png'))),
+                                        'assets/images/operation.jpg'))),
                     child: Row(
                       mainAxisAlignment:
                           MainAxisAlignment
@@ -820,7 +898,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Project Development & Management',
+                                    'Operation and Maintenance',
                                     style: TextStyle(
                                         fontSize:
                                             45,
@@ -843,7 +921,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Our Extensive Project Development and Management involves a comprehensive\napproach to conceptualizing, planning, implementing, and maintaining solar energy projects.\nThese projects can range from small residential solar installations to large-scale commercial solar,\nMini Grid Projects, large home system, solar street project, energy\nefficiency housing projects.',
+                                    'To ensure optimal performance and longevity, we provide comprehensive operation\nand maintenance services.',
                                     style: TextStyle(
                                         fontSize:
                                             16,

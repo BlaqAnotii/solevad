@@ -23,8 +23,9 @@ class _EnergyScreenState extends State<EnergyScreen>  with SingleTickerProviderS
   bool _isSubMenuOpen = false;
   int? _hoveredMenuIndex;
 
+
   
- // List of submenu items with routes
+// List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/about-us/our-team"},
@@ -38,15 +39,18 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
+
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
-  void _showSubMenu(BuildContext context,
-      int index, Offset position) {
+  void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
 
     _overlayEntry = OverlayEntry(
@@ -54,27 +58,20 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
         left: position.dx,
         top: position.dy + 30,
         child: MouseRegion(
-          onEnter: (_) => _isSubMenuOpen =
-              true, // Keep submenu open
+          onEnter: (_) => _isSubMenuOpen = true, // Keep submenu open
           onExit: (_) {
-            Future.delayed(
-                const Duration(milliseconds: 300),
-                () {
-              if (!_isSubMenuOpen) {
-                _removeOverlay();
-              }
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!_isSubMenuOpen) _removeOverlay();
             });
           },
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5),
+              width: 350,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -85,28 +82,40 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: _subMenuItems[index]!
-                    .map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go(item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets
-                          .symmetric(
-                          vertical: 12,
-                          horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(
-                            fontSize: 17,
-                              color:
-                                  Colors.black)),
-                    ),
-                  );
-                }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),
@@ -116,6 +125,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
 
     Overlay.of(context).insert(_overlayEntry!);
   }
+
 
   /// Removes overlay menu
   void _removeOverlay() {
@@ -311,169 +321,201 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   scale: 6,
                 ),
               )
-            : PreferredSize(
-                preferredSize:
-                    Size(screenSize.width, 1000),
-                child: Container(
-                  color: const Color(0xfffffffff),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(10),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center,
-                      children: [
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    70),
-                        Image.asset(
+            :PreferredSize(
+              preferredSize: Size(screenSize.width, 1000),
+              child: Container(
+                color: const Color(0xfffffffff),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: screenSize.width / 70),
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
                           'assets/images/newlogo.png',
                           scale: 6,
                         ),
+                      ),
 
-                        // const Text(
-                        //   'Solevad Energy',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.w500,
-                        //     letterSpacing: 3,
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                            children: [
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      12),
-                              _buildMenuItem(
-                                  context,
-                                  "About Us",
-                                  0),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              _buildMenuItem(
-                                  context,
-                                  "Products & Services",
-                                  1),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              InkWell(
-                                onHover: (value) {
-                                  setState(() {
-                                    value
-                                        ? _isHovering[
-                                                2] =
-                                            true
-                                        : _isHovering[
-                                                2] =
-                                            false;
-                                  });
-                                },
-                                onTap: () {
-                                   context.go('/contact_us');
-                                },
-                                child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize
-                                          .min,
-                                  children: [
-                                    Text(
-                                      'Contact Us',
-                                      style: TextStyle(
-                                          color: _isHovering[2]
-                                              ? Colors.blue[
-                                                  200]
-                                              : Colors
-                                                  .black,
-                                          fontWeight:
-                                              FontWeight.bold),
+                      // const Text(
+                      //   'Solevad Energy',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w500,
+                      //     letterSpacing: 3,
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
                                     ),
-                                    const SizedBox(
-                                        height:
-                                            5),
-                                    Visibility(
-                                      maintainAnimation:
-                                          true,
-                                      maintainState:
-                                          true,
-                                      maintainSize:
-                                          true,
-                                      visible:
-                                          _isHovering[
-                                              2],
-                                      child:
-                                          Container(
-                                        height: 2,
-                                        width: 20,
-                                        color: Colors
-                                            .white,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        // IconButton(
-                        //   icon: const Icon(Icons.brightness_6),
-                        //   splashColor: Colors.transparent,
-                        //   highlightColor: Colors.transparent,
-                        //   color: Colors.white,
-                        //   onPressed: () {
-                        //     EasyDynamicTheme.of(context).changeTheme();
-                        //   },
-                        // ),
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    20),
-                        ElevatedButton(
-                          onPressed: () {
-                            //context.go('/Our_Services');
-                            //context.go('/whatsapp');
-                          },
-                          style: ElevatedButton
-                              .styleFrom(
-                            fixedSize: const Size(
-                                170, 45),
-                            backgroundColor:
-                                const Color(
-                                    0xff4779A3),
-                          ),
-                          child: const Text(
-                            'Get Started',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(
-                                  0xffffffff),
-                              fontWeight:
-                                  FontWeight.bold,
                             ),
+                    SizedBox(width: screenSize.width / 20),
+                            _buildMenuItem(context, "About Us", 0),
+                    SizedBox(width: screenSize.width / 20),
+                    _buildMenuItem(context, "Products & Services", 1),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/contact_us');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Contact Us',
+                                    style: TextStyle(
+                                      color: _isHovering[3]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // IconButton(
+                      //   icon: const Icon(Icons.brightness_6),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: Colors.white,
+                      //   onPressed: () {
+                      //     EasyDynamicTheme.of(context).changeTheme();
+                      //   },
+                      // ),
+                      SizedBox(width: screenSize.width / 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Get Started',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width:
-                              screenSize.width /
-                                  20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: screenSize.width / 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
-        drawer: Drawer(
+            ), 
+      drawer: Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -493,6 +535,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -583,7 +643,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -591,7 +651,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -613,7 +673,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -623,13 +683,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -639,7 +699,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -658,6 +718,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -755,7 +833,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Also, we offer the following high-level services for multinationals, government departments and international agencies.',
+                                    'We provide consulting and advisory services to help clients optimize energy usage, enhance reliability, and reduce costs.',
                                     style: TextStyle(
                                         fontSize:
                                             13,
@@ -846,7 +924,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Also, we offer the following high-level services for multinationals, government departments\nand international agencies.',
+                                    'We provide consulting and advisory services to help clients optimize\nenergy usage, enhance reliability, and reduce costs.',
                                     style: TextStyle(
                                         fontSize:
                                             16,
@@ -972,421 +1050,9 @@ context.go('/products&services/solar-services');
                 ),
               ),
             ),
-            const Divider(),
-                          const SizedBox(height: 70,)    ,         
-
-                             ResponsiveWidget.isSmallScreen(
-                    context)
-                  
-                ?
-                Container(
-                margin: const EdgeInsets.only(
-                  left: 20, right: 20
-                ),
-                child: const Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text(
-                                            'Advisory & consultancy for energy management system',
-                                            style: TextStyle(
-                                              color: Color(
-                                                  0xff32CD32),
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
-                        ),
-                         SizedBox(
-                                      height: 30,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Through consultancy and advisory services, we offer Energy Management System to our clients to a remotely host, managed and supported system. Helping customer increase reliability, and optimize energy usage to reduce cost. We are Committed to providing users with system solutions for energy efficiency management and electricity safety.',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                      ],
-                    ),
-                   
-                  ],
-                ),
-              )
-              :
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                margin: const EdgeInsets.only(
-                  left: 40, right: 20
-                ),
-                child: const Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                                            'Advisory & consultancy for energy management system',
-                                            style: TextStyle(
-                                              color: Color(
-                                                  0xff32CD32),
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
-                        ),
-                         SizedBox(
-                                      height: 30,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Through consultancy and advisory services, we offer Energy Management System\nto our clients to a remotely host, managed and supported system. Helping\ncustomer increase reliability, and optimize energy usage to reduce cost.\nWe are Committed to providing users with system solutions for energy efficiency\nmanagement and electricity safety.',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                      ],
-                    ),
-                    SizedBox(width: 5,),
-                
-                                        SizedBox(width: 100,),
-
-                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                                            'Services',
-                                            style: TextStyle(
-                                              color: Color(
-                                                  0xff32CD32),
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
-                        ),
-                         SizedBox(
-                                      height: 20,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.pie_chart,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Load Audit and system design',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.analytics,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Energy Usage Analysis Service',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.battery_charging_full,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Energy Efficiency Conversion Studies and Implementation',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                        SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.support,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'After-Sales Support Services',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                      ],
-                    ),
-                                    
-                  ],
-                ),
-              ),
-            ),
+            const Divider(),                     
                            
-              const SizedBox(height: 70,)    ,         
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn1.png'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Load Audit and system design',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'At Solevad Energy, we specialize in providing comprehensive Load Audit and System Design solutions to meet your energy needs efficiently and sustainably. By performing a detailed load audit and designing a solar system to meet our client’s unique energy needs, organizations can maximize efficiency, minimize costs, and contribute to environmental sustainability.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 600,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn1.png'))),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Load Audit and system design',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'At Solevad Energy, we specialize in providing comprehensive Load Audit and System\nDesign solutions to meet your energy needs efficiently and sustainably. By performing\na detailed load audit and designing a solar system to meet our client’s unique energy\nneeds, organizations can maximize efficiency, minimize costs, and contribute to\nenvironmental sustainability.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/learn2.png'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Energy Usage Analysis Service',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'We also specialize on providing Energy Usage Analysis services designed to help individuals, businesses, and organizations understand and optimize their energy consumption. By understanding consumption patterns, the right capacity for solar panels, inverters, and battery storage can be determined, ensuring cost-effectiveness and reliability.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 40,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Energy Usage Analysis Service',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'We also specialize on providing Energy Usage Analysis services designed\nto help individuals, businesses, and organizations understand and optimize\ntheir energy consumption. By understanding consumption patterns, the right\ncapacity for solar panels, inverters, and battery storage can be determined,\nensuring cost-effectiveness and reliability.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 70,
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 650,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/learn2.png'))),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+              const SizedBox(height: 20,)    ,         
             ResponsiveWidget.isSmallScreen(
                     context)
                 ? Container(
@@ -1417,7 +1083,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'Energy Efficiency Conversion Studies and Implementation',
+                              'Energy Efficiency Conversion Studies',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1431,7 +1097,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'At Solevad we are committed to helping clients transition to more energy-efficient systems through Energy Efficiency Conversion Studies and Implementation Services. Our expertise ensures that you maximize energy savings, enhance system performance, and reduce your environmental footprint.',
+                              'Transition to energy-efficient systems with our expertise, ensuring maximum savings, enhanced performance, and reduced environmental impact.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1473,7 +1139,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'Energy Efficiency Conversion Studies and\nImplementation',
+                                'Energy Efficiency Conversion Studies',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1487,7 +1153,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'At Solevad we are committed to helping clients transition to more energy-efficient\nsystems through Energy Efficiency Conversion Studies and Implementation\nServices. Our expertise ensures that you maximize energy savings, enhance\nsystem performance, and reduce your environmental\nfootprint. ',
+                                'Transition to energy-efficient systems with our expertise, ensuring maximum savings,\nenhanced performance, and reduced environmental impact.',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1528,7 +1194,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'After-Sales Support Services',
+                              'Cost benefit Analysis',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1542,7 +1208,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'Customer satisfaction is our top priority. That’s why we provide comprehensive After-Sales Support Services to ensure the smooth operation of your purchased products and solutions long after the initial sale.',
+                              'We offer comprehensive Cost-Benefit Analysis (CBA) services for solar installations as part of our energy management solutions. Our CBA evaluates the financial feasibility of solar energy investments by comparing total costs with anticipated benefits, ensuring that clients make informed decisions:  our Key Components of Our Cost-Benefit Analysis includes : Cost Assessment, Benefit Evaluation, Return on Investment (ROI).',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1569,7 +1235,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'After-Sales Support Services',
+                                'Cost benefit Analysis',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1583,7 +1249,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'Customer satisfaction is our top priority. That’s why we provide comprehensive\nAfter-Sales Support Services to ensure the smooth operation of your\npurchased products and solutions long after the initial sale.',
+                                'We offer comprehensive Cost-Benefit Analysis (CBA) services for solar\ninstallations as part of our energy management solutions. Our CBA\nevaluates the financial feasibility of solar energy investments by comparing\ntotal costs with anticipated benefits, ensuring that clients make informed\ndecisions:  our Key Components of Our Cost-Benefit Analysis includes :\nCost Assessment, Benefit Evaluation, Return on\nInvestment (ROI).',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1591,7 +1257,7 @@ context.go('/products&services/solar-services');
                             ],
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 70,
                           ),
                           Column(
                             children: [
@@ -1609,26 +1275,230 @@ context.go('/products&services/solar-services');
                       ),
                     ),
                   ),
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/learn2.png'))),
+                            ),
+                          ],
+                        ),
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Measurement & Verification (M&V)',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Ensuring your solar energy system performs efficiently, meets energy production targets, and delivers the expected financial and environmental benefits.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 40,
+                        right: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 600,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/learn2.png'))),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Measurement & Verification (M&V)',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Ensuring your solar energy system performs efficiently, meets energy production\ntargets, and delivers the expected financial and environmental benefits.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/carbon.jpg'))),
+                            ),
+                          ],
+                        ),
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Compliance and Carbon Footprint Reporting and Environmental Impact Assessment',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Assisting clients in meeting regulatory standards and demonstrating measurable environmental benefits.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 40,
+                        right: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Compliance and Carbon Footprint\nReporting and Environmental Impact\nAssessment',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Assisting clients in meeting regulatory standards and demonstrating\nmeasurable environmental benefits..',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 110,
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 650,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/carbon.jpg'))),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
           
-            const Padding(
-              padding: EdgeInsets.all(40.0),
-              child: Divider(),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-               child: Row(
-                   children: newss
-                       .map((newss) => NewsCards(
-                             newss,
-                           ))
-                       .toList()),
-             ),
-                const SizedBox(
-              height: 15,
-            ),
+          
             const Padding(
               padding: EdgeInsets.all(40.0),
               child: Divider(),
@@ -1872,60 +1742,7 @@ context.go('/products&services/solar-services');
                                 ),
                                  const SizedBox(
                                 height: 20),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 1,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
-                                            .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          15,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                           
                              const SizedBox(
                                 height: 20),
                             const Text(
@@ -2210,62 +2027,7 @@ context.go('/products&services/solar-services');
                               ),
                               const SizedBox(
                                   height: 50),
-                              Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 2,
-                                    child: Checkbox(
-                                      side:
-                                          const BorderSide(
-                                        color: Colors
-                                            .grey,
-                                      ),
-                                      activeColor:
-                                          Colors
-                                              .black,
-                                      focusColor:
-                                          Colors
-                                              .black,
-                                      checkColor:
-                                          Colors
-                                              .grey,
-                                      value:
-                                          termsAccepted,
-                                      onChanged:
-                                          (bool?
-                                              value) {
-                                        setState(
-                                            () {
-                                          termsAccepted =
-                                              value ??
-                                                  false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Expanded(
-                                    child: Text(
-                                      'I own my Home',
-                                      maxLines: 2,
-                                      style:
-                                          TextStyle(
-                                        fontSize:
-                                            19,
-                                        fontWeight:
-                                            FontWeight
-                                                .w400,
-                                        color: Colors
-                                            .black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                  height: 20),
+                             
                               const Text(
                                 'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
                                 style: TextStyle(),

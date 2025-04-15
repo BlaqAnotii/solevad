@@ -24,7 +24,7 @@ class _SolarScreenState extends State<SolarScreen>
   int? _hoveredMenuIndex;
 
   
- // List of submenu items with routes
+// List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/about-us/our-team"},
@@ -38,16 +38,18 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
 
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
-  void _showSubMenu(BuildContext context,
-      int index, Offset position) {
+  void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
 
     _overlayEntry = OverlayEntry(
@@ -55,27 +57,20 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
         left: position.dx,
         top: position.dy + 30,
         child: MouseRegion(
-          onEnter: (_) => _isSubMenuOpen =
-              true, // Keep submenu open
+          onEnter: (_) => _isSubMenuOpen = true, // Keep submenu open
           onExit: (_) {
-            Future.delayed(
-                const Duration(milliseconds: 300),
-                () {
-              if (!_isSubMenuOpen) {
-                _removeOverlay();
-              }
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!_isSubMenuOpen) _removeOverlay();
             });
           },
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5),
+              width: 350,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -86,28 +81,40 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: _subMenuItems[index]!
-                    .map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go(item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets
-                          .symmetric(
-                          vertical: 12,
-                          horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(
-                            fontSize: 17,
-                              color:
-                                  Colors.black)),
-                    ),
-                  );
-                }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),
@@ -117,6 +124,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
 
     Overlay.of(context).insert(_overlayEntry!);
   }
+
 
   /// Removes overlay menu
   void _removeOverlay() {
@@ -313,168 +321,200 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 ),
               )
             : PreferredSize(
-                preferredSize:
-                    Size(screenSize.width, 1000),
-                child: Container(
-                  color: const Color(0xfffffffff),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(10),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center,
-                      children: [
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    70),
-                        Image.asset(
+              preferredSize: Size(screenSize.width, 1000),
+              child: Container(
+                color: const Color(0xfffffffff),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: screenSize.width / 70),
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
                           'assets/images/newlogo.png',
                           scale: 6,
                         ),
+                      ),
 
-                        // const Text(
-                        //   'Solevad Energy',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.w500,
-                        //     letterSpacing: 3,
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                            children: [
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      12),
-                              _buildMenuItem(
-                                  context,
-                                  "About Us",
-                                  0),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              _buildMenuItem(
-                                  context,
-                                  "Products & Services",
-                                  1),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              InkWell(
-                                onHover: (value) {
-                                  setState(() {
-                                    value
-                                        ? _isHovering[
-                                                2] =
-                                            true
-                                        : _isHovering[
-                                                2] =
-                                            false;
-                                  });
-                                },
-                                onTap: () {
-                                   context.go('/contact_us');
-                                },
-                                child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize
-                                          .min,
-                                  children: [
-                                    Text(
-                                      'Contact Us',
-                                      style: TextStyle(
-                                          color: _isHovering[2]
-                                              ? Colors.blue[
-                                                  200]
-                                              : Colors
-                                                  .black,
-                                          fontWeight:
-                                              FontWeight.bold),
+                      // const Text(
+                      //   'Solevad Energy',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w500,
+                      //     letterSpacing: 3,
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
                                     ),
-                                    const SizedBox(
-                                        height:
-                                            5),
-                                    Visibility(
-                                      maintainAnimation:
-                                          true,
-                                      maintainState:
-                                          true,
-                                      maintainSize:
-                                          true,
-                                      visible:
-                                          _isHovering[
-                                              2],
-                                      child:
-                                          Container(
-                                        height: 2,
-                                        width: 20,
-                                        color: Colors
-                                            .white,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        // IconButton(
-                        //   icon: const Icon(Icons.brightness_6),
-                        //   splashColor: Colors.transparent,
-                        //   highlightColor: Colors.transparent,
-                        //   color: Colors.white,
-                        //   onPressed: () {
-                        //     EasyDynamicTheme.of(context).changeTheme();
-                        //   },
-                        // ),
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    20),
-                        ElevatedButton(
-                          onPressed: () {
-                            //context.go('/Our_Services');
-                          context.go('/contact_us');
-                          },
-                          style: ElevatedButton
-                              .styleFrom(
-                            fixedSize: const Size(
-                                170, 45),
-                            backgroundColor:
-                                const Color(
-                                    0xff4779A3),
-                          ),
-                          child: const Text(
-                            'Get Started',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(
-                                  0xffffffff),
-                              fontWeight:
-                                  FontWeight.bold,
                             ),
+                    SizedBox(width: screenSize.width / 20),
+                            _buildMenuItem(context, "About Us", 0),
+                    SizedBox(width: screenSize.width / 20),
+                    _buildMenuItem(context, "Products & Services", 1),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/contact_us');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Contact Us',
+                                    style: TextStyle(
+                                      color: _isHovering[3]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // IconButton(
+                      //   icon: const Icon(Icons.brightness_6),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: Colors.white,
+                      //   onPressed: () {
+                      //     EasyDynamicTheme.of(context).changeTheme();
+                      //   },
+                      // ),
+                      SizedBox(width: screenSize.width / 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Get Started',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width:
-                              screenSize.width /
-                                  20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: screenSize.width / 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
-        drawer: Drawer(
+            ), 
+      drawer: Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -494,6 +534,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -584,7 +642,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -592,7 +650,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -614,7 +672,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -624,13 +682,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -640,7 +698,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -659,6 +717,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -733,7 +809,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Comprehensive Solar Services',
+                                    'Solar Development',
                                     style: TextStyle(
                                         fontSize:
                                             22,
@@ -756,7 +832,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'We provide an extensive suite of services that includes consultancy, solar installation, and maintenance. Our product offerings are equipped with the latest technology, ensuring optimal efficiency and longevity. We serve a broad spectrum of clients, including residential, commercial, and industrial sectors, with a steadfast commitment to promoting access to clean and renewable energy.',
+                                    'We specialize in the custom design and installation of solar photovoltaic (PV) systems for homes, businesses, and large-scale facilities. Our expertise spans rooftop, ground-mounted, and carport solar systems.',
                                     style: TextStyle(
                                         fontSize:
                                             13,
@@ -824,7 +900,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Comprehensive Solar Services',
+                                    'Solar Development',
                                     style: TextStyle(
                                         fontSize:
                                             45,
@@ -847,7 +923,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'We provide an extensive suite of services that includes consultancy,\nsolar installation, and maintenance. Our product offerings are equipped with\nthe latest technology, ensuring optimal efficiency and longevity. We serve a broad\nspectrum of clients, including residential, commercial, and industrial sectors, with\na steadfast commitment to promoting access\nto clean and renewable energy.',
+                                    'We specialize in the custom design and installation of solar photovoltaic (PV) systems\nfor homes, businesses, and large-scale facilities. Our expertise spans rooftop, ground-mounted, and\ncarport solar systems.',
                                     style: TextStyle(
                                         fontSize:
                                             16,
@@ -957,7 +1033,7 @@ context.go('/products&services/solar-services');
                               MainAxisSize.min,
                           children: [
                             Text(
-                              'SOLAR SERVICES',
+                              'SOLAR DEVELOPMENT',
                               style: TextStyle(
                                   color: Colors
                                       .black,
@@ -991,7 +1067,7 @@ context.go('/products&services/solar-services');
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/serve1.png'))),
+                                          'assets/images/learn1.png'))),
                             ),
                           ],
                         ),
@@ -1004,7 +1080,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'Solar System Design & Installation',
+                              'Load Audit and Energy Usage analysis',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1018,7 +1094,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'Custom design and installation of solar photovoltaic (PV) systems for homes, businesses, and large-scale facilities. Expertise in rooftop, ground-mounted, and carport solar systems',
+                              'Conducting detailed load audits to design solar systems tailored to your unique energy needs, maximizing efficiency and minimizing costs. Also Helping clients understand energy consumption patterns to determine the optimal capacity for solar panels, inverters, and battery storage.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1047,7 +1123,7 @@ context.go('/products&services/solar-services');
                                 decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            'assets/images/serve1.png'))),
+                                            'assets/images/learn1.png'))),
                               ),
                             ],
                           ),
@@ -1060,7 +1136,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'Solar System Design & Installation',
+                                'Load Audit and Energy Usage analysis',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1074,7 +1150,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'Custom design and installation of solar photovoltaic (PV) systems for\nhomes, businesses, and large-scale facilities. Expertise in rooftop, ground-mounted,\nand carport solar systems',
+                                'Conducting detailed load audits to design solar systems tailored to\nyour unique energy needs, maximizing efficiency and minimizing costs.\nAlso Helping clients understand energy consumption patterns to determine\nthe optimal capacity for solar panels, inverters, and battery storage.',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1115,7 +1191,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'Energy Consulting',
+                              'System Design',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1129,7 +1205,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'Comprehensive energy assessments and feasibility studies. Expert advice on transitioning to solar energy and maximizing returns',
+                              'We offer comprehensive system design services for solar energy installations, focusing on optimal performance, efficiency, and sustainability. Our tailored designs meet the unique energy needs of each client, enabling effective harnessing of solar power. Key components of our system design include selecting the right components—such as batteries, inverters, and panels—based on their efficiency and output, as well as optimizing the system layout, which involves panel placement and consideration of solar irradiance and mechanical setups.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1146,7 +1222,7 @@ context.go('/products&services/solar-services');
                       margin:
                           const EdgeInsets.only(
                         left: 20,
-                        right: 20,
+                        right: 50,
                       ),
                       child: Row(
                         children: [
@@ -1156,7 +1232,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'Energy Consulting',
+                                'System Design',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1170,7 +1246,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'Comprehensive energy assessments and feasibility studies. Expert advice on\ntransitioning to solar energy and maximizing returns',
+                                'We offer comprehensive system design services for solar energy installations,\nfocusing on optimal performance, efficiency, and sustainability. Our tailored\ndesigns meet the unique energy needs of each client, enabling effective\nharnessing of solar power. Key components of our system design include\nselecting the right components—such as batteries, inverters, and  panels—based\non their efficiency and output, as well as optimizing the system layout, which\ninvolves panel placement and consideration of solar irradiance and mechanical setups.',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1178,7 +1254,7 @@ context.go('/products&services/solar-services');
                             ],
                           ),
                           const SizedBox(
-                            width: 50,
+                            width: 40,
                           ),
                           Column(
                             children: [
@@ -1213,7 +1289,7 @@ context.go('/products&services/solar-services');
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/serve3.png'))),
+                                          'assets/images/testimony.png'))),
                             ),
                           ],
                         ),
@@ -1226,7 +1302,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'Solar Financing',
+                              'Project Management implementation ',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1240,7 +1316,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'Assistance with financing options, including leasing and Power Purchase Agreements (PPA)',
+                              'We offer comprehensive end-to-end Project Management and Implementation  services for solar installations, ensuring smooth execution, quality control, and timely delivery. Our structured approach covers every phase of the project, from planning to commissioning. Key elements of our project implementation include product procurement and distribution, installation, commissioning, performance testing, and system optimization. This ensures that each aspect is handled professionally, leading to successful solar energy solutions.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1269,7 +1345,7 @@ context.go('/products&services/solar-services');
                                 decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            'assets/images/serve3.png'))),
+                                            'assets/images/testimony.png'))),
                               ),
                             ],
                           ),
@@ -1282,7 +1358,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'Solar Financing',
+                                'Project Management implementation ',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1296,7 +1372,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'Assistance with financing options, including leasing and Power Purchase\n Agreements (PPA)',
+                                'We offer comprehensive end-to-end Project Management and Implementation\n services for solar installations, ensuring smooth execution, quality\ncontrol, and timely delivery. Our structured approach covers every phase\nof the project, from planning to commissioning. Key elements\nof our project implementation include product procurement and distribution,\ninstallation, commissioning, performance testing, and system optimization.\nThis ensures that each aspect is handled professionally, leading to successful\nsolar energy solutions.',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1337,7 +1413,7 @@ context.go('/products&services/solar-services');
                                   .center,
                           children: [
                             Text(
-                              'Off-Grid and Hybrid Systems',
+                              'Minigrid',
                               style: TextStyle(
                                 color: Color(
                                     0xff32CD32),
@@ -1351,7 +1427,7 @@ context.go('/products&services/solar-services');
                               height: 10,
                             ),
                             Text(
-                              'Design and implementation of off-grid solar systems for remote locations. Hybrid solutions combining solar with other energy sources for uninterrupted power supply.',
+                              'We provide mini-grid solar systems designed for both community and commercial users. These systems are independent, decentralized electricity networks that deliver reliable, renewable energy to local consumers, such as communities, schools, and businesses. Our mini-grid solutions aim to enhance energy access in underserved areas, promoting sustainability and empowering local stakeholders. By offering high-quality electricity, we help bridge the energy access gap, contributing to the social and economic development of the communities we serve.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -1378,7 +1454,7 @@ context.go('/products&services/solar-services');
                                     .start,
                             children: [
                               Text(
-                                'Off-Grid and Hybrid Systems',
+                                'Minigrid',
                                 style: TextStyle(
                                   color: Color(
                                       0xff32CD32),
@@ -1392,7 +1468,7 @@ context.go('/products&services/solar-services');
                                 height: 20,
                               ),
                               Text(
-                                'Design and implementation of off-grid solar systems for remote locations.\nHybrid solutions combining solar with other energy sources for uninterrupted\npower supply.',
+                                'We provide mini-grid solar systems designed for both community\nand commercial users. These systems are independent, decentralized\nelectricity networks that deliver reliable, renewable energy to local consumers,\nsuch as communities, schools, and businesses. Our mini-grid solutions\naim to enhance energy access in underserved areas, promoting sustainability\nand empowering local stakeholders. By offering high-quality electricity,\nwe help bridge the energy access gap, contributing to the social and economic\ndevelopment of the communities we serve.',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -1418,117 +1494,7 @@ context.go('/products&services/solar-services');
                       ),
                     ),
                   ),
-            ResponsiveWidget.isSmallScreen(
-                    context)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                    ),
-                    child: Column(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 300,
-                              width: 350,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/serve5.png'))),
-                            ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment
-                                  .start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment
-                                  .center,
-                          children: [
-                            Text(
-                              'Environmental, Social, and Governance (ESG) Consulting',
-                              style: TextStyle(
-                                color: Color(
-                                    0xff32CD32),
-                                fontSize: 30,
-                                fontWeight:
-                                    FontWeight
-                                        .bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Advisory services on integrating solar solutions into ESG strategies. Carbon footprint reduction and sustainability reporting.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal,
-                    child: Container(
-                      margin:
-                          const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 500,
-                                width: 600,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/serve5.png'))),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 40,
-                          ),
-                          const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .start,
-                            children: [
-                              Text(
-                                'Environmental, Social, and Governance\n(ESG) Consulting',
-                                style: TextStyle(
-                                  color: Color(
-                                      0xff32CD32),
-                                  fontSize: 30,
-                                  fontWeight:
-                                      FontWeight
-                                          .bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                'Advisory services on integrating solar solutions into ESG strategies. Carbon\nfootprint reduction and sustainability reporting.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+           
             const Padding(
               padding: EdgeInsets.all(40.0),
               child: Divider(),
@@ -1772,60 +1738,7 @@ context.go('/products&services/solar-services');
                                 ),
                                  const SizedBox(
                                 height: 20),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 1,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
-                                            .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          15,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            
                              const SizedBox(
                                 height: 20),
                             const Text(
@@ -2110,62 +2023,8 @@ context.go('/products&services/solar-services');
                               ),
                               const SizedBox(
                                   height: 50),
-                              Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 2,
-                                    child: Checkbox(
-                                      side:
-                                          const BorderSide(
-                                        color: Colors
-                                            .grey,
-                                      ),
-                                      activeColor:
-                                          Colors
-                                              .black,
-                                      focusColor:
-                                          Colors
-                                              .black,
-                                      checkColor:
-                                          Colors
-                                              .grey,
-                                      value:
-                                          termsAccepted,
-                                      onChanged:
-                                          (bool?
-                                              value) {
-                                        setState(
-                                            () {
-                                          termsAccepted =
-                                              value ??
-                                                  false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Expanded(
-                                    child: Text(
-                                      'I own my Home',
-                                      maxLines: 2,
-                                      style:
-                                          TextStyle(
-                                        fontSize:
-                                            19,
-                                        fontWeight:
-                                            FontWeight
-                                                .w400,
-                                        color: Colors
-                                            .black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                  height: 20),
+                              
+                              
                               const Text(
                                 'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
                                 style: TextStyle(),
