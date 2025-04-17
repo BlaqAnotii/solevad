@@ -22,7 +22,8 @@ class _OurTeamScreenState extends State<OurTeamScreen> with SingleTickerProvider
   int? _hoveredMenuIndex;
 
   
- // List of submenu items with routes
+    
+// List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/about-us/our-team"},
@@ -36,16 +37,18 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
 
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
-  void _showSubMenu(BuildContext context,
-      int index, Offset position) {
+  void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
 
     _overlayEntry = OverlayEntry(
@@ -53,27 +56,20 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
         left: position.dx,
         top: position.dy + 30,
         child: MouseRegion(
-          onEnter: (_) => _isSubMenuOpen =
-              true, // Keep submenu open
+          onEnter: (_) => _isSubMenuOpen = true, // Keep submenu open
           onExit: (_) {
-            Future.delayed(
-                const Duration(milliseconds: 300),
-                () {
-              if (!_isSubMenuOpen) {
-                _removeOverlay();
-              }
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!_isSubMenuOpen) _removeOverlay();
             });
           },
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5),
+              width: 350,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -84,28 +80,40 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: _subMenuItems[index]!
-                    .map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go(item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets
-                          .symmetric(
-                          vertical: 12,
-                          horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(
-                            fontSize: 17,
-                              color:
-                                  Colors.black)),
-                    ),
-                  );
-                }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),
@@ -115,6 +123,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
 
     Overlay.of(context).insert(_overlayEntry!);
   }
+
 
   /// Removes overlay menu
   void _removeOverlay() {
@@ -311,168 +320,200 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 ),
               )
             : PreferredSize(
-                preferredSize:
-                    Size(screenSize.width, 1000),
-                child: Container(
-                  color: const Color(0xfffffffff),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(10),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center,
-                      children: [
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    70),
-                        Image.asset(
+              preferredSize: Size(screenSize.width, 1000),
+              child: Container(
+                color: const Color(0xfffffffff),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: screenSize.width / 70),
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
                           'assets/images/newlogo.png',
                           scale: 6,
                         ),
+                      ),
 
-                        // const Text(
-                        //   'Solevad Energy',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.w500,
-                        //     letterSpacing: 3,
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                            children: [
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      12),
-                              _buildMenuItem(
-                                  context,
-                                  "About Us",
-                                  0),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              _buildMenuItem(
-                                  context,
-                                  "Products & Services",
-                                  1),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              InkWell(
-                                onHover: (value) {
-                                  setState(() {
-                                    value
-                                        ? _isHovering[
-                                                2] =
-                                            true
-                                        : _isHovering[
-                                                2] =
-                                            false;
-                                  });
-                                },
-                                onTap: () {
-                                   context.go('/contact_us');
-                                },
-                                child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize
-                                          .min,
-                                  children: [
-                                    Text(
-                                      'Contact Us',
-                                      style: TextStyle(
-                                          color: _isHovering[2]
-                                              ? Colors.blue[
-                                                  200]
-                                              : Colors
-                                                  .black,
-                                          fontWeight:
-                                              FontWeight.bold),
+                      // const Text(
+                      //   'Solevad Energy',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w500,
+                      //     letterSpacing: 3,
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
                                     ),
-                                    const SizedBox(
-                                        height:
-                                            5),
-                                    Visibility(
-                                      maintainAnimation:
-                                          true,
-                                      maintainState:
-                                          true,
-                                      maintainSize:
-                                          true,
-                                      visible:
-                                          _isHovering[
-                                              2],
-                                      child:
-                                          Container(
-                                        height: 2,
-                                        width: 20,
-                                        color: Colors
-                                            .white,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        // IconButton(
-                        //   icon: const Icon(Icons.brightness_6),
-                        //   splashColor: Colors.transparent,
-                        //   highlightColor: Colors.transparent,
-                        //   color: Colors.white,
-                        //   onPressed: () {
-                        //     EasyDynamicTheme.of(context).changeTheme();
-                        //   },
-                        // ),
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    20),
-                        ElevatedButton(
-                          onPressed: () {
-                            //context.go('/Our_Services');
-                            //context.go('/whatsapp');
-                          },
-                          style: ElevatedButton
-                              .styleFrom(
-                            fixedSize: const Size(
-                                170, 45),
-                            backgroundColor:
-                                const Color(
-                                    0xff4779A3),
-                          ),
-                          child: const Text(
-                            'Get Started',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(
-                                  0xffffffff),
-                              fontWeight:
-                                  FontWeight.bold,
                             ),
+                    SizedBox(width: screenSize.width / 20),
+                            _buildMenuItem(context, "About Us", 0),
+                    SizedBox(width: screenSize.width / 20),
+                    _buildMenuItem(context, "Products & Services", 1),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/contact_us');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Contact Us',
+                                    style: TextStyle(
+                                      color: _isHovering[3]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // IconButton(
+                      //   icon: const Icon(Icons.brightness_6),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: Colors.white,
+                      //   onPressed: () {
+                      //     EasyDynamicTheme.of(context).changeTheme();
+                      //   },
+                      // ),
+                      SizedBox(width: screenSize.width / 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Get Started',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width:
-                              screenSize.width /
-                                  20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: screenSize.width / 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
-        drawer: Drawer(
+            ), 
+      drawer: Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -492,6 +533,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -582,7 +641,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -590,7 +649,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -612,7 +671,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -622,13 +681,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -638,7 +697,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -657,6 +716,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -754,7 +831,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Our organization is composed of highly competent engineers, experienced project managers, and experts in renewable energy, all of whom share a fervent commitment to sustainability and innovation. Under the guidance of our CEO, Mr. Leroy Ahwinahwi, we collaborate effectively to deliver optimal solutions tailored to our clients needs.',
+                                    'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future.',
                                     style: TextStyle(
                                         fontSize:
                                             13,
@@ -845,7 +922,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Our organization is composed of highly competent engineers, experienced project managers,\nand experts in renewable energy, all of whom share a fervent commitment to sustainability and innovation.\nUnder the guidance of our CEO, Mr. Leroy Ahwinahwi, we collaborate effectively to\ndeliver optimal solutions tailored to our clients needs.',
+                                    'Solevad Energy’s team is built on a foundation of technical excellence,\nindustry expertise, and a shared vision for a sustainable future.',
                                     style: TextStyle(
                                         fontSize:
                                             16,
@@ -972,6 +1049,92 @@ context.go('/products&services/solar-services');
               ),
             ),
             const Divider(),
+                  const SizedBox(height: 20,)    ,         
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/aboutus3.png'))),
+                            ),
+                          ],
+                        ),
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                           
+                            Text(
+                              'Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 600,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/aboutus3.png'))),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 40,
+                          ),
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                           
+                              Text(
+                                'Our team consists of highly skilled engineers, experienced project managers,\nand renewable energy specialists who leverage cutting-edge technologies and innovative\nstrategies to deliver exceptional results. At the helm of our leadership is\nCEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence.\nUnder his guidance, we foster a culture of collaboration, continuous improvement,\nand client-centric solutions. With our collective expertise, we develop energy\nsolutions that meet, and often exceed, industry standards, contributing to a greener\nand more sustainable future.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
            ResponsiveWidget.isSmallScreen(
                 context)
             ? Container(
@@ -979,9 +1142,10 @@ context.go('/products&services/solar-services');
                 left: 10, right: 10,
               ),
               child:  Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   SizedBox(
-                      height: 15,
+                   const SizedBox(
+                      height: 45,
                     ),
                 const Center(
                               child: Text(
@@ -996,437 +1160,439 @@ context.go('/products&services/solar-services');
                                                 ),
                                               ),
                             ),
-                              SizedBox(
+                              const SizedBox(
                       height: 15,
                     ),
-                    Container(
-                       padding: const EdgeInsets.all(30),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                          )
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                              Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
-                                    ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Center(
+                      child: Container(
+                         padding: const EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                            )
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                                Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'LEROY AHWINAWHI',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'CEO',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
                                       ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'LEROY AHWINAWHI',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'CEO',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
                                     ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                  ],
+                                ),
+                              ),
+                            Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'DEJI AKANJI',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'GENERAL MANAGER',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          
-                                            Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
                                       ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'DEJI AKANJI',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'GENERAL MANAGER',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
                                     ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                  ],
+                                ),
+                              ),
+                            
+                                              Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'OBINNA ASUQUO',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'PROJECT MANAGER',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                              Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
                                       ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'OBINNA ASUQUO',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'PROJECT MANAGER',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
                                     ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                  ],
+                                ),
+                              ),
+                                Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'LEROY AHWINAWHI',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'CEO',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
                                       ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'LEROY AHWINAWHI',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'CEO',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
                                     ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                  ],
+                                ),
+                              ),
+                            Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'DEJI AKANJI',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'GENERAL MANAGER',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          
-                                            Container(
-                              width: 300,
-                              margin: const EdgeInsets.only(right: 15, bottom: 35),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    width: 1,
-                                    color: Colors.grey,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      Container(
-                                        height: 220,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/ceo.png'),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
                                       ),
-                                    
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.all(
-                                      10,
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'DEJI AKANJI',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'GENERAL MANAGER',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
                                     ),
-                                    width: 300,
-                                    child: const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                  ],
+                                ),
+                              ),
+                            
+                                              Container(
+                                width: 300,
+                                margin: const EdgeInsets.only(right: 15, bottom: 35),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Colors.grey,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Text(
-                                          'OBINNA ASUQUO',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Color(
-                                                          0xff32CD32),
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          height: 220,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/ceo.png'),
+                                              fit: BoxFit.fill,
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                       
-                                        Text(
-                                          'PROJECT MANAGER',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 3,
-                                        ),
-                                        
+                                      
                                       ],
                                     ),
-                                  ),
-                                ],
+                                    Container(
+                                      padding: const EdgeInsets.all(
+                                        10,
+                                      ),
+                                      width: 300,
+                                      child: const Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'OBINNA ASUQUO',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Color(
+                                                            0xff32CD32),
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                         
+                                          Text(
+                                            'PROJECT MANAGER',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3,
+                                          ),
+                                          
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                      ),
                     ),
 
                 ],
@@ -1436,9 +1602,10 @@ context.go('/products&services/solar-services');
               scrollDirection: Axis.horizontal,
               child: Container(
                 margin: const EdgeInsets.only(
-                  left: 80, right: 60,
+                  left: 190, right: 60,
                 ),
                 child:  Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
                       height: 40,

@@ -21,8 +21,8 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
   bool _isSubMenuOpen = false;
   int? _hoveredMenuIndex;
 
-  
- // List of submenu items with routes
+    
+// List of submenu items with routes
 final Map<int, List<Map<String, String>>> _subMenuItems = {
   0: [
     {"title": "Our Team", "route": "/about-us/our-team"},
@@ -36,16 +36,18 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
       },
   ],
   1: [
-    {"title": "Comprehensive Solar Services", "route": "/products&services/solar-services"},
+    {"title": "Solar Development", "route": "/products&services/solar-development"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
-    {"title": "Project Development & Management", "route": "/products&services/project-management"},
-    {"title": "Product Supply and Distribution", "route": "/products&services/product-supply"},
+    {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
+    {"title": "Solar Financing", "route": "/products&services/solar-financing"},
   ],
 };
 
+int? _hoveredIndex; // null when nothing is hovered
+
+
   /// Show submenu on hover
-  void _showSubMenu(BuildContext context,
-      int index, Offset position) {
+  void _showSubMenu(BuildContext context, int index, Offset position) {
     _removeOverlay(); // Remove existing submenu first
 
     _overlayEntry = OverlayEntry(
@@ -53,27 +55,20 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
         left: position.dx,
         top: position.dy + 30,
         child: MouseRegion(
-          onEnter: (_) => _isSubMenuOpen =
-              true, // Keep submenu open
+          onEnter: (_) => _isSubMenuOpen = true, // Keep submenu open
           onExit: (_) {
-            Future.delayed(
-                const Duration(milliseconds: 300),
-                () {
-              if (!_isSubMenuOpen) {
-                _removeOverlay();
-              }
+            Future.delayed(const Duration(milliseconds: 300), () {
+              if (!_isSubMenuOpen) _removeOverlay();
             });
           },
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 250,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 5),
+              width: 350,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(1),
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
@@ -84,28 +79,40 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                children: _subMenuItems[index]!
-                    .map((item) {
-                  return InkWell(
-                    onTap: () {
-                      _removeOverlay(); // Close menu
-                      context.go(item["route"]!);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets
-                          .symmetric(
-                          vertical: 12,
-                          horizontal: 16),
-                      child: Text(item["title"]!,
-                          style: const TextStyle(
-                            fontSize: 17,
-                              color:
-                                  Colors.black)),
-                    ),
-                  );
-                }).toList(),
+                crossAxisAlignment: CrossAxisAlignment.start,
+               children: _subMenuItems[index]!.asMap().entries.map((entry) {
+  int itemIndex = entry.key;
+  Map<String, String> item = entry.value;
+
+  return MouseRegion(
+    onEnter: (_) {
+      setState(() {
+        _hoveredIndex = itemIndex;
+      });
+    },
+    onExit: (_) {
+      setState(() {
+        _hoveredIndex = null;
+      });
+    },
+    child: InkWell(
+      onTap: () {
+        _removeOverlay(); // Close menu
+        context.go(item["route"]!);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        child: Text(
+          item["title"]!,
+          style: TextStyle(
+            color: _hoveredIndex == itemIndex ? Colors.blue[200] : Colors.black,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    ),
+  );
+}).toList(),
               ),
             ),
           ),
@@ -115,6 +122,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
 
     Overlay.of(context).insert(_overlayEntry!);
   }
+
 
   /// Removes overlay menu
   void _removeOverlay() {
@@ -209,6 +217,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
           controllers.position.pixels;
     });
   }
+
 
   @override
   void initState() {
@@ -310,169 +319,201 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                   scale: 6,
                 ),
               )
-            : PreferredSize(
-                preferredSize:
-                    Size(screenSize.width, 1000),
-                child: Container(
-                  color: const Color(0xfffffffff),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.all(10),
-                    child: Row(
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center,
-                      children: [
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    70),
-                        Image.asset(
+            :  PreferredSize(
+              preferredSize: Size(screenSize.width, 1000),
+              child: Container(
+                color: const Color(0xfffffffff),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(width: screenSize.width / 70),
+                      InkWell(
+                        onTap: () {
+                                 context.go('/home');
+
+                        },
+                        child: Image.asset(
                           'assets/images/newlogo.png',
                           scale: 6,
                         ),
+                      ),
 
-                        // const Text(
-                        //   'Solevad Energy',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 20,
-                        //     fontWeight: FontWeight.w500,
-                        //     letterSpacing: 3,
-                        //   ),
-                        // ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment
-                                    .center,
-                            children: [
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      12),
-                              _buildMenuItem(
-                                  context,
-                                  "About Us",
-                                  0),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              _buildMenuItem(
-                                  context,
-                                  "Products & Services",
-                                  1),
-                              SizedBox(
-                                  width: screenSize
-                                          .width /
-                                      20),
-                              InkWell(
-                                onHover: (value) {
-                                  setState(() {
-                                    value
-                                        ? _isHovering[
-                                                2] =
-                                            true
-                                        : _isHovering[
-                                                2] =
-                                            false;
-                                  });
-                                },
-                                onTap: () {
-                                   context.go('/contact_us');
-                                },
-                                child: Column(
-                                  mainAxisSize:
-                                      MainAxisSize
-                                          .min,
-                                  children: [
-                                    Text(
-                                      'Contact Us',
-                                      style: TextStyle(
-                                          color: _isHovering[2]
-                                              ? Colors.blue[
-                                                  200]
-                                              : Colors
-                                                  .black,
-                                          fontWeight:
-                                              FontWeight.bold),
+                      // const Text(
+                      //   'Solevad Energy',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.w500,
+                      //     letterSpacing: 3,
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(width: screenSize.width / 12),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[0] = true
+                                      : _isHovering[0] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/home');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Home',
+                                    style: TextStyle(
+                                      color: _isHovering[0]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
                                     ),
-                                    const SizedBox(
-                                        height:
-                                            5),
-                                    Visibility(
-                                      maintainAnimation:
-                                          true,
-                                      maintainState:
-                                          true,
-                                      maintainSize:
-                                          true,
-                                      visible:
-                                          _isHovering[
-                                              2],
-                                      child:
-                                          Container(
-                                        height: 2,
-                                        width: 20,
-                                        color: Colors
-                                            .white,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[0],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        // IconButton(
-                        //   icon: const Icon(Icons.brightness_6),
-                        //   splashColor: Colors.transparent,
-                        //   highlightColor: Colors.transparent,
-                        //   color: Colors.white,
-                        //   onPressed: () {
-                        //     EasyDynamicTheme.of(context).changeTheme();
-                        //   },
-                        // ),
-                        SizedBox(
-                            width:
-                                screenSize.width /
-                                    20),
-                        ElevatedButton(
-                          onPressed: () {
-                            //context.go('/Our_Services');
-                          context.go('/contact_us');
-                          },
-                          style: ElevatedButton
-                              .styleFrom(
-                            fixedSize: const Size(
-                                170, 45),
-                            backgroundColor:
-                                const Color(
-                                    0xff4779A3),
-                          ),
-                          child: const Text(
-                            'Get Started',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(
-                                  0xffffffff),
-                              fontWeight:
-                                  FontWeight.bold,
                             ),
+                    SizedBox(width: screenSize.width / 20),
+                            _buildMenuItem(context, "About Us", 0),
+                    SizedBox(width: screenSize.width / 20),
+                    _buildMenuItem(context, "Products & Services", 1),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[3] = true
+                                      : _isHovering[3] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/contact_us');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Contact Us',
+                                    style: TextStyle(
+                                      color: _isHovering[3]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[3],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: screenSize.width / 20),
+                            InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[4] = true
+                                      : _isHovering[4] = false;
+                                });
+                              },
+                              onTap: () {
+                                context.go('/blog');
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Blog',
+                                    style: TextStyle(
+                                      color: _isHovering[4]
+                                          ? Colors.blue[200]
+                                          : Colors.black,
+                                          fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[4],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // IconButton(
+                      //   icon: const Icon(Icons.brightness_6),
+                      //   splashColor: Colors.transparent,
+                      //   highlightColor: Colors.transparent,
+                      //   color: Colors.white,
+                      //   onPressed: () {
+                      //     EasyDynamicTheme.of(context).changeTheme();
+                      //   },
+                      // ),
+                      SizedBox(width: screenSize.width / 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          //context.go('/Our_Services');
+                          context.go('/contact_us');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(170, 45),
+                          backgroundColor: const Color(0xff4779A3),
+                        ),
+                        child: const Text(
+                          'Get Started',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xffffffff),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width:
-                              screenSize.width /
-                                  20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: screenSize.width / 20,
+                      ),
+                    ],
                   ),
                 ),
               ),
-        drawer: Drawer(
+            ), 
+      drawer: Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -492,6 +533,24 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 thickness: 0.5,
               ),
               const SizedBox(height: 30),
+               ListTile(
+                onTap: () {
+               context.go('/home');
+
+                },
+                leading: const Icon(
+                  Iconsax.home_1_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.profile_2user_bold,
@@ -582,7 +641,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                 children: <Widget>[
                   ListTile(
                     title: const Text(
-                      'Comprehensive Solar Service',
+                      'Solar Development',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -590,7 +649,7 @@ final Map<int, List<Map<String, String>>> _subMenuItems = {
                     ),
                     onTap: () {
                       //  navigationService.push(const WithdrawMoneyScreen());
-context.go('/products&services/solar-services');
+context.go('/products&services/solar-development');
                       // Navigate or handle logic for withdrawing money
                     },
                   ),
@@ -612,7 +671,7 @@ context.go('/products&services/solar-services');
                   ),
                   ListTile(
                     title: const Text(
-                      'Project Development & Management',
+                      'Operation and Maintenance',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -622,13 +681,13 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/project-management');
+                                            context.go('/products&services/operation&maintenance');
 
                     },
                   ),
                   ListTile(
                     title: const Text(
-                      'Product Supply and Distribution',
+                      'Solar Financing',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -638,7 +697,7 @@ context.go('/products&services/solar-services');
                       // Navigate or handle logic for withdrawal settings
                       // navigationService
                       //     .push(const WithdrawalSettingScreen());
-                                            context.go('/products&services/product-supply');
+                                            context.go('/products&services/solar-financing');
 
                     },
                   ),
@@ -657,6 +716,24 @@ context.go('/products&services/solar-services');
                 ),
                 title: const Text(
                   'Contact Us',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+               ListTile(
+                onTap: () {
+               context.go('/blog');
+
+                },
+                leading: const Icon(
+                  Iconsax.blogger_bold,
+                  size: 22,
+                  color: Color(0xff4779A3),
+                ),
+                title: const Text(
+                  'Blog',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -702,7 +779,7 @@ context.go('/products&services/solar-services');
                                           .darken,
                                     ),
                                     image: AssetImage(
-                                        'assets/images/product1.png'))),
+                                        'assets/images/serve3.png'))),
                     child: Row(
                       mainAxisAlignment:
                           MainAxisAlignment
@@ -731,7 +808,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Product supply and distribution',
+                                    'Solar Financing',
                                     style: TextStyle(
                                         fontSize:
                                             22,
@@ -754,7 +831,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'At Solevad Energy, we specialize in the efficient and sustainable supply and distribution of solar energy products. Our services ensure you have access to high-quality, certified solar solutions tailored to meet your energy needs.  We employ the following processes for an efficient, reliable and excellent product distribution to exceed our clients/customers expectation.',
+                                    'We make solar energy accessible and affordable by offering flexible financing solutions designed to meet diverse needs.',
                                     style: TextStyle(
                                         fontSize:
                                             13,
@@ -793,7 +870,7 @@ context.go('/products&services/solar-services');
                                           .darken,
                                     ),
                                     image: AssetImage(
-                                        'assets/images/product1.png'))),
+                                        'assets/images/serve3.png'))),
                     child: Row(
                       mainAxisAlignment:
                           MainAxisAlignment
@@ -822,7 +899,7 @@ context.go('/products&services/solar-services');
                                       textRevealAnimation,
                                   child:
                                       const Text(
-                                    'Product supply and distribution',
+                                    'Solar Financing',
                                     style: TextStyle(
                                         fontSize:
                                             45,
@@ -845,7 +922,7 @@ context.go('/products&services/solar-services');
                                   //textRevealAnimation: textRevealAnimation,
                                   child:
                                       const Text(
-                                    'At Solevad Energy, we specialize in the efficient and sustainable supply and distribution of solar energy\nproducts. Our services ensure you have access to high-quality, certified solar solutions tailored to\nmeet your energy needs.  We employ the following processes for an efficient,\nreliable and excellent product distribution to exceed our clients/customers\nexpectation.',
+                                    'We make solar energy accessible and affordable by offering flexible\nfinancing solutions designed to meet diverse needs.',
                                     style: TextStyle(
                                         fontSize:
                                             16,
@@ -955,7 +1032,7 @@ context.go('/products&services/solar-services');
                               MainAxisSize.min,
                           children: [
                             Text(
-                              'PRODUCT SUPPLY',
+                              'SOLAR FINANCING',
                               style: TextStyle(
                                   color: Colors
                                       .black,
@@ -972,557 +1049,452 @@ context.go('/products&services/solar-services');
               ),
             ),
             const Divider(),
-                          const SizedBox(height: 70,)    ,         
+                         const SizedBox(height: 20,)    ,         
 
-                             ResponsiveWidget.isSmallScreen(
+                      ResponsiveWidget.isSmallScreen(
                     context)
-                  
-                ?
-                Container(
-                margin: const EdgeInsets.only(
-                  left: 20, right: 20
-                ),
-                child:  Column(
-                  children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
                       children: [
-                     Center(
-                          child: Text(
-                                            'Services',
-                                            style: TextStyle(
-                                              color: Color(
-                                                  0xff32CD32),
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/flexible.jpg'))),
+                            ),
+                          ],
                         ),
-                         SizedBox(
-                                      height: 20,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Comprehensive Product Range',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                     Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Reliable Distribution Network',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Tailored Logistics and Support',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                   
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Flexible Loan Options',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Secured and unsecured loan options tailored to your financial situation.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                     const SizedBox(
-                                      height: 30,
-                                    ),
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        )
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
                       ),
-                       child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          Center(
-                            child: Text(
-                                              'Comprehensive Product Range',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 600,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/flexible.jpg'))),
+                              ),
+                            ],
                           ),
-                           SizedBox(
-                                        height: 30,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Solar Panels: High-performance monocrystalline, polycrystalline, and thin-film panels.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Inverters: Advanced string inverters, micro-inverters, and hybrid options.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Energy Storage Systems: Reliable lithium-ion and lead-acid batteries.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                       SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Mounting Systems and Accessories: Durable structures, connectors, and balance of system components.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-SizedBox(
-                                        height: 50,
-                                      ),
-
-                                      Center(
-                            child: Text(
-                                              'Reliable Distribution Network',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          const SizedBox(
+                            width: 40,
                           ),
-                           SizedBox(
-                                        height: 30,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Direct-to-Customer Delivery: Quick and secure transport to residential, commercial, and industrial clients.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Partnered Dealerships: Collaborating with local distributors and installers to expand availability.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Strategically Located Warehouses: Reducing delivery times with regionally based storage facilities.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 50,
-                                      ),
-
-                                      Center(
-                            child: Text(
-                                              'Tailored Logistics and Support',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Flexible Loan Options',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Secured and unsecured loan options tailored to your financial situation.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
-                           SizedBox(
-                                        height: 30,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Efficient Logistics: Eco-friendly and cost-effective shipping options.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Real-Time Order Tracking: Transparency in order fulfillment with shipment monitoring tools.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                       SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          '- Customs and Compliance Expertise: Ensuring adherence to regional and international regulations.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 90,
-                                      ),
-                                      
-                                      
                         ],
-                                           ),
-                     ),
-                  ],
-                ),
-              )
-              :
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                margin: const EdgeInsets.only(
-                  left: 90, right: 20
-                ),
-                child:  Row(
-                  children: [
-                   
-                   
-
-                     const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                    ),
+                  ),
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
                       children: [
-                        Center(
-                          child: Text(
-                                            'Services',
-                                            style: TextStyle(
-                                              color: Color(
-                                                  0xff32CD32),
-                                              fontSize: 20,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/approval.jpg'))),
+                            ),
+                          ],
                         ),
-                         SizedBox(
-                                      height: 20,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Comprehensive Product Range',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                     Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Reliable Distribution Network',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Row(
-                                    children: [
-                                      Icon(Icons.arrow_forward_ios,
-                                       color:  Color(0xff4779A3),),
-                                       SizedBox(width: 10,),
-                                       Text(
-                                            'Tailored Logistics and Support',
-                                            style: TextStyle(
-                                              
-                                              fontSize: 15,
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w500,
-                                            ),
-                                          ),
-                                    ],
-                                   ),
-                                   SizedBox(
-                                    height: 1000,
-                                   )  
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Quick Approval Process',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Streamlined applications to enable faster project execution.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                     const SizedBox(width: 5,),
-                
-                                        const SizedBox(width: 90,),
-                     Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        )
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 60,
+                        right: 50,
                       ),
-                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                         const Center(
-                            child: Text(
-                                              'Comprehensive Product Range',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Quick Approval Process',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Streamlined applications to enable faster project execution.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
-                           const SizedBox(
-                                        height: 30,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Solar Panels: High-performance monocrystalline, polycrystalline, and thin-film panels.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Inverters: Advanced string inverters, micro-inverters, and hybrid options.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Energy Storage Systems: Reliable lithium-ion and lead-acid batteries.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                       const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Mounting Systems and Accessories: Durable structures, connectors, and balance of system components.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                     const SizedBox(
-                                        height: 50,
-                                      ),
-                     
-                                      const Center(
-                            child: Text(
-                                              'Reliable Distribution Network',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          const SizedBox(
+                            width: 180,
                           ),
-                           const SizedBox(
-                                        height: 30,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Direct-to-Customer Delivery: Quick and secure transport to residential, commercial, and industrial clients.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Partnered Dealerships: Collaborating with local distributors and installers to expand availability.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Strategically Located Warehouses: Reducing delivery times with regionally based storage facilities.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 50,
-                                      ),
-                     
-                                      const Center(
-                            child: Text(
-                                              'Tailored Logistics and Support',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 650,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/approval.jpg'))),
+                              ),
+                            ],
                           ),
-                           const SizedBox(
-                                        height: 30,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Efficient Logistics: Eco-friendly and cost-effective shipping options.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Real-Time Order Tracking: Transparency in order fulfillment with shipment monitoring tools.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                       const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Center(
-                                        child: Text(
-                                          '- Customs and Compliance Expertise: Ensuring adherence to regional and international regulations.',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                  
-                                      SizedBox(
-                                        height: 520,
-                                        
-                                        child: Image.asset('assets/images/product2.png'),
-                                      ),
-                                      
-                                      
                         ],
-                                           ),
-                     ),
-                                    
-                  ],
-                ),
-              ),
-            ),
+                      ),
+                    ),
+                  ),
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/rates.jpg'))),
+                            ),
+                          ],
+                        ),
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Competitive Rates',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'Affordable interest rates and payment terms for manageable costs.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 600,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/rates.jpg'))),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 70,
+                          ),
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Competitive Rates',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Affordable interest rates and payment terms for manageable costs.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+            ResponsiveWidget.isSmallScreen(
+                    context)
+                ? Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              width: 350,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/power.jpg'))),
+                            ),
+                          ],
+                        ),
+                        const Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .start,
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center,
+                          children: [
+                            Text(
+                              'Power Purchase Agreements (PPA)',
+                              style: TextStyle(
+                                color: Color(
+                                    0xff32CD32),
+                                fontSize: 30,
+                                fontWeight:
+                                    FontWeight
+                                        .bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              'At Solevad Energy, we provide Power Purchase Agreement (PPA) financing 	solutions for solar energy installations, enabling clients to enjoy the benefits of solar power without upfront capital investment. Under this model, we design, install, and maintain the solar system on your premises, while you pay only for the power you consume at a lower, predictable rate than traditional electricity sources. This approach helps reduce energy costs, manage cash flow efficiently, and achieve sustainability goals with zero ownership risk.',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection:
+                        Axis.horizontal,
+                    child: Container(
+                      margin:
+                          const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                      ),
+                      child: Row(
+                        children: [
+                          const Column(
+                            mainAxisAlignment:
+                                MainAxisAlignment
+                                    .start,
+                            children: [
+                              Text(
+                                'Power Purchase Agreements (PPA)',
+                                style: TextStyle(
+                                  color: Color(
+                                      0xff32CD32),
+                                  fontSize: 30,
+                                  fontWeight:
+                                      FontWeight
+                                          .bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'At Solevad Energy, we provide Power Purchase Agreement (PPA) financing\nsolutions for solar energy installations, enabling clients to enjoy\nthe benefits of solar power without upfront capital investment. Under\nthis model, we design, install, and maintain the solar system on your\npremises, while you pay only for the power you consume at a lower,\npredictable rate than traditional electricity sources. This approach\nhelps reduce energy costs, manage cash flow efficiently, and achieve\nsustainability goals with zero ownership risk.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 90,
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                width: 650,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/power.jpg'))),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
              const SizedBox(
                                         height: 70,
                                       ),
@@ -1545,7 +1517,7 @@ SizedBox(
                         MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Questions about Product Supply? Request a free online appointment with Solevad.',
+                        'Questions about Solar Financing? Request a free online appointment with Solevad.',
                         style: TextStyle(
                           fontSize: 22,
                           color:
@@ -1772,60 +1744,7 @@ SizedBox(
                                 ),
                                  const SizedBox(
                                 height: 20),
-                            Row(
-                              children: [
-                                Transform.scale(
-                                  scale: 1,
-                                  child: Checkbox(
-                                    side:
-                                        const BorderSide(
-                                      color: Colors
-                                          .grey,
-                                    ),
-                                    activeColor:
-                                        Colors
-                                            .black,
-                                    focusColor:
-                                        Colors
-                                            .black,
-                                    checkColor:
-                                        Colors
-                                            .grey,
-                                    value:
-                                        termsAccepted,
-                                    onChanged:
-                                        (bool?
-                                            value) {
-                                      setState(
-                                          () {
-                                        termsAccepted =
-                                            value ??
-                                                false;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Expanded(
-                                  child: Text(
-                                    'I own my Home',
-                                    maxLines: 2,
-                                    style:
-                                        TextStyle(
-                                      fontSize:
-                                          15,
-                                      fontWeight:
-                                          FontWeight
-                                              .w400,
-                                      color: Colors
-                                          .black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                           
                              const SizedBox(
                                 height: 20),
                             const Text(
@@ -1866,7 +1785,7 @@ SizedBox(
                         MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Questions about Product Supply? Request a free online\nappointment with Solevad.',
+                        'Questions about Solar Financing? Request a free online\nappointment with Solevad.',
                         style: TextStyle(
                           fontSize: 35,
                           fontWeight:
@@ -2110,62 +2029,7 @@ SizedBox(
                               ),
                               const SizedBox(
                                   height: 50),
-                              Row(
-                                children: [
-                                  Transform.scale(
-                                    scale: 2,
-                                    child: Checkbox(
-                                      side:
-                                          const BorderSide(
-                                        color: Colors
-                                            .grey,
-                                      ),
-                                      activeColor:
-                                          Colors
-                                              .black,
-                                      focusColor:
-                                          Colors
-                                              .black,
-                                      checkColor:
-                                          Colors
-                                              .grey,
-                                      value:
-                                          termsAccepted,
-                                      onChanged:
-                                          (bool?
-                                              value) {
-                                        setState(
-                                            () {
-                                          termsAccepted =
-                                              value ??
-                                                  false;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Expanded(
-                                    child: Text(
-                                      'I own my Home',
-                                      maxLines: 2,
-                                      style:
-                                          TextStyle(
-                                        fontSize:
-                                            19,
-                                        fontWeight:
-                                            FontWeight
-                                                .w400,
-                                        color: Colors
-                                            .black,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                  height: 20),
+                             
                               const Text(
                                 'By clicking the “Get a Quote” button below, I authorize Solevad Energy. and its agents or representatives, to contact me on the phone number provided to send SMS messages or contact me by phone about a solar project. We will send text messages about support, n appointments, reminders, notifications. Consent is not a condition of purchase.',
                                 style: TextStyle(),

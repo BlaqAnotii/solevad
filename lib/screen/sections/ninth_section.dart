@@ -43,7 +43,7 @@ class _NinthSectionState extends State<NinthSection> {
             "We are driven by sustainability, grounded in integrity, inspired by\ninnovation, committed to customer focus, and dedicated to excellence in all we do.",
             style: TextStyle(
               color: Colors.white,
-           fontSize: screenSize.width /38,
+           fontSize: screenSize.width /35,
               fontWeight: FontWeight.bold,
               height: 1.4,
             ),
@@ -52,7 +52,7 @@ class _NinthSectionState extends State<NinthSection> {
          ElevatedButton(
                         onPressed: () {
                           //context.go('/Our_Services');
-                          context.go('/contact_us');
+                          context.go('/about-us/our-mission&vision&values');
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),

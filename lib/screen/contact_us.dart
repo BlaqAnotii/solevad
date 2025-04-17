@@ -1042,7 +1042,7 @@ context.go('/products&services/solar-development');
                                     ),
                                     const Center(
                                       child: Text(
-                                        'Have a challenge? Want to develop a new source for products and services? Drop us a line or give us a call. Put Our Superior customer service and speedy response to a test, We are ready to help!.',
+                                        'Have a challenge? Want to develop a new source for products and services? Drop us a line or give us a call. Put Our Superior customer service and speedy response to a test, We are ready to help!. Let us help you transition to clean, renewable energy today! Contact us to learn more about our services and solutions.',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
@@ -1284,7 +1284,7 @@ context.go('/products&services/solar-development');
                                     ),
                                     Center(
                                       child: Text(
-                                        'Have a challenge? Want to develop a new source for products and\nservices? Drop us a line or give us a call. Put Our Superior customer\nservice and speedy response to a test, We are ready to\nhelp!.',
+                                        'Have a challenge? Want to develop a new source for products and\nservices? Drop us a line or give us a call. Put Our Superior customer\nservice and speedy response to a test, We are ready to\nhelp!. Let us help you transition to clean, renewable energy\ntoday! Contact us to learn more about our services\nand solutions.',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),

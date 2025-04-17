@@ -155,7 +155,7 @@ class _ThirdSectionState extends State<ThirdSection>
                         child:   ElevatedButton(
                         onPressed: () {
                           //context.go('/Our_Services');
-                          context.go('/contact_us');
+                          context.go('/about-us/our-mission&vision&values');
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),

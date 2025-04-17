@@ -47,14 +47,16 @@ class _FAQPageState extends State<FAQPage> {
       children: [
                   const SizedBox(height: 16),
 
-        const Text(
-            "Frequently Asked Questions",
-            style: TextStyle(
-                            color: Color(0xff32CD32),
-              fontSize: 30,
-              fontWeight: FontWeight.w500,
+        const Center(
+          child: Text(
+              "Frequently Asked Questions",
+              style: TextStyle(
+                              color: Color(0xff32CD32),
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
+        ),
           const SizedBox(height: 16),
         ListView.separated(
             padding: const EdgeInsets.all(16),

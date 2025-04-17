@@ -165,6 +165,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:solevad/bloc/screen_offset.dart';
 import 'package:solevad/model/news.dart';
@@ -315,6 +316,15 @@ height: widget.news.index == 1
                           onPressed: () {
                             //context.go('/Our_Services');
                            // context.go('/contact_us');
+                           if (widget.news.index == 1) {
+        context.go('/products&services/solar-development');
+      } else if (widget.news.index == 2) {
+        context.go('/products&services/energy-management');
+      } else if (widget.news.index == 3) {
+        context.go('/products&services/operation&maintenance');
+      } else if(widget.news.index == 4){
+        context.go('/products&services/solar-financing');
+      }
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(170, 45),

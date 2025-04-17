@@ -1181,7 +1181,7 @@ context.go('/products&services/solar-development');
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/learn4.png'))),
+                                          'assets/images/product1.png'))),
                             ),
                           ],
                         ),
@@ -1267,7 +1267,7 @@ context.go('/products&services/solar-development');
                                 decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            'assets/images/learn4.png'))),
+                                            'assets/images/product1.png'))),
                               ),
                             ],
                           ),

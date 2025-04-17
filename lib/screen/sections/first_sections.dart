@@ -94,7 +94,7 @@ class _FirstSectionState extends State<FirstSection>
     return ResponsiveWidget.isSmallScreen(context)
           ? 
            SizedBox(
-      height: 500,
+      height: 700,
       child: Stack(
         children: [
           CarouselSlider.builder(
@@ -198,7 +198,7 @@ class _FirstSectionState extends State<FirstSection>
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-                    context.go('/contact_us');
+                    context.go('/products&services/solar-development');
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(165, 45),
@@ -218,24 +218,24 @@ class _FirstSectionState extends State<FirstSection>
           ),
 
           // Indicator Dots
-          Positioned(
-            bottom: 30,
-            left: 230,
-            child: Row(
-              children: List.generate(
-                imageList.length,
-                (index) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  width: _currentIndex == index ? 11 : 7,
-                  height: _currentIndex == index ? 11 : 7,
-                  decoration: BoxDecoration(
-                    color: _currentIndex == index ? Colors.white : Colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 30,
+          //   left: 230,
+          //   child: Row(
+          //     children: List.generate(
+          //       imageList.length,
+          //       (index) => Container(
+          //         margin: const EdgeInsets.symmetric(horizontal: 5),
+          //         width: _currentIndex == index ? 11 : 7,
+          //         height: _currentIndex == index ? 11 : 7,
+          //         decoration: BoxDecoration(
+          //           color: _currentIndex == index ? Colors.white : Colors.grey,
+          //           shape: BoxShape.circle,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     )
@@ -342,7 +342,7 @@ class _FirstSectionState extends State<FirstSection>
                 const SizedBox(height: 40),
                 ElevatedButton(
                   onPressed: () {
-                    context.go('/contact_us');
+                    context.go('/products&services/solar-development');
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(170, 45),

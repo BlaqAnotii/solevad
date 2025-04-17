@@ -40,10 +40,10 @@ class _MarketState extends State<Market> {
           ),
           const SizedBox(height: 16),
            Text(
-            "The demand for solar energy in Nigeria is growing rapidly due to\nchallengesin the national power supply and rising fossil fuel costs",
+            "The demand for solar energy in Nigeria is growing rapidly due to\nchallenges in the national power supply and rising fossil fuel costs",
             style: TextStyle(
               color: Colors.white,
-           fontSize: screenSize.width /38,
+           fontSize: screenSize.width /35,
               fontWeight: FontWeight.bold,
               height: 1.4,
             ),
@@ -53,6 +53,7 @@ class _MarketState extends State<Market> {
                         onPressed: () {
                           //context.go('/Our_Services');
                           //context.go('/contact_us');
+                   context.go('/about-us/our-mission&vision&values');
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(170, 45),

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solevad/screen/widget/responsive.dart';
 
 class SeventhSection extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SeventhSectionState extends State<SeventhSection> {
           ),
           ResponsiveWidget.isSmallScreen(context)
           ? 
-          const Column(
+          Column(
             children: [
              
           AboutCard(
@@ -30,30 +31,30 @@ class _SeventhSectionState extends State<SeventhSection> {
             title: 'Leadership',
             description:
                 'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future.',
-            linkText: 'Learn More',
+            linkText: 'Learn More', index: 1,
           ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               AboutCard(
                 imagePath: 'assets/images/aboutus3.png',
                 title: 'Our Vision',
                 description:
                     'To become the foremost partner for solar energy solutions across Sub-Saharan Africa. , driven by strategic alliances with global leaders in technology',
-                linkText: 'Learn More',
+                linkText: 'Learn More', index: 2,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               AboutCard(
                 imagePath: 'assets/images/aboutus4.png',
                 title: 'Our Mission',
                 description:
                     'To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.',
-                linkText: 'Learn More',
+                linkText: 'Learn More', index: 3,
               ),
       
           ],)
           // Row of Cards
         
         :
-          const Row(
+           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -63,26 +64,27 @@ class _SeventhSectionState extends State<SeventhSection> {
                   description:
                       'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future.',
                   linkText: 'Learn More',
+                  index: 1,
                 ),
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               Expanded(
                 child: AboutCard(
                   imagePath: 'assets/images/aboutus3.png',
                   title: 'Our Vision',
                   description:
                       'To become the foremost partner for solar energy solutions across Sub-Saharan Africa. , driven by strategic alliances with global leaders in technology',
-                  linkText: 'Learn More',
+                  linkText: 'Learn More', index: 2,
                 ),
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               Expanded(
                 child: AboutCard(
                   imagePath: 'assets/images/aboutus4.png',
                   title: 'Our Mission',
                   description:
                       'To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.',
-                  linkText: 'Learn More',
+                  linkText: 'Learn More', index: 3,
                 ),
               ),
             ],
@@ -99,13 +101,17 @@ class AboutCard extends StatelessWidget {
   final String title;
   final String description;
   final String linkText;
+    int index;
 
-  const AboutCard({
+
+   AboutCard({
     super.key,
     required this.imagePath,
     required this.title,
     required this.description,
     required this.linkText,
+        required this.index,
+
   });
 
   @override
@@ -167,12 +173,25 @@ class AboutCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    linkText,
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: () {
+                      if (index == 1) {
+        context.go('/about-us/our-team');
+      } else if (index == 2) {
+        context.go('/about-us/our-mission&vision&values');
+      } else if(index == 3) {
+        context.go('/about-us/our-mission&vision&values');
+      }else {
+        return;
+      }
+                    },
+                    child: Text(
+                      linkText,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w500,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 )
