@@ -14,19 +14,16 @@ class _NinthSectionState extends State<NinthSection> {
                     var screenSize = MediaQuery.of(context).size;
 
     return Container(
-      margin: const EdgeInsets.only(top: 70),// dark background
-      width: double.infinity,
+  width: double.infinity,
+  margin: const EdgeInsets.only(top: 70),
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-      decoration: const BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.centerLeft, // Start from the left
-    end: Alignment.centerRight,  // End at the right
-    colors: [
-      Color(0xFF1A1A1A), // Dark gray on the left
-      Color(0xFF2C2C2C), // Slightly lighter gray on the right
-    ],
-  ),
-),
+    decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/black.jpg',),
+                    fit: BoxFit.cover,
+                   
+                  ),
+                ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,15 +36,21 @@ class _NinthSectionState extends State<NinthSection> {
             ),
           ),
           const SizedBox(height: 16),
-           Text(
-            "We are driven by sustainability, grounded in integrity, inspired by\ninnovation, committed to customer focus, and dedicated to excellence in all we do.",
-            style: TextStyle(
-              color: Colors.white,
-           fontSize: screenSize.width /35,
-              fontWeight: FontWeight.bold,
-              height: 1.4,
-            ),
-          ),
+ 
+           Container(
+           //  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+             constraints: const BoxConstraints(maxWidth: 1200), // Constrain width for better block layout
+             child: Text(
+               'We are driven by sustainability, grounded in integrity, inspired by innovation, committed to customer focus, and dedicated to excellence in all we do.',
+               textAlign: TextAlign.justify, // This aligns both edges
+               style: TextStyle(
+                 fontSize: screenSize.width * 0.028, // Adjusted for readability
+                 color: Colors.white,
+                 fontWeight: FontWeight.w500,
+                 height: 1.3,
+               ),
+             ),
+           ),
           const SizedBox(height: 32),
          ElevatedButton(
                         onPressed: () {

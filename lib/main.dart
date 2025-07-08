@@ -62,7 +62,7 @@ void main() {
           },
         ),
           GoRoute(
-          path: '/about-us/our-team',
+          path: '/about-us',
           builder: (context, GoRouterState state) {
             return const OurTeamScreen();
           },
@@ -351,223 +351,226 @@ int? _hoveredIndex; // null when nothing is hovered
         : 1;
     return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.surface,
-      extendBodyBehindAppBar: true,
-      appBar: ResponsiveWidget.isSmallScreen(context)
-          ? AppBar(
-              backgroundColor: const Color(0xffffffff),
-              elevation: 0,
-              centerTitle: true,
-              toolbarHeight: 80,
-              leading: Builder(
-                builder: (context) => IconButton(
-                  icon: const Icon(Iconsax.menu_1_outline, color: Colors.black),
-                  onPressed: () {
-                    Scaffold.of(context)
-                        .openDrawer(); // Opens the drawer using correct context
-                  },
-                ),
-              ),
-              title: Image.asset(
-                'assets/images/newlogo.png',
-                scale: 6,
-              ),
-            )
-          :
-      PreferredSize(
-              preferredSize: Size(screenSize.width, 1000),
-              child: Container(
-                color: const Color(0xfffffffff),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: screenSize.width / 70),
-                      InkWell(
-                        onTap: () {
-                                 context.go('/home');
+      // extendBodyBehindAppBar: true,
+      // appBar: ResponsiveWidget.isSmallScreen(context)
+      //     ? AppBar(
+      //         backgroundColor: const Color(0xffffffff),
+      //         elevation: 0,
+      //         centerTitle: true,
+      //         toolbarHeight: 80,
+      //         leading: Builder(
+      //           builder: (context) => IconButton(
+      //             icon: const Icon(Iconsax.menu_1_outline, color: Colors.black),
+      //             onPressed: () {
+      //               Scaffold.of(context)
+      //                   .openDrawer(); // Opens the drawer using correct context
+      //             },
+      //           ),
+      //         ),
+      //         title: Image.asset(
+      //           'assets/images/newlogo.png',
+      //           scale: 6,
+      //         ),
+      //       )
+      //     :
+      // PreferredSize(
+      //         preferredSize: Size(screenSize.width, 1000),
+      //         child: Container(
+      //           color: const Color(0xfffffffff),
+      //           child: Padding(
+      //             padding: const EdgeInsets.all(10),
+      //             child: Row(
+      //               crossAxisAlignment: CrossAxisAlignment.center,
+      //               children: [
+      //                 SizedBox(width: screenSize.width / 70),
+      //                 InkWell(
+      //                   onTap: () {
+      //                            context.go('/home');
 
-                        },
-                        child: Image.asset(
-                          'assets/images/newlogo.png',
-                          scale: 6,
-                        ),
-                      ),
+      //                   },
+      //                   child: Image.asset(
+      //                     'assets/images/newlogo.png',
+      //                     scale: 6,
+      //                   ),
+      //                 ),
 
-                      // const Text(
-                      //   'Solevad Energy',
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 20,
-                      //     fontWeight: FontWeight.w500,
-                      //     letterSpacing: 3,
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(width: screenSize.width / 12),
-                            InkWell(
-                              onHover: (value) {
-                                setState(() {
-                                  value
-                                      ? _isHovering[0] = true
-                                      : _isHovering[0] = false;
-                                });
-                              },
-                              onTap: () {
-                                context.go('/home');
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Home',
-                                    style: TextStyle(
-                                      color: _isHovering[0]
-                                          ? Colors.blue[200]
-                                          : Colors.black,
-                                          fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[0],
-                                    child: Container(
-                                      height: 2,
-                                      width: 20,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                    SizedBox(width: screenSize.width / 20),
-                            _buildMenuItem(context, "About Us", 0),
-                    SizedBox(width: screenSize.width / 20),
-                    _buildMenuItem(context, "Products & Services", 1),
-                            SizedBox(width: screenSize.width / 20),
-                            InkWell(
-                              onHover: (value) {
-                                setState(() {
-                                  value
-                                      ? _isHovering[3] = true
-                                      : _isHovering[3] = false;
-                                });
-                              },
-                              onTap: () {
-                                context.go('/contact_us');
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Contact Us',
-                                    style: TextStyle(
-                                      color: _isHovering[3]
-                                          ? Colors.blue[200]
-                                          : Colors.black,
-                                          fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[3],
-                                    child: Container(
-                                      height: 2,
-                                      width: 20,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: screenSize.width / 20),
-                            InkWell(
-                              onHover: (value) {
-                                setState(() {
-                                  value
-                                      ? _isHovering[4] = true
-                                      : _isHovering[4] = false;
-                                });
-                              },
-                              onTap: () {
-                                context.go('/blog');
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Blog',
-                                    style: TextStyle(
-                                      color: _isHovering[4]
-                                          ? Colors.blue[200]
-                                          : Colors.black,
-                                          fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Visibility(
-                                    maintainAnimation: true,
-                                    maintainState: true,
-                                    maintainSize: true,
-                                    visible: _isHovering[4],
-                                    child: Container(
-                                      height: 2,
-                                      width: 20,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // IconButton(
-                      //   icon: const Icon(Icons.brightness_6),
-                      //   splashColor: Colors.transparent,
-                      //   highlightColor: Colors.transparent,
-                      //   color: Colors.white,
-                      //   onPressed: () {
-                      //     EasyDynamicTheme.of(context).changeTheme();
-                      //   },
-                      // ),
-                      SizedBox(width: screenSize.width / 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          //context.go('/Our_Services');
-                          context.go('/contact_us');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 45),
-                          backgroundColor: const Color(0xff4779A3),
-                        ),
-                        child: const Text(
-                          'Get Started',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xffffffff),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: screenSize.width / 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ), 
-      drawer: Drawer(
+      //                 // const Text(
+      //                 //   'Solevad Energy',
+      //                 //   style: TextStyle(
+      //                 //     color: Colors.white,
+      //                 //     fontSize: 20,
+      //                 //     fontWeight: FontWeight.w500,
+      //                 //     letterSpacing: 3,
+      //                 //   ),
+      //                 // ),
+      //                 Expanded(
+      //                   child: Row(
+      //                     mainAxisAlignment: MainAxisAlignment.center,
+      //                     children: [
+      //                       SizedBox(width: screenSize.width / 12),
+      //                       InkWell(
+      //                         onHover: (value) {
+      //                           setState(() {
+      //                             value
+      //                                 ? _isHovering[0] = true
+      //                                 : _isHovering[0] = false;
+      //                           });
+      //                         },
+      //                         onTap: () {
+      //                           context.go('/home');
+      //                         },
+      //                         child: Column(
+      //                           mainAxisSize: MainAxisSize.min,
+      //                           children: [
+      //                             Text(
+      //                               'Home',
+      //                               style: TextStyle(
+      //                                 color: _isHovering[0]
+      //                                     ? Colors.blue[200]
+      //                                     : Colors.black,
+      //                                     fontWeight: FontWeight.bold
+      //                               ),
+      //                             ),
+      //                             const SizedBox(height: 5),
+      //                             Visibility(
+      //                               maintainAnimation: true,
+      //                               maintainState: true,
+      //                               maintainSize: true,
+      //                               visible: _isHovering[0],
+      //                               child: Container(
+      //                                 height: 2,
+      //                                 width: 20,
+      //                                 color: Colors.white,
+      //                               ),
+      //                             )
+      //                           ],
+      //                         ),
+      //                       ),
+      //               SizedBox(width: screenSize.width / 20),
+      //                       _buildMenuItem(context, "About Us", 0),
+      //               SizedBox(width: screenSize.width / 20),
+      //               _buildMenuItem(context, "Products & Services", 1),
+      //                       SizedBox(width: screenSize.width / 20),
+      //                       InkWell(
+      //                         onHover: (value) {
+      //                           setState(() {
+      //                             value
+      //                                 ? _isHovering[3] = true
+      //                                 : _isHovering[3] = false;
+      //                           });
+      //                         },
+      //                         onTap: () {
+      //                           context.go('/contact_us');
+      //                         },
+      //                         child: Column(
+      //                           mainAxisSize: MainAxisSize.min,
+      //                           children: [
+      //                             Text(
+      //                               'Contact Us',
+      //                               style: TextStyle(
+      //                                 color: _isHovering[3]
+      //                                     ? Colors.blue[200]
+      //                                     : Colors.black,
+      //                                     fontWeight: FontWeight.bold
+      //                               ),
+      //                             ),
+      //                             const SizedBox(height: 5),
+      //                             Visibility(
+      //                               maintainAnimation: true,
+      //                               maintainState: true,
+      //                               maintainSize: true,
+      //                               visible: _isHovering[3],
+      //                               child: Container(
+      //                                 height: 2,
+      //                                 width: 20,
+      //                                 color: Colors.white,
+      //                               ),
+      //                             )
+      //                           ],
+      //                         ),
+      //                       ),
+      //                       SizedBox(width: screenSize.width / 20),
+      //                       InkWell(
+      //                         onHover: (value) {
+      //                           setState(() {
+      //                             value
+      //                                 ? _isHovering[4] = true
+      //                                 : _isHovering[4] = false;
+      //                           });
+      //                         },
+      //                         onTap: () {
+      //                           context.go('/blog');
+      //                         },
+      //                         child: Column(
+      //                           mainAxisSize: MainAxisSize.min,
+      //                           children: [
+      //                             Text(
+      //                               'Blog',
+      //                               style: TextStyle(
+      //                                 color: _isHovering[4]
+      //                                     ? Colors.blue[200]
+      //                                     : Colors.black,
+      //                                     fontWeight: FontWeight.bold
+      //                               ),
+      //                             ),
+      //                             const SizedBox(height: 5),
+      //                             Visibility(
+      //                               maintainAnimation: true,
+      //                               maintainState: true,
+      //                               maintainSize: true,
+      //                               visible: _isHovering[4],
+      //                               child: Container(
+      //                                 height: 2,
+      //                                 width: 20,
+      //                                 color: Colors.white,
+      //                               ),
+      //                             )
+      //                           ],
+      //                         ),
+      //                       ),
+      //                     ],
+      //                   ),
+      //                 ),
+      //                 // IconButton(
+      //                 //   icon: const Icon(Icons.brightness_6),
+      //                 //   splashColor: Colors.transparent,
+      //                 //   highlightColor: Colors.transparent,
+      //                 //   color: Colors.white,
+      //                 //   onPressed: () {
+      //                 //     EasyDynamicTheme.of(context).changeTheme();
+      //                 //   },
+      //                 // ),
+      //                 SizedBox(width: screenSize.width / 20),
+      //                 ElevatedButton(
+      //                   onPressed: () {
+      //                     //context.go('/Our_Services');
+      //                     context.go('/contact_us');
+      //                   },
+      //                   style: ElevatedButton.styleFrom(
+      //                     fixedSize: const Size(170, 45),
+      //                     backgroundColor: const Color(0xff4779A3),
+      //                   ),
+      //                   child: const Text(
+      //                     'Get Started',
+      //                     style: TextStyle(
+      //                       fontSize: 13,
+      //                       color: Color(0xffffffff),
+      //                       fontWeight: FontWeight.bold,
+      //                     ),
+      //                   ),
+      //                 ),
+      //                 SizedBox(
+      //                   width: screenSize.width / 20,
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ), 
+      drawer:  ResponsiveWidget.isSmallScreen(context)
+         ? 
+      
+      Drawer(
         child: Container(
           color: const Color(0xfffffffff),
           child: Column(
@@ -605,75 +608,27 @@ int? _hoveredIndex; // null when nothing is hovered
                   ),
                 ),
               ),
-              ExpansionTile(
-                leading: const Icon(
-                  Iconsax.profile_2user_bold,
+              ListTile(
+                   leading: const Icon(
+                  Iconsax.people_bold,
                   size: 22,
                   color: Color(0xff4779A3),
                 ),
                 title: const Text(
-                  'About us',
+                  'About Us',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
                   ),
                 ),
-                trailing: const Icon(
-                  Iconsax.arrow_down_1_outline,
-                  size: 22,
-                  color: Colors.black,
-                ),
-       
-                children: <Widget>[
-                  ListTile(
-                    title: const Text(
-                      'Our Team',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onTap: () {
-                      //  navigationService.push(const WithdrawMoneyScreen());
-                                            context.go('/about-us/our-team');
-
-                      // Navigate or handle logic for withdrawing money
-                    },
-                  ),
-                  ListTile(
-                    title: const Text(
-                      'Our Vision, Mission & Values',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onTap: () {
-                      // Navigate or handle logic for viewing withdrawal list
-                      // navigationService
-                      //     .push(const WithdarwalListScreen());
-                                            context.go('/about-us/our-mission&vision&values');
-
-                    },
-                  ),
-                  ListTile(
-                    title: const Text(
-                      'Careers at Solevad',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onTap: () {
-                      // Navigate or handle logic for withdrawal settings
-                      // navigationService
-                      //     .push(const WithdrawalSettingScreen());
-                      context.go('/about-us/careers');
-
-                    },
-                  ),
-                ],
+                onTap: () {
+                  //  navigationService.push(const WithdrawMoneyScreen());
+                                        context.go('/about-us');
+              
+                  // Navigate or handle logic for withdrawing money
+                },
               ),
+             
               ExpansionTile(
                 leading: const Icon(
                   Iconsax.bag_2_bold,
@@ -810,7 +765,7 @@ context.go('/products&services/solar-development');
             ],
           ),
         ),
-      ),
+      ): null,
       body: BlocProvider(
         create: (context) => DisplayOffset(ScrollOffset(scrollOffsetValue: 0)),
         child: const WholeScreen(),

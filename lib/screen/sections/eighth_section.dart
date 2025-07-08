@@ -78,10 +78,12 @@ class _EighthSectionState extends State<EighthSection>
 
   @override
   Widget build(BuildContext context) {
+               var screenSize = MediaQuery.of(context).size;
+
     return  ResponsiveWidget.isSmallScreen(context)
           ? 
               Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
@@ -95,12 +97,18 @@ class _EighthSectionState extends State<EighthSection>
                      ),
                    ),
                    const SizedBox(height: 20),
-                   const Center(
-                     child: Text(
-                       "Our organization is composed of highly competent engineers, experienced project managers, and experts in renewable energy, all of whom share a fervent commitment to sustainability  and innovation. We collaborate effectively to deliver optimal solutions tailored\nto our clients' needs.",
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.6,
+                    Center(
+                     child: Container(
+                                   constraints: const BoxConstraints(maxWidth: 1000), // Constrain width for better block layout
+
+                       child: const Text(
+                         "Our organization is composed of highly competent engineers, experienced project managers, and experts in renewable energy, all of whom share a fervent commitment to sustainability  and innovation. We collaborate effectively to deliver optimal solutions tailored to our clients' needs.",
+                                        textAlign: TextAlign.justify, // This aligns both edges
+
+                         style: TextStyle(
+                           fontSize: 16,
+                           height: 1.6,
+                         ),
                        ),
                      ),
                    ),
@@ -109,7 +117,7 @@ class _EighthSectionState extends State<EighthSection>
    child: ClipRRect(
                        borderRadius: BorderRadius.circular(5),
                        child: Image.asset(
-                         'assets/images/ceo.png', // Replace with your image path
+                         'assets/images/leroy.jpg', // Replace with your image path
                          width: 350,
                          height: 350,
                          fit: BoxFit.cover,
@@ -137,24 +145,32 @@ class _EighthSectionState extends State<EighthSection>
            crossAxisAlignment: CrossAxisAlignment.start,
            children: [
              // Left: Text Content
-             const Column(
+             Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Text(
+                 const Text(
                    'Message from the Group CEO',
                    style: TextStyle(
                      fontSize: 26,
                      fontWeight: FontWeight.w700,
                    ),
                  ),
-                 SizedBox(height: 20),
-                 Text(
-                   "Our organization is composed of highly competent engineers, experienced project managers,\n and experts in renewable energy, all of whom share a fervent commitment to sustainability\n and innovation. We collaborate effectively to deliver optimal solutions tailored\nto our clients' needs.",
-                   style: TextStyle(
-                     fontSize: 16,
-                     height: 1.6,
-                   ),
-                 ),
+                 const SizedBox(height: 20),
+         
+                   Container(
+           //  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+             constraints: const BoxConstraints(maxWidth: 800), // Constrain width for better block layout
+             child: const Text(
+               'Our organization is composed of highly competent engineers, experienced project managers, and experts in renewable energy, all of whom share a fervent commitment to sustainability and innovation. We collaborate effectively to deliver optimal solutions tailored to our clients needs.',
+               textAlign: TextAlign.justify, // This aligns both edges
+               style: TextStyle(
+                 fontSize: 20, // Adjusted for readability
+                 color: Colors.black,
+                 fontWeight: FontWeight.w500,
+                 height: 1.3,
+               ),
+             ),
+           ),
                ],
              ),
          
@@ -168,10 +184,10 @@ class _EighthSectionState extends State<EighthSection>
                    ClipRRect(
                      borderRadius: BorderRadius.circular(5),
                      child: Image.asset(
-                       'assets/images/ceo.png', // Replace with your image path
+                       'assets/images/leroy.jpg', // Replace with your image path
                        width: 350,
                        height: 350,
-                       fit: BoxFit.cover,
+                       fit: BoxFit.contain,
                      ),
                    ),
                    const SizedBox(height: 15),

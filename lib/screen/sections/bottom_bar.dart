@@ -15,17 +15,14 @@ class BottomBar extends StatelessWidget {
           ?
 
           Container(
-      height: 600,
+      height: 750,
   padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
    decoration: const BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.centerLeft, // Start from the left
-    end: Alignment.centerRight,  // End at the right
-    colors: [
-      Color(0xFF1A1A1A), // Dark gray on the left
-      Color(0xFF2C2C2C), // Slightly lighter gray on the right
-    ],
-  ),
+  image: DecorationImage(
+                    image: AssetImage('assets/images/black.jpg',),
+                    fit: BoxFit.cover,
+                   
+                  ),
 ),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,14 +192,11 @@ Container(
       height: 400,
   padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
    decoration: const BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.centerLeft, // Start from the left
-    end: Alignment.centerRight,  // End at the right
-    colors: [
-      Color(0xFF1A1A1A), // Dark gray on the left
-      Color(0xFF2C2C2C), // Slightly lighter gray on the right
-    ],
-  ),
+  image: DecorationImage(
+                    image: AssetImage('assets/images/black.jpg',),
+                    fit: BoxFit.cover,
+                   
+                  ),
 ),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,

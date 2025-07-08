@@ -44,18 +44,24 @@ class _FAQPageState extends State<FAQPage> {
     return Container(
       child: 
     Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
                   const SizedBox(height: 16),
 
         const Center(
-          child: Text(
-              "Frequently Asked Questions",
-              style: TextStyle(
-                              color: Color(0xff32CD32),
-                fontSize: 30,
-                fontWeight: FontWeight.w500,
-              ),
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 15,
             ),
+            child: Text(
+                "Frequently Asked Questions",
+                style: TextStyle(
+                                color: Color(0xff32CD32),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+          ),
         ),
           const SizedBox(height: 16),
         ListView.separated(

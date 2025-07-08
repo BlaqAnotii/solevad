@@ -61,7 +61,6 @@ class _FirstSectionState extends State<FirstSection>
 
 
   final List<String> imageList = [
-    'assets/images/section1.png',
     'assets/images/energy1.png',
     'assets/images/news5.png',
   ];
@@ -170,52 +169,101 @@ class _FirstSectionState extends State<FirstSection>
             ),
           ),
 
-           // Static Text on top
-          Positioned(
-            left: 90,
-            top: 130,
+Positioned(
+            left: 50,
+            top: 150,
             right: 50,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+    
+         Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 950),
+            child: const Text(
+              
                   'Empowering the future through Clean Energy',
-                  style: TextStyle(
-                    fontSize: 25,
+                 
+                  textAlign: TextAlign.center,
+                 style: TextStyle(
+          fontFamily: 'Mulish',
+         fontSize: 28,
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
-                  ),
-                ),
+        ),
+            ),
+          ),
+        ),
+      
+              
                 const SizedBox(height: 20),
-                const Text(
-                  'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    context.go('/products&services/solar-development');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(165, 45),
-                    backgroundColor: Colors.white,
-                  ),
-                  child: const Text(
-                    'Learn more',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+       Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1000), // Constrain width for better block layout
+    child: Text(
+      'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us in shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.038, // Adjusted for readability
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+  ),
+),
+              
+              
               ],
             ),
           ),
+           // Static Text on top
+          // Positioned(
+          //   left: 90,
+          //   top: 130,
+          //   right: 50,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       const Text(
+          //         'Empowering the future through Clean Energy',
+          //         style: TextStyle(
+          //           fontSize: 25,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w800,
+          //         ),
+          //       ),
+          //       const SizedBox(height: 20),
+          //       const Text(
+          //         'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+          //         style: TextStyle(
+          //           fontSize: 14,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //       ),
+          //       const SizedBox(height: 40),
+          //       ElevatedButton(
+          //         onPressed: () {
+          //           context.go('/products&services/solar-development');
+          //         },
+          //         style: ElevatedButton.styleFrom(
+          //           fixedSize: const Size(165, 45),
+          //           backgroundColor: Colors.white,
+          //         ),
+          //         child: const Text(
+          //           'Learn more',
+          //           style: TextStyle(
+          //             fontSize: 13,
+          //             color: Colors.black,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
 
           // Indicator Dots
           // Positioned(
@@ -240,7 +288,7 @@ class _FirstSectionState extends State<FirstSection>
       ),
     )
           : SizedBox(
-      height: 500,
+      height: 700,
       child: Stack(
         children: [
           CarouselSlider.builder(
@@ -305,7 +353,7 @@ class _FirstSectionState extends State<FirstSection>
               );
             },
             options: CarouselOptions(
-              height: 500,
+              height: 700,
               viewportFraction: 1.0,
               autoPlay: true,
               onPageChanged: (index, reason) {
@@ -314,52 +362,102 @@ class _FirstSectionState extends State<FirstSection>
             ),
           ),
 
-            // Static Text on top
+           // Static Text on top
           Positioned(
             left: 90,
-            top: 130,
+            top: 190,
             right: 50,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+      
+         Center(
+          child: Container(
+             padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1000),
+            child: const Text(
+            
                   'Empowering the future through Clean Energy',
-                  style: TextStyle(
-                    fontSize: 45,
+                                    textAlign: TextAlign.center,
+            style: TextStyle(
+          fontFamily: 'Mulish',
+         fontSize: 45,
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
-                  ),
-                ),
+        ),
+                
+            ),
+          ),
+        ),
+      
                 const SizedBox(height: 20),
-                const Text(
-                  'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    context.go('/products&services/solar-development');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(170, 45),
-                    backgroundColor: Colors.white,
-                  ),
-                  child: const Text(
-                    'Learn more',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              
+                   Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1000), // Constrain width for better block layout
+    child: Text(
+      'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us in shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.018, // Adjusted for readability
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+  ),
+),
               ],
             ),
           ),
+
+
+            // Static Text on top
+          // Positioned(
+          //   left: 90,
+          //   top: 180,
+          //   right: 50,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       const Text(
+          //         'Empowering the future through Clean Energy',
+          //         style: TextStyle(
+          //           fontSize: 45,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w800,
+          //         ),
+          //       ),
+          //       const SizedBox(height: 20),
+          //       const Text(
+          //         'Revolutionizing energy access by delivering innovative, sustainable, and cost-effective clean energy solutions. Join us\nin shaping a greener, more sustainable future for businesses and households across Sub-Saharan Africa.',
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //       ),
+          //       const SizedBox(height: 40),
+          //       ElevatedButton(
+          //         onPressed: () {
+          //           context.go('/products&services/solar-development');
+          //         },
+          //         style: ElevatedButton.styleFrom(
+          //           fixedSize: const Size(170, 45),
+          //           backgroundColor: Colors.white,
+          //         ),
+          //         child: const Text(
+          //           'Learn more',
+          //           style: TextStyle(
+          //             fontSize: 13,
+          //             color: Colors.black,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
 
           // Indicator Dots
           Positioned(

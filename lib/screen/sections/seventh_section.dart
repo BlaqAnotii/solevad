@@ -116,89 +116,86 @@ class AboutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image with overlay title
-          Stack(
-            children: [
-              ColorFiltered(
-                colorFilter: ColorFilter.mode(
-        Colors.black.withOpacity(0.4), // Adjust opacity
-        BlendMode.darken,
-      ),
-                child: Image.asset(
-                  imagePath,
-                  height: 180,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                
-                  
-                ),
-              ),
-              Positioned(
-                bottom: 12,
-                left: 12,
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                        color:Colors.white,
-                    shadows: [
-                      Shadow(blurRadius: 4, color: Colors.black45),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          // Description and link
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    height: 1.5,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: InkWell(
-                    onTap: () {
+    return InkWell(
+       onTap: () {
                       if (index == 1) {
-        context.go('/about-us/our-team');
-      } else if (index == 2) {
-        context.go('/about-us/our-mission&vision&values');
-      } else if(index == 3) {
-        context.go('/about-us/our-mission&vision&values');
-      }else {
-        return;
-      }
+                    context.go('/about-us/our-team');
+                  } else if (index == 2) {
+                    context.go('/about-us/our-mission&vision&values');
+                  } else if(index == 3) {
+                    context.go('/about-us/our-mission&vision&values');
+                  }else {
+                    return;
+                  }
                     },
+      child: Card(
+        elevation: 4,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image with overlay title
+            Stack(
+              children: [
+                ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.4), // Adjust opacity
+          BlendMode.darken,
+        ),
+                  child: Image.asset(
+                    imagePath,
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  
+                    
+                  ),
+                ),
+                Positioned(
+                  bottom: 12,
+                  left: 12,
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize:21,
+                      fontWeight: FontWeight.bold,
+                          color:Colors.white,
+                      shadows: [
+                        Shadow(blurRadius: 4, color: Colors.black45),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // Description and link
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      constraints: const BoxConstraints(maxWidth: 1000),
                     child: Text(
-                      linkText,
+                      description,
+                      textAlign: TextAlign.justify,
                       style: const TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w500,
-                        decoration: TextDecoration.underline,
+                        fontSize: 14,
+                        height: 1.5,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600
                       ),
                     ),
                   ),
-                )
-              ],
+                  const SizedBox(height: 12),
+                 
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
