@@ -98,23 +98,23 @@ class _SixthSectionState extends State<SixthSection>
                     ),
           ),
       
-// const SizedBox(height: 30),
-//                 Center(
-//   child: Container(
-//     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-//     constraints: const BoxConstraints(maxWidth: 900), // Constrain width for better block layout
-//     child: Text(
-//       'At Solevad Consulting, we are dedicated to forging meaningful connections that not only drive growth but also promote sustainability across all facets of business and community life. We understand that true impact comes from collaboration and innovation, which is why we prioritize human-centered designs in our approach. By aligning our strategies with the unique needs of our clients and the communities they serve, we empower organizations to thrive while fostering a positive social and environmental footprint. Our commitment to creating these impactful connections ensures that every project contributes to a more sustainable future, benefiting both businesses and the communities they engage with.\n\nWe offer a diverse range of services across three core areas:',
-//       textAlign: TextAlign.justify, // This aligns both edges
-//       style: TextStyle(
-//         fontSize: screenSize.width * 0.028, // Adjusted for readability
-//         color: Colors.white,
-//         fontWeight: FontWeight.w500,
-//         height: 1.8,
-//       ),
-//     ),
-//   ),
-// ),
+const SizedBox(height: 30),
+                Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 900), // Constrain width for better block layout
+    child: Text(
+      'At Solevad Energy, we offer a comprehensive suite of services designed to meet the energy needs of residential, commercial, and industrial clients, ensuring optimal efficiency and sustainability.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.028, // Adjusted for readability
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        height: 1.8,
+      ),
+    ),
+  ),
+),
                 const SizedBox(height: 40),          // Icons row
          Padding(
            padding: EdgeInsets.only(
@@ -130,7 +130,7 @@ class _SixthSectionState extends State<SixthSection>
                      // Background image container
                      InkWell(
                       onTap: () {
-                                                                       context.go('/services/energy-consulting');
+                                          context.go('/products&services/energy-management');
 
                       },
                        child: Container(
@@ -153,7 +153,7 @@ class _SixthSectionState extends State<SixthSection>
                        right: 0,
                        child: InkWell(
                         onTap: () {
-                                                                         context.go('/services/energy-consulting');
+                                              context.go('/products&services/energy-management');
 
                         },
                          child: ClipRRect(
@@ -191,7 +191,7 @@ class _SixthSectionState extends State<SixthSection>
                                ),
                                 InkWell(
                                   onTap: () {
-                                            //   context.go('/services/energy-consulting');
+                                              context.go('/products&services/energy-management');
                          
                                   },
                                   child: Container(
@@ -229,7 +229,7 @@ class _SixthSectionState extends State<SixthSection>
                      // Background image container
                      InkWell(
                       onTap: () {
-                     context.go('/services/community-development');
+                     context.go('/products&services/energy-management');
 
                       },
                        child: Container(
@@ -252,7 +252,7 @@ class _SixthSectionState extends State<SixthSection>
                        right: 0,
                        child: InkWell(
                         onTap: () {
-                           context.go('/services/community-development');
+                           context.go('/products&services/energy-management');
                         },
                          child: ClipRRect(
                            borderRadius: const BorderRadius.only(
@@ -289,7 +289,7 @@ class _SixthSectionState extends State<SixthSection>
                                ),
                                 InkWell(
                                   onTap: () {
-                                context.go('/services/community-development');
+                                context.go('/products&services/energy-management');
                          
                                   },
                                   child: Container(
@@ -328,7 +328,7 @@ class _SixthSectionState extends State<SixthSection>
                      // Background image container
                      InkWell(
                       onTap: () {
-                                      context.go('/services/business-consulting');
+                                      context.go('/products&services/operation&maintenance');
 
                       },
                        child: Container(
@@ -352,7 +352,7 @@ class _SixthSectionState extends State<SixthSection>
                        child: InkWell(
                         onTap: () {
                               
-              context.go('/services/business-consulting');
+              context.go('/products&services/operation&maintenance');
                
                         },
                          child: ClipRRect(
@@ -390,7 +390,7 @@ class _SixthSectionState extends State<SixthSection>
                                ),
                                 InkWell(
                                   onTap: () {
-                                               context.go('/services/business-consulting');
+                                               context.go('/products&services/operation&maintenance');
                          
                                   },
                                   child: Container(
@@ -428,7 +428,7 @@ class _SixthSectionState extends State<SixthSection>
                      // Background image container
                      InkWell(
                       onTap: () {
-                                      context.go('/services/business-consulting');
+                                      context.go('/products&services/solar-financing');
 
                       },
                        child: Container(
@@ -452,7 +452,7 @@ class _SixthSectionState extends State<SixthSection>
                        child: InkWell(
                         onTap: () {
                               
-              context.go('/services/business-consulting');
+              context.go('/products&services/solar-financing');
                
                         },
                          child: ClipRRect(
@@ -490,7 +490,7 @@ class _SixthSectionState extends State<SixthSection>
                                ),
                                 InkWell(
                                   onTap: () {
-                                               context.go('/services/business-consulting');
+                                               context.go('/products&services/solar-financing');
                          
                                   },
                                   child: Container(
@@ -562,23 +562,23 @@ class _SixthSectionState extends State<SixthSection>
                     ),
           ),
       
-// const SizedBox(height: 30),
-//                Center(
-//   child: Container(
-//     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-//     constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
-//     child: Text(
-//       'At Solevad Consulting, we are dedicated to forging meaningful connections that not only drive growth but also promote sustainability across all facets of business and community life. We understand that true impact comes from collaboration and innovation, which is why we prioritize human-centered designs in our approach. By aligning our strategies with the unique needs of our clients and the communities they serve, we empower organizations to thrive while fostering a positive social and environmental footprint. Our commitment to creating these impactful connections ensures that every project contributes to a more sustainable future, benefiting both businesses and the communities they engage with.\n\nWe offer a diverse range of services across three core areas:',
-//       textAlign: TextAlign.justify, // This aligns both edges
-//       style: TextStyle(
-//         fontSize: screenSize.width * 0.018, // Adjusted for readability
-//         color: Colors.white,
-//         fontWeight: FontWeight.w500,
-//         height: 1.8,
-//       ),
-//     ),
-//   ),
-// ),
+const SizedBox(height: 30),
+               Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
+    child: Text(
+      'At Solevad Energy, we offer a comprehensive suite of services designed to meet the energy needs of residential, commercial, and industrial clients, ensuring optimal efficiency and sustainability.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.018, // Adjusted for readability
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        height: 1.8,
+      ),
+    ),
+  ),
+),
                 const SizedBox(height: 40),          // Icons row
          SizedBox(
           height: 320,
@@ -598,12 +598,15 @@ class _SixthSectionState extends State<SixthSection>
         InkWell(
           onTap: () {
                 if (service["index"]=='1') {
-                        context.go('/services/energy-consulting');
+                        context.go('/products&services/solar-development');
                   } else if (service["index"]=='2') {
-             context.go('/services/community-development');
+             context.go('/products&services/energy-management');
                   } else if(service["index"]=='3') {
-              context.go('/services/business-consulting');
-                  }else {
+              context.go('/products&services/operation&maintenance');
+                  }else if(service["index"]=='3') {
+              context.go('/products&services/solar-financing');
+                  
+                 } else {
                     return;
                   }
           },

@@ -48,7 +48,7 @@ class _WholeScreenState extends State<WholeScreen> {
 final Map<int, List<Map<String, String>>> _subMenuItems = {
  
   0: [
-    {"title": "Solar Development", "route": "/products&services/solar-development"},
+    {"title": "Solar Development", "route": "/products&services/energy-management"},
     {"title": "Energy Management Services", "route": "/products&services/energy-management"},
     {"title": "Operation and Maintenance", "route": "/products&services/operation&maintenance"},
     {"title": "Solar Financing", "route": "/products&services/solar-financing"},

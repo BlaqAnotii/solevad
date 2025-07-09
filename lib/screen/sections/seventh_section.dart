@@ -119,11 +119,11 @@ class AboutCard extends StatelessWidget {
     return InkWell(
        onTap: () {
                       if (index == 1) {
-                    context.go('/about-us/our-team');
+                    context.go('/about-us');
                   } else if (index == 2) {
-                    context.go('/about-us/our-mission&vision&values');
+                    context.go('/about-us');
                   } else if(index == 3) {
-                    context.go('/about-us/our-mission&vision&values');
+                    context.go('/about-us');
                   }else {
                     return;
                   }
