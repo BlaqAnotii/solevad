@@ -2848,6 +2848,8 @@ class _TeamState extends State<Team> {
   ];
   @override
   Widget build(BuildContext context) {
+        var screenSize = MediaQuery.of(context).size;
+
            return   ResponsiveWidget.isSmallScreen(
                 context)
             ? Container(
@@ -2873,6 +2875,24 @@ class _TeamState extends State<Team> {
                                                 ),
                                               ),
                             ),
+                                 
+const SizedBox(height: 30),
+               Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
+    child: Text(
+      'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.03, // Adjusted for readability
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        height: 1.8,
+      ),
+    ),
+  ),
+),
                               const SizedBox(
                       height: 15,
                     ),
@@ -2998,6 +3018,23 @@ class _TeamState extends State<Team> {
                                               ),
                                             ),
                           ),
+                          const SizedBox(height: 30),
+               Center(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
+    child: Text(
+      'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
+      textAlign: TextAlign.justify, // This aligns both edges
+      style: TextStyle(
+        fontSize: screenSize.width * 0.018, // Adjusted for readability
+        color: Colors.black,
+        fontWeight: FontWeight.w500,
+        height: 1.8,
+      ),
+    ),
+  ),
+),
                             const SizedBox(
                     height: 40,
                   ),
