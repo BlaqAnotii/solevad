@@ -2731,565 +2731,178 @@ title: ResponsiveWidget.isSmallScreen(context)
 }
 
 
-class Renewable extends StatefulWidget {
+class ResponsiveSection extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+  final bool imageLeft;
+
+  const ResponsiveSection({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.imageLeft = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isSmallScreen = ResponsiveWidget.isSmallScreen(context);
+
+    if (isSmallScreen) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 30),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 350,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Large screen layout
+    List<Widget> rowChildren = [
+      Expanded(
+        flex: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.asset(
+            imagePath,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(width: 50),
+      Expanded(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: imageLeft ? rowChildren : rowChildren.reversed.toList(),
+      ),
+    );
+  }
+}
+
+class Renewable extends StatelessWidget {
   const Renewable({super.key});
 
   @override
-  State<Renewable> createState() => _RenewableState();
-}
-
-class _RenewableState extends State<Renewable> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Load Audit and Energy Usage analysis',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Conducting detailed load audits to design solar systems tailored to your unique energy needs, maximizing efficiency and minimizing costs. Also Helping clients understand energy consumption patterns to determine the optimal capacity for solar panels, inverters, and battery storage.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/so2.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/so2.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Load Audit and Energy Usage analysis',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Conducting detailed load audits to design solar systems tailored to your unique energy needs, maximizing efficiency and minimizing costs. Also Helping clients understand energy consumption patterns to determine the optimal capacity for solar panels, inverters, and battery storage.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Load Audit and Energy Usage analysis',
+      description:
+          'Conducting detailed load audits to design solar systems tailored to your unique energy needs, maximizing efficiency and minimizing costs. Also Helping clients understand energy consumption patterns to determine the optimal capacity for solar panels, inverters, and battery storage.',
+      imagePath: 'assets/images/so2.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-class Renewable4 extends StatefulWidget {
+class Renewable4 extends StatelessWidget {
   const Renewable4({super.key});
 
   @override
-  State<Renewable4> createState() => _Renewable4State();
-}
-
-class _Renewable4State extends State<Renewable4> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Project Management implementation ',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
+    return const ResponsiveSection(
+      title:                     
+           'Project Management implementation ',
 
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We offer comprehensive end-to-end Project Management and Implementation services for solar installations, ensuring smooth execution, quality control, and timely delivery. Our structured approach covers every phase of the project, from planning to commissioning. Key elements of our project implementation include product procurement and distribution, installation, commissioning, performance testing, and system optimization. This ensures that each aspect is handled professionally, leading to successful solar energy solutions.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/so4.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/so4.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Project Management implementation ',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We offer comprehensive end-to-end Project Management and Implementation services for solar installations, ensuring smooth execution, quality control, and timely delivery. Our structured approach covers every phase of the project, from planning to commissioning. Key elements of our project implementation include product procurement and distribution, installation, commissioning, performance testing, and system optimization. This ensures that each aspect is handled professionally, leading to successful solar energy solutions.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+      description:
+          'We offer comprehensive end-to-end Project Management and Implementation services for solar installations, ensuring smooth execution, quality control, and timely delivery. Our structured approach covers every phase of the project, from planning to commissioning. Key elements of our project implementation include product procurement and distribution, installation, commissioning, performance testing, and system optimization. This ensures that each aspect is handled professionally, leading to successful solar energy solutions.',
+      imagePath: 'assets/images/so4.jpg',
+      imageLeft: true,
+    );
   }
 }
 
 
-
-
-
-
-class Renewable3 extends StatefulWidget {
+class Renewable3 extends StatelessWidget {
   const Renewable3({super.key});
 
   @override
-  State<Renewable3> createState() => _Renewable3State();
-}
-
-class _Renewable3State extends State<Renewable3> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
+    return const ResponsiveSection(
+      title:                     
                          'System Design',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
 
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We offer comprehensive system design services for solar energy installations, focusing on optimal performance, efficiency, and sustainability. Our tailored designs meet the unique energy needs of each client, enabling effective harnessing of solar power. Key components of our system design include selecting the right components—such as batteries, inverters, and panels—based on their efficiency and output, as well as optimizing the system layout, which involves panel placement and consideration of solar irradiance and mechanical setups.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/so3.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'System Design',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We offer comprehensive system design services for solar energy installations, focusing on optimal performance, efficiency, and sustainability. Our tailored designs meet the unique energy needs of each client, enabling effective harnessing of solar power. Key components of our system design include selecting the right components—such as batteries, inverters, and panels—based on their efficiency and output, as well as optimizing the system layout, which involves panel placement and consideration of solar irradiance and mechanical setups.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/so3.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+      description:
+            "We offer comprehensive system design services for solar energy installations, focusing on optimal performance, efficiency, and sustainability. Our tailored designs meet the unique energy needs of each client, enabling effective harnessing of solar power. Key components of our system design include selecting the right components—such as batteries, inverters, and panels—based on their efficiency and output, as well as optimizing the system layout, which involves panel placement and consideration of solar irradiance and mechanical setups.",
+      imagePath: 'assets/images/so3.jpg',
+      imageLeft: false,
+    );
   }
 }
 
 
-class Renewable5 extends StatefulWidget {
+class Renewable5 extends StatelessWidget {
   const Renewable5({super.key});
 
   @override
-  State<Renewable5> createState() => _Renewable5State();
-}
-
-class _Renewable5State extends State<Renewable5> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
+    return const ResponsiveSection(
+      title:                     
                          'Minigrid',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
 
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We provide mini-grid solar systems designed for both community and commercial users. These systems are independent, decentralized electricity networks that deliver reliable, renewable energy to local consumers, such as communities, schools, and businesses. Our mini-grid solutions aim to enhance energy access in underserved areas, promoting sustainability and empowering local stakeholders. By offering high-quality electricity, we help bridge the energy access gap, contributing to the social and economic development of the communities we serve.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/so5.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Minigrid',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We provide mini-grid solar systems designed for both community and commercial users. These systems are independent, decentralized electricity networks that deliver reliable, renewable energy to local consumers, such as communities, schools, and businesses. Our mini-grid solutions aim to enhance energy access in underserved areas, promoting sustainability and empowering local stakeholders. By offering high-quality electricity, we help bridge the energy access gap, contributing to the social and economic development of the communities we serve.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/so5.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+      description:
+          'We provide mini-grid solar systems designed for both community and commercial users. These systems are independent, decentralized electricity networks that deliver reliable, renewable energy to local consumers, such as communities, schools, and businesses. Our mini-grid solutions aim to enhance energy access in underserved areas, promoting sustainability and empowering local stakeholders. By offering high-quality electricity, we help bridge the energy access gap, contributing to the social and economic development of the communities we serve.',
+      imagePath: 'assets/images/so5.jpg',
+      imageLeft: false,
+    );
   }
 }
 

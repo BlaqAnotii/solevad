@@ -460,24 +460,24 @@ Positioned(
           // ),
 
           // Indicator Dots
-          Positioned(
-            bottom: 20,
-            left: 650,
-            child: Row(
-              children: List.generate(
-                imageList.length,
-                (index) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  width: _currentIndex == index ? 12 : 8,
-                  height: _currentIndex == index ? 12 : 8,
-                  decoration: BoxDecoration(
-                    color: _currentIndex == index ? Colors.white : Colors.grey,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 20,
+          //   left: 650,
+          //   child: Row(
+          //     children: List.generate(
+          //       imageList.length,
+          //       (index) => Container(
+          //         margin: const EdgeInsets.symmetric(horizontal: 5),
+          //         width: _currentIndex == index ? 12 : 8,
+          //         height: _currentIndex == index ? 12 : 8,
+          //         decoration: BoxDecoration(
+          //           color: _currentIndex == index ? Colors.white : Colors.grey,
+          //           shape: BoxShape.circle,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

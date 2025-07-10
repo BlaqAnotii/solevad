@@ -957,565 +957,167 @@ title: ResponsiveWidget.isSmallScreen(context)
   bool termsAccepted = false;
 }
 
+// Reuse your ResponsiveSection here
+class ResponsiveSection extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+  final bool imageLeft;
 
-class Renewables21 extends StatefulWidget {
+  const ResponsiveSection({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.imageLeft = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isSmallScreen = MediaQuery.of(context).size.width < 800;
+
+    if (isSmallScreen) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 30),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 350,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    List<Widget> rowChildren = [
+      Expanded(
+        flex: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.asset(
+            imagePath,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(width: 50),
+      Expanded(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: imageLeft ? rowChildren : rowChildren.reversed.toList(),
+      ),
+    );
+  }
+}
+
+// System Performance Monitoring
+class Renewables21 extends StatelessWidget {
   const Renewables21({super.key});
 
   @override
-  State<Renewables21> createState() => _Renewables21State();
-}
-
-class _Renewables21State extends State<Renewables21> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'System Performance Monitoring',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We offer System Performance Monitoring services for solar system installations to ensure optimal efficiency and reliability through Continuous remote monitoring for real-time analytics and reporting.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/op2.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/op2.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'System Performance Monitoring',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We offer System Performance Monitoring services for solar system installations to ensure optimal efficiency and reliability through Continuous remote monitoring for real-time analytics and reporting.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'System Performance Monitoring',
+      description:
+          "We offer System Performance Monitoring services for solar system installations to ensure optimal efficiency and reliability through Continuous remote monitoring for real-time analytics and reporting.",
+      imagePath: 'assets/images/op2.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-class Renewables22 extends StatefulWidget {
+// Preventive Maintenance
+class Renewables22 extends StatelessWidget {
   const Renewables22({super.key});
 
   @override
-  State<Renewables22> createState() => _Renewables22State();
-}
-
-class _Renewables22State extends State<Renewables22> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Preventive Maintenance',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We provide Preventive Maintenance services for solar installations to ensure optimal performance and longevity of solar energy systems. Our approach focuses on regular  Scheduled inspections, cleaning of solar panels, and checks on inverters, batteries, and connections tasks that help identify and address potential issues before they escalate, thereby enhancing the reliability and efficiency of the solar systems.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/op3.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/op3.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Preventive Maintenance',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We provide Preventive Maintenance services for solar installations to ensure optimal performance and longevity of solar energy systems. Our approach focuses on regular  Scheduled inspections, cleaning of solar panels, and checks on inverters, batteries, and connections tasks that help identify and address potential issues before they escalate, thereby enhancing the reliability and efficiency of the solar systems.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Preventive Maintenance',
+      description:
+          "We provide Preventive Maintenance services for solar installations to ensure optimal performance and longevity of solar energy systems. Our approach focuses on regular Scheduled inspections, cleaning of solar panels, and checks on inverters, batteries, and connections tasks that help identify and address potential issues before they escalate, thereby enhancing the reliability and efficiency of the solar systems.",
+      imagePath: 'assets/images/op3.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-
-
-
-class Renewables23 extends StatefulWidget {
+// Corrective Maintenance
+class Renewables23 extends StatelessWidget {
   const Renewables23({super.key});
 
   @override
-  State<Renewables23> createState() => _Renewables23State();
-}
-
-class _Renewables23State extends State<Renewables23> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Corrective Maintenance',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We offer Corrective Maintenance services for solar installations to address and resolve issues that may arise during the operation of solar energy systems. This service is essential for restoring systems to optimal functionality after a failure or performance drop has been detected. Our approach focuses Troubleshooting and repairing issues, including inverter failures, wiring damage, and shading concerns.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/op4.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Corrective Maintenance',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We offer Corrective Maintenance services for solar installations to address and resolve issues that may arise during the operation of solar energy systems. This service is essential for restoring systems to optimal functionality after a failure or performance drop has been detected. Our approach focuses Troubleshooting and repairing issues, including inverter failures, wiring damage, and shading concerns.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/op4.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Corrective Maintenance',
+      description:
+          "We offer Corrective Maintenance services for solar installations to address and resolve issues that may arise during the operation of solar energy systems. This service is essential for restoring systems to optimal functionality after a failure or performance drop has been detected. Our approach focuses Troubleshooting and repairing issues, including inverter failures, wiring damage, and shading concerns.",
+      imagePath: 'assets/images/op4.jpg',
+      imageLeft: false,
+    );
   }
 }
 
-
-class Renewables24 extends StatefulWidget {
+// After Sales Services
+class Renewables24 extends StatelessWidget {
   const Renewables24({super.key});
 
   @override
-  State<Renewables24> createState() => _Renewables24State();
-}
-
-class _Renewables24State extends State<Renewables24> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'After Sales Services',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Offering robust after-sales services is essential for ensuring customer satisfaction and the long-term success of solar installations. Our approach focuses on customer support system, warranty and reliability and customer  engagement and feedback.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/op5.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 500),
-                     child: const Text(
-                           'After Sales Services',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Offering robust after-sales services is essential for ensuring customer satisfaction and the long-term success of solar installations. Our approach focuses on customer support system, warranty and reliability and customer  engagement and feedback.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/op5.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'After Sales Services',
+      description:
+          "Offering robust after-sales services is essential for ensuring customer satisfaction and the long-term success of solar installations. Our approach focuses on customer support system, warranty and reliability and customer engagement and feedback.",
+      imagePath: 'assets/images/op5.jpg',
+      imageLeft: false,
+    );
   }
 }

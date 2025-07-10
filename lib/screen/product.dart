@@ -957,564 +957,164 @@ title: ResponsiveWidget.isSmallScreen(context)
 }
 
 
-class Renewables15 extends StatefulWidget {
+
+// Reuse your ResponsiveSection here
+class ResponsiveSection extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+  final bool imageLeft;
+
+  const ResponsiveSection({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.imageLeft = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isSmallScreen = MediaQuery.of(context).size.width < 800;
+
+    if (isSmallScreen) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 30),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 350,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    List<Widget> rowChildren = [
+      Expanded(
+        flex: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.asset(
+            imagePath,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(width: 50),
+      Expanded(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontSize: 16, height: 1.5),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: imageLeft ? rowChildren : rowChildren.reversed.toList(),
+      ),
+    );
+  }
+}
+
+class Renewables15 extends StatelessWidget {
   const Renewables15({super.key});
 
   @override
-  State<Renewables15> createState() => _Renewables15State();
-}
-
-class _Renewables15State extends State<Renewables15> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Flexible Loan Options',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Secured and unsecured loan options tailored to your financial situation.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/fin2.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/fin2.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Flexible Loan Options',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Secured and unsecured loan options tailored to your financial situation.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Flexible Loan Options',
+      description:
+          'Secured and unsecured loan options tailored to your financial situation.',
+      imagePath: 'assets/images/fin2.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-class Renewables16 extends StatefulWidget {
+class Renewables16 extends StatelessWidget {
   const Renewables16({super.key});
 
   @override
-  State<Renewables16> createState() => _Renewables16State();
-}
-
-class _Renewables16State extends State<Renewables16> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Quick Approval Process',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Streamlined applications to enable faster project execution.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/fin4.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/fin4.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Quick Approval Process',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Streamlined applications to enable faster project execution.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Fast Approval Process',
+      description:
+          'Streamlined application process with quick approval timelines for solar financing.',
+      imagePath: 'assets/images/fin1.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-
-
-
-class Renewables17 extends StatefulWidget {
+class Renewables17 extends StatelessWidget {
   const Renewables17({super.key});
 
   @override
-  State<Renewables17> createState() => _Renewables17State();
-}
-
-class _Renewables17State extends State<Renewables17> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Competitive Rates',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Affordable interest rates and payment terms for manageable costs.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/fin3.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Competitive Rates',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Affordable interest rates and payment terms for manageable costs.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/fin3.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Competitive Interest Rates',
+      description:
+          'Enjoy low interest rates, making solar energy affordable and accessible.',
+      imagePath: 'assets/images/fin4.jpg',
+      imageLeft: false,
+    );
   }
 }
 
-
-class Renewables18 extends StatefulWidget {
+class Renewables18 extends StatelessWidget {
   const Renewables18({super.key});
 
   @override
-  State<Renewables18> createState() => _Renewables18State();
-}
-
-class _Renewables18State extends State<Renewables18> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Power Purchase Agreements (PPA)',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "At Solevad Energy , we provide Power Purchase Agreement (PPA) financing 	solutions for solar energy installations, enabling clients to enjoy the benefits 	of solar power without upfront capital investment. Under this model, we design, install, and maintain the solar system on your premises, while you pay only for the power you consume at a lower, predictable rate than traditional electricity sources. This approach helps reduce energy costs, manage cash flow efficiently, and achieve sustainability goals with zero ownership risks.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/fin5.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 500),
-                     child: const Text(
-                           'Power Purchase Agreements (PPA)',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "At Solevad Energy , we provide Power Purchase Agreement (PPA) financing 	solutions for solar energy installations, enabling clients to enjoy the benefits 	of solar power without upfront capital investment. Under this model, we design, install, and maintain the solar system on your premises, while you pay only for the power you consume at a lower, predictable rate than traditional electricity sources. This approach helps reduce energy costs, manage cash flow efficiently, and achieve sustainability goals with zero ownership risk.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/fin5.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Partnered Financing Institutions',
+      description:
+          'We work with reputable financial institutions to provide you with the best financing options for solar installation.',
+      imagePath: 'assets/images/fin3.jpg',
+      imageLeft: false,
+    );
   }
 }

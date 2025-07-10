@@ -1,18 +1,7 @@
-
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:solevad/bloc/screen_offset.dart';
-import 'package:solevad/model/news.dart';
-import 'package:solevad/screen/widget/news_card.dart';
-import 'package:solevad/screen/widget/responsive.dart';
-import 'package:solevad/screen/widget/text_reveal.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
-
 
 class SixthSection extends StatefulWidget {
   const SixthSection({super.key});
@@ -21,749 +10,238 @@ class SixthSection extends StatefulWidget {
   State<SixthSection> createState() => _SixthSectionState();
 }
 
-class _SixthSectionState extends State<SixthSection>
+class _SixthSectionState extends State<SixthSection> {
+  final List<Map<String, String>> services = [
     {
- 
-
-  final services = [
-    // {
-    //   "icon": 'assets/images/vector.jpg',
-    //   "title": "Sustainable Infrastructure"
-    // },
-    // {
-    //   "icon": 'assets/images/vector2.jpg',
-    //   "title": "Renewable Energy Services"
-    // },
-       {
       "icon": 'assets/images/serve1.png',
-      "title": "Solar Development,",
-      'index': "1",
+      "title": "Solar Development",
+      "index": "1",
     },
     {
       "icon": 'assets/images/serve2.png',
       "title": "Energy Management",
-      'index': "2",
+      "index": "2",
     },
     {
       "icon": 'assets/images/serve4.png',
       "title": "Operation and Maintenance",
-      'index': "3",
-
+      "index": "3",
     },
     {
       "icon": 'assets/images/serve3.png',
       "title": "Solar Financing",
-      'index': "4",
-
+      "index": "4",
     },
   ];
 
+  bool isSmallScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width < 800;
+  }
 
-
+  void _navigateToPage(String? index) {
+    switch (index) {
+      case '1':
+        context.go('/products&services/solar-development');
+        break;
+      case '2':
+        context.go('/products&services/energy-management');
+        break;
+      case '3':
+        context.go('/products&services/operation&maintenance');
+        break;
+      case '4':
+        context.go('/products&services/solar-financing');
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
+    final smallScreen = isSmallScreen(context);
 
-    return  ResponsiveWidget.isSmallScreen(context)
-          ?  Container(
+    return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-    decoration: const BoxDecoration(
-                 color: Colors.white,
-                ),
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Animated Title
           DefaultTextStyle(
             style: const TextStyle(
-          fontFamily: 'Mulish',
-         fontSize: 45,
-                              color: Color(0xff32CD32),
-                    fontWeight: FontWeight.w800,
-        ),
+              fontFamily: 'Mulish',
+              fontSize: 45,
+              color: Color(0xff32CD32),
+              fontWeight: FontWeight.w800,
+            ),
             child: AnimatedTextKit(
-            animatedTexts: [
-              TypewriterAnimatedText(
-                'Our Services',
-                speed: const Duration(milliseconds: 100),
-                cursor: '|'
-              ),
-            ],
-            totalRepeatCount: 2,
-            repeatForever: true,
-            pause: const Duration(milliseconds: 10000),
-            displayFullTextOnTap: true,
-            stopPauseOnTap: true,
-                    ),
-          ),
-      
-const SizedBox(height: 30),
-                Center(
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900), // Constrain width for better block layout
-    child: Text(
-      'At Solevad Energy, we offer a comprehensive suite of services designed to meet the energy needs of residential, commercial, and industrial clients, ensuring optimal efficiency and sustainability.',
-      textAlign: TextAlign.justify, // This aligns both edges
-      style: TextStyle(
-        fontSize: screenSize.width * 0.028, // Adjusted for readability
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        height: 1.8,
-      ),
-    ),
-  ),
-),
-                const SizedBox(height: 40),          // Icons row
-         Padding(
-           padding: EdgeInsets.only(
-            left: screenSize.width /25,
-            right: screenSize.width /25,
-           ),
-           child: Column(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             crossAxisAlignment: CrossAxisAlignment.center,
-             children: [
-               Stack(
-                   children: [
-                     // Background image container
-                     InkWell(
-                      onTap: () {
-                                          context.go('/products&services/energy-management');
-
-                      },
-                       child: Container(
-                         height: 250,
-                         width: screenSize.width *0.75,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(1),
-                           image:  const DecorationImage(
-                                   image: AssetImage("assets/images/serve1.png"),
-                                   fit: BoxFit.cover,
-                           ),
-                         ),
-                       ),
-                     ),
-                                 
-                     // Blurred bottom overlay
-                     Positioned(
-                       bottom: 0,
-                       left: 0,
-                       right: 0,
-                       child: InkWell(
-                        onTap: () {
-                                              context.go('/products&services/energy-management');
-
-                        },
-                         child: ClipRRect(
-                           borderRadius: const BorderRadius.only(
-                                   bottomLeft: Radius.circular(1),
-                                   bottomRight: Radius.circular(1),
-                           ),
-                           child: BackdropFilter(
-                                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                   child: Container(
-                                        height: 210 * 0.38, // 10% of height
-                                        color: Colors.black.withOpacity(0.1),
-                                         child:  Padding(
-                                           padding: const EdgeInsets.only(
-                                            left: 10,
-                                           ),
-                                           child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                     const SizedBox(height: 20),          // Icons row
-                         Padding(
-                           padding: const EdgeInsets.only(
-                             right: 10,
-                           ),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                                const Text(
-                                              'Solar Developmet',
-                                 style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold,
-                                   fontSize: 20,
-                                 ),
-                               ),
-                                InkWell(
-                                  onTap: () {
-                                              context.go('/products&services/energy-management');
-                         
-                                  },
-                                  child: Container(
-                                   padding: const EdgeInsets.all(7),
-                                   decoration: const BoxDecoration(
-                                     color: Color(0xff8B4513),
-                                     shape: BoxShape.circle
-                                   ),
-                                    child: const Center(
-                                      child: Icon(
-                                       Icons.arrow_forward_ios_sharp,
-                                       color: Colors.white,
-                                       size: 20,),
-                                    ),
-                                  ),
-                                ),
-                           
-                             ],
-                           ),
-                         ),
-                                           
-                                              ],
-                                            ),
-                                         ), // transparent but blurred
-                                   ),
-                           ),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-            const SizedBox(height: 20),          // Icons row
-                   Stack(
-                   children: [
-                     // Background image container
-                     InkWell(
-                      onTap: () {
-                     context.go('/products&services/energy-management');
-
-                      },
-                       child: Container(
-                         height: 250,
-                         width: screenSize.width *0.75,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(1),
-                           image:  const DecorationImage(
-                                   image: AssetImage("assets/images/serve2.png"),
-                                   fit: BoxFit.cover,
-                           ),
-                         ),
-                       ),
-                     ),
-                                 
-                     // Blurred bottom overlay
-                     Positioned(
-                       bottom: 0,
-                       left: 0,
-                       right: 0,
-                       child: InkWell(
-                        onTap: () {
-                           context.go('/products&services/energy-management');
-                        },
-                         child: ClipRRect(
-                           borderRadius: const BorderRadius.only(
-                                   bottomLeft: Radius.circular(1),
-                                   bottomRight: Radius.circular(1),
-                           ),
-                           child: BackdropFilter(
-                                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                   child: Container(
-                                        height: 210 * 0.38, // 10% of height
-                                        color: Colors.black.withOpacity(0.1),
-                                         child:  Padding(
-                                           padding: const EdgeInsets.only(
-                                            left: 10,
-                                           ),
-                                           child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                     const SizedBox(height: 20),          // Icons row
-                         Padding(
-                           padding: const EdgeInsets.only(
-                             right: 10,
-                           ),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                                const Text(
-                                              'Energy Management',
-                                 style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold,
-                                   fontSize: 16,
-                                 ),
-                               ),
-                                InkWell(
-                                  onTap: () {
-                                context.go('/products&services/energy-management');
-                         
-                                  },
-                                  child: Container(
-                                   padding: const EdgeInsets.all(7),
-                                   decoration: const BoxDecoration(
-                                     color: Color(0xff8B4513),
-                                     shape: BoxShape.circle
-                                   ),
-                                    child: const Center(
-                                      child: Icon(
-                                       Icons.arrow_forward_ios_sharp,
-                                       color: Colors.white,
-                                       size: 20,),
-                                    ),
-                                  ),
-                                ),
-                           
-                             ],
-                           ),
-                         ),
-                                           
-                                              ],
-                                            ),
-                                         ), // transparent but blurred
-                                   ),
-                           ),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-                             const SizedBox(height: 20),          // Icons row
-
-                   Stack(
-                   children: [
-                     // Background image container
-                     InkWell(
-                      onTap: () {
-                                      context.go('/products&services/operation&maintenance');
-
-                      },
-                       child: Container(
-                         height: 250,
-                         width: screenSize.width *0.75,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(1),
-                           image:  const DecorationImage(
-                                   image: AssetImage("assets/images/serve4.png"),
-                                   fit: BoxFit.cover,
-                           ),
-                         ),
-                       ),
-                     ),
-                                 
-                     // Blurred bottom overlay
-                     Positioned(
-                       bottom: 0,
-                       left: 0,
-                       right: 0,
-                       child: InkWell(
-                        onTap: () {
-                              
-              context.go('/products&services/operation&maintenance');
-               
-                        },
-                         child: ClipRRect(
-                           borderRadius: const BorderRadius.only(
-                                   bottomLeft: Radius.circular(1),
-                                   bottomRight: Radius.circular(1),
-                           ),
-                           child: BackdropFilter(
-                                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                   child: Container(
-                                        height: 210 * 0.38, // 10% of height
-                                        color: Colors.black.withOpacity(0.1),
-                                         child:  Padding(
-                                           padding: const EdgeInsets.only(
-                                            left: 10,
-                                           ),
-                                           child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                         const SizedBox(height: 20),
-                         Padding(
-                           padding: const EdgeInsets.only(
-                             right: 10,
-                           ),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                                const Text(
-                                              'Operation & Maintenance',
-                                 style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold,
-                                   fontSize: 16,
-                                 ),
-                               ),
-                                InkWell(
-                                  onTap: () {
-                                               context.go('/products&services/operation&maintenance');
-                         
-                                  },
-                                  child: Container(
-                                   padding: const EdgeInsets.all(7),
-                                   decoration: const BoxDecoration(
-                                     color: Color(0xff8B4513),
-                                     shape: BoxShape.circle
-                                   ),
-                                    child: const Center(
-                                      child: Icon(
-                                       Icons.arrow_forward_ios_sharp,
-                                       color: Colors.white,
-                                       size: 20,),
-                                    ),
-                                  ),
-                                ),
-                           
-                             ],
-                           ),
-                         ),
-                                           
-                                              ],
-                                            ),
-                                         ), // transparent but blurred
-                                   ),
-                           ),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-                 
-                   Stack(
-                   children: [
-                     // Background image container
-                     InkWell(
-                      onTap: () {
-                                      context.go('/products&services/solar-financing');
-
-                      },
-                       child: Container(
-                         height: 250,
-                         width: screenSize.width *0.75,
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(1),
-                           image:  const DecorationImage(
-                                   image: AssetImage("assets/images/serve3.png"),
-                                   fit: BoxFit.cover,
-                           ),
-                         ),
-                       ),
-                     ),
-                                 
-                     // Blurred bottom overlay
-                     Positioned(
-                       bottom: 0,
-                       left: 0,
-                       right: 0,
-                       child: InkWell(
-                        onTap: () {
-                              
-              context.go('/products&services/solar-financing');
-               
-                        },
-                         child: ClipRRect(
-                           borderRadius: const BorderRadius.only(
-                                   bottomLeft: Radius.circular(1),
-                                   bottomRight: Radius.circular(1),
-                           ),
-                           child: BackdropFilter(
-                                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                   child: Container(
-                                        height: 210 * 0.38, // 10% of height
-                                        color: Colors.black.withOpacity(0.1),
-                                         child:  Padding(
-                                           padding: const EdgeInsets.only(
-                                            left: 10,
-                                           ),
-                                           child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                         const SizedBox(height: 20),
-                         Padding(
-                           padding: const EdgeInsets.only(
-                             right: 10,
-                           ),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             children: [
-                                const Text(
-                                              'Solar Financing',
-                                 style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold,
-                                   fontSize: 20,
-                                 ),
-                               ),
-                                InkWell(
-                                  onTap: () {
-                                               context.go('/products&services/solar-financing');
-                         
-                                  },
-                                  child: Container(
-                                   padding: const EdgeInsets.all(7),
-                                   decoration: const BoxDecoration(
-                                     color: Color(0xff8B4513),
-                                     shape: BoxShape.circle
-                                   ),
-                                    child: const Center(
-                                      child: Icon(
-                                       Icons.arrow_forward_ios_sharp,
-                                       color: Colors.white,
-                                       size: 20,),
-                                    ),
-                                  ),
-                                ),
-                           
-                             ],
-                           ),
-                         ),
-                                           
-                                              ],
-                                            ),
-                                         ), // transparent but blurred
-                                   ),
-                           ),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-             ],
-           ),
-         ),
-        
-        ],
-      ),
-    ):
-    
-     Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
-    decoration: const BoxDecoration(
-                color: Colors.white,
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'Our Services',
+                  speed: const Duration(milliseconds: 100),
+                  cursor: '|',
                 ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DefaultTextStyle(
-            style: const TextStyle(
-          fontFamily: 'Mulish',
-         fontSize: 45,
-                              color: Color(0xff32CD32),
-                    fontWeight: FontWeight.w800,
-        ),
-            child: AnimatedTextKit(
-            animatedTexts: [
-              TypewriterAnimatedText(
-                'Our Services',
-                speed: const Duration(milliseconds: 100),
-                cursor: '|'
-              ),
-            ],
-            totalRepeatCount: 2,
-            repeatForever: true,
-            pause: const Duration(milliseconds: 10000),
-            displayFullTextOnTap: true,
-            stopPauseOnTap: true,
-                    ),
+              ],
+              totalRepeatCount: 2,
+              repeatForever: true,
+              pause: const Duration(milliseconds: 10000),
+              displayFullTextOnTap: true,
+              stopPauseOnTap: true,
+            ),
           ),
-      
-const SizedBox(height: 30),
-               Center(
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
-    child: Text(
-      'At Solevad Energy, we offer a comprehensive suite of services designed to meet the energy needs of residential, commercial, and industrial clients, ensuring optimal efficiency and sustainability.',
-      textAlign: TextAlign.justify, // This aligns both edges
-      style: TextStyle(
-        fontSize: screenSize.width * 0.018, // Adjusted for readability
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        height: 1.8,
-      ),
-    ),
-  ),
-),
-                const SizedBox(height: 40),          // Icons row
-         SizedBox(
-          height: 320,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: services.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 1),
-            itemBuilder: (context, index) {
-              final service = services[index];
-              return Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
+          const SizedBox(height: 30),
+
+          // Description
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              constraints: const BoxConstraints(maxWidth: 1100),
+              child: Text(
+                'At Solevad Energy, we offer a comprehensive suite of services designed to meet the energy needs of residential, commercial, and industrial clients, ensuring optimal efficiency and sustainability.',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: smallScreen ? screenSize.width * 0.028 : screenSize.width * 0.018,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  height: 1.8,
                 ),
-                child:    Stack(
-      children: [
-        // Background image container
-        InkWell(
-          onTap: () {
-                if (service["index"]=='1') {
-                        context.go('/products&services/solar-development');
-                  } else if (service["index"]=='2') {
-             context.go('/products&services/energy-management');
-                  } else if(service["index"]=='3') {
-              context.go('/products&services/operation&maintenance');
-                  }else if(service["index"]=='3') {
-              context.go('/products&services/solar-financing');
-                  
-                 } else {
-                    return;
-                  }
-          },
-          child: Container(
-            height: 250,
-            width: 330,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(1),
-              image:  DecorationImage(
-                image: AssetImage(service["icon"]!),
-                fit: BoxFit.cover,
               ),
             ),
           ),
-        ),
+          const SizedBox(height: 40),
 
-        // Blurred bottom overlay
-        Positioned(
-          bottom: 50,
-          left: 0,
-          right: 0,
-          child: InkWell(
-            onTap: () {
-                  if (service["index"]=='1') {
-                        context.go('/services/energy-consulting');
-                  } else if (service["index"]=='2') {
-             context.go('/services/community-development');
-                  } else if(service["index"]=='3') {
-              context.go('/services/business-consulting');
-                  }else {
-                    return;
-                  }
-            },
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(1),
-                bottomRight: Radius.circular(1),
-              ),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  height: 210 * 0.38, // 10% of height
-                  color: Colors.black.withOpacity(0.1),
-                   child:  Padding(
-                     padding: const EdgeInsets.only(
-                      left: 10,
-                     ),
-                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 12),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              right: 10,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                 Text(
-                        service["title"]!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                 InkWell(
-                                  onTap: () {
-                                                 if (service["index"]=='1') {
-                        context.go('/services/energy-consulting');
-                  } else if (service["index"]=='2') {
-             context.go('/services/community-development');
-                  } else if(service["index"]=='3') {
-              context.go('/services/business-consulting');
-                  }else {
-                    return;
-                  }
-                                  },
-                                   child: Container(
-                                    padding: const EdgeInsets.all(7),
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xff8B4513),
-                                      shape: BoxShape.circle
-                                    ),
-                                     child: const Center(
-                                       child: Icon(
-                                        Icons.arrow_forward_ios_sharp,
-                                        color: Colors.white,
-                                        size: 20,),
-                                     ),
-                                   ),
-                                 ),
-                            
-                              ],
-                            ),
-                          ),
-                     
-                        ],
+          // Services
+          smallScreen
+              ? Column(
+                  children: services.map((service) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: AnimatedServiceCard(
+                        icon: service["icon"]!,
+                        title: service["title"]!,
+                        onTap: () => _navigateToPage(service["index"]),
                       ),
-                   ), // transparent but blurred
+                    );
+                  }).toList(),
+                )
+              : Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  alignment: WrapAlignment.center,
+                  children: services.map((service) {
+                    return SizedBox(
+                      width: 500,
+                      child: AnimatedServiceCard(
+                        icon: service["icon"]!,
+                        title: service["title"]!,
+                        onTap: () => _navigateToPage(service["index"]),
+                      ),
+                    );
+                  }).toList(),
+                ),
+        ],
+      ),
+    );
+  }
+}
+
+// 🔥 Reusable Card Widget with Hover Effect
+class AnimatedServiceCard extends StatefulWidget {
+  final String icon;
+  final String title;
+  final VoidCallback onTap;
+
+  const AnimatedServiceCard({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  State<AnimatedServiceCard> createState() => _AnimatedServiceCardState();
+}
+
+class _AnimatedServiceCardState extends State<AnimatedServiceCard> {
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: AnimatedScale(
+        scale: isHovered ? 1.02 : 1.0,
+        duration: const Duration(milliseconds: 300),
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: Stack(
+            children: [
+              // Background Image
+              Container(
+                height: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1),
+                  image: DecorationImage(
+                    image: AssetImage(widget.icon),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
+
+              // Blur Overlay with Text
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(1),
+                    bottomRight: Radius.circular(1),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      height: 90,
+                      color: Colors.black.withOpacity(0.1),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                widget.title,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(7),
+                              decoration: const BoxDecoration(
+                                color: Color(0xff8B4513),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.arrow_forward_ios_sharp,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ],
-    ),
-                
-                
-                // Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                // CircleAvatar(
-                //   backgroundImage:  AssetImage(service["icon"]!),
-                // radius: 70,
-                // ),
-                //                         const SizedBox(height: 12),
-                //     Text(
-                //       service["title"]!,
-                //       textAlign: TextAlign.center,
-                //       style:  const TextStyle(
-                //               color: Colors.white,
-                //            fontSize: 16,
-                //               fontWeight: FontWeight.w500,
-                //               height: 1.4,
-                //             ),
-                //     ),
-                //   ],
-                // ),
-              );
-            },
-          ),
-        ),
-        //   const SizedBox(height: 32),
-        //  ElevatedButton(
-        //                 onPressed: () {
-        //                   //context.go('/Our_Services');
-        //                   context.go('/services');
-        //                 },
-        //                 style: ElevatedButton.styleFrom(
-        //                    shape: RoundedRectangleBorder(
-        //                     borderRadius: BorderRadius.circular(1),
-        //                   ),
-        //                   fixedSize: const Size(170, 45),
-        //                   backgroundColor: const Color(0xff4779A3),
-        //                 ),
-        //                 child: const Text(
-        //                   'Learn more',
-        //                   style: TextStyle(
-        //                     fontSize: 13,
-        //                     color: Color(0xffffffff),
-        //                     fontWeight: FontWeight.bold,
-        //                   ),
-        //                 ),
-        //               ),
-        ],
       ),
     );
   }

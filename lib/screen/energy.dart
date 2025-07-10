@@ -960,564 +960,175 @@ title: ResponsiveWidget.isSmallScreen(context)
 }
 
 
-class Renewables extends StatefulWidget {
+
+class ResponsiveSection extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+  final bool imageLeft;
+
+  const ResponsiveSection({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.imageLeft = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isSmallScreen = ResponsiveWidget.isSmallScreen(context);
+
+    if (isSmallScreen) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 30),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 350,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Large screen layout
+    List<Widget> rowChildren = [
+      Expanded(
+        flex: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.asset(
+            imagePath,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(width: 50),
+      Expanded(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: imageLeft ? rowChildren : rowChildren.reversed.toList(),
+      ),
+    );
+  }
+}
+
+class Renewables extends StatelessWidget {
   const Renewables({super.key});
 
   @override
-  State<Renewables> createState() => _RenewablesState();
-}
-
-class _RenewablesState extends State<Renewables> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
+    return const ResponsiveSection(
+      title: 
                          'Energy Efficiency Conversion Studies',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Transition to energy-efficient systems with our expertise, ensuring maximum savings, enhanced performance, and reduced environmental impact.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/en2.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/en2.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Energy Efficiency Conversion Studies',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Transition to energy-efficient systems with our expertise, ensuring maximum savings, enhanced performance, and reduced environmental impact.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+      description:
+        "Transition to energy-efficient systems with our expertise, ensuring maximum savings, enhanced performance, and reduced environmental impact.",
+      imagePath: 'assets/images/en2.jpg',
+      imageLeft: true,
+    );
   }
 }
 
 
-
-class Renewables4 extends StatefulWidget {
-  const Renewables4({super.key});
-
-  @override
-  State<Renewables4> createState() => _Renewables4State();
-}
-
-class _Renewables4State extends State<Renewables4> {
-  @override
-  Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Measurement & Verification (M&V)',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Ensuring your solar energy system performs efficiently, meets energy production targets, and delivers the expected financial and environmental benefits.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/en4.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/en4.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Measurement & Verification (M&V)',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Ensuring your solar energy system performs efficiently, meets energy production targets, and delivers the expected financial and environmental benefits.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
-  }
-}
-
-
-
-
-
-
-class Renewables3 extends StatefulWidget {
+// Renewables3
+class Renewables3 extends StatelessWidget {
   const Renewables3({super.key});
 
   @override
-  State<Renewables3> createState() => _Renewables3State();
-}
-
-class _Renewables3State extends State<Renewables3> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Cost benefit Analysis',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "We offer comprehensive Cost-Benefit Analysis (CBA) services for solar installations as part of our energy management solutions. Our CBA evaluates the financial feasibility of solar energy investments by comparing total costs with anticipated benefits, ensuring that clients make informed decisions:  our Key Components of Our Cost-Benefit Analysis includes : Cost Assessment, Benefit Evaluation, Return on Investment (ROI).",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/en3.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Cost benefit Analysis',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "We offer comprehensive Cost-Benefit Analysis (CBA) services for solar installations as part of our energy management solutions. Our CBA evaluates the financial feasibility of solar energy investments by comparing total costs with anticipated benefits, ensuring that clients make informed decisions:  our Key Components of Our Cost-Benefit Analysis includes : Cost Assessment, Benefit Evaluation, Return on Investment (ROI).",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/en3.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Cost benefit Analysis',
+      description:
+          "We offer comprehensive Cost-Benefit Analysis (CBA) services for solar installations as part of our energy management solutions. Our CBA evaluates the financial feasibility of solar energy investments by comparing total costs with anticipated benefits, ensuring that clients make informed decisions: our Key Components of Our Cost-Benefit Analysis includes: Cost Assessment, Benefit Evaluation, Return on Investment (ROI).",
+      imagePath: 'assets/images/en3.jpg',
+      imageLeft: false,
+    );
   }
 }
 
+// Renewables4
+class Renewables4 extends StatelessWidget {
+  const Renewables4({super.key});
 
-class Renewables5 extends StatefulWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const ResponsiveSection(
+      title: 'Measurement & Verification (M&V)',
+      description:
+          "Ensuring your solar energy system performs efficiently, meets energy production targets, and delivers the expected financial and environmental benefits.",
+      imagePath: 'assets/images/en4.jpg',
+      imageLeft: true,
+    );
+  }
+}
+
+// Renewables5
+class Renewables5 extends StatelessWidget {
   const Renewables5({super.key});
 
   @override
-  State<Renewables5> createState() => _Renewables5State();
-}
-
-class _Renewables5State extends State<Renewables5> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Compliance and Carbon Footprint Reporting and Environmental Impact Assessment',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "Assisting clients in meeting regulatory standards and demonstrating measurable environmental benefits.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/en5.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 500),
-                     child: const Text(
-                           'Compliance and Carbon Footprint Reporting and Environmental Impact Assessment',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "Assisting clients in meeting regulatory standards and demonstrating measurable environmental benefits.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/en5.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Compliance and Carbon Footprint Reporting and Environmental Impact Assessment',
+      description:
+          "Assisting clients in meeting regulatory standards and demonstrating measurable environmental benefits.",
+      imagePath: 'assets/images/en5.jpg',
+      imageLeft: false,
+    );
   }
 }

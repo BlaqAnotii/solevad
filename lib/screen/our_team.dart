@@ -2378,429 +2378,158 @@ title: ResponsiveWidget.isSmallScreen(context)
 }
 
 
-
-
-class Renewable10 extends StatefulWidget {
+class Renewable10 extends StatelessWidget {
   const Renewable10({super.key});
 
   @override
-  State<Renewable10> createState() => _Renewable10State();
-}
-
-class _Renewable10State extends State<Renewable10> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Market Overview',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "The demand for solar energy in Nigeria is driven by challenges in national power supply and rising fossil fuel costs. Solar technology adoption, including panels, inverters, and batteries, offers a practical solution to frequent power outages while promoting environmental sustainability. Solevad Energy is committed to empowering businesses and households with reliable, cost-effective solar solutions.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/event3.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/event3.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Market Overview',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "The demand for solar energy in Nigeria is driven by challenges in national power supply and rising fossil fuel costs. Solar technology adoption, including panels, inverters, and batteries, offers a practical solution to frequent power outages while promoting environmental sustainability. Solevad Energy is committed to empowering businesses and households with reliable, cost-effective solar solutions.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Market Overview',
+      description:
+          'The demand for solar energy in Nigeria is driven by challenges in national power supply and rising fossil fuel costs. Solar technology adoption, including panels, inverters, and batteries, offers a practical solution to frequent power outages while promoting environmental sustainability. Solevad Energy is committed to empowering businesses and households with reliable, cost-effective solar solutions.',
+      imagePath: 'assets/images/event3.jpg',
+      imageLeft: true,
+    );
   }
 }
 
-
-
-
-
-
-class Renewable11 extends StatefulWidget {
+class Renewable11 extends StatelessWidget {
   const Renewable11({super.key});
 
   @override
-  State<Renewable11> createState() => _Renewable11State();
-}
-
-class _Renewable11State extends State<Renewable11> {
-  @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Our Mission',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
-
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/event2.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
-
-           Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Our Mission',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-         
-             const SizedBox(width: 70),
-           Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/event2.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-             // Right: CEO Image and Name
-             
-           ],
-         ),
-       );
+    return const ResponsiveSection(
+      title: 'Our Mission',
+      description:
+          'To revolutionize energy accessibility by delivering innovative, sustainable solar solutions that exceed client expectations.',
+      imagePath: 'assets/images/event2.jpg',
+      imageLeft: false, // reverse layout
+    );
   }
 }
 
 
 
 
-class Renewable12 extends StatefulWidget {
+class Renewable12 extends StatelessWidget {
   const Renewable12({super.key});
 
   @override
-  State<Renewable12> createState() => _Renewable12State();
+  Widget build(BuildContext context) {
+    return const ResponsiveSection(
+      title: 'Our Vision',
+      description:
+          'To be the foremost partner for solar solutions across Sub-Saharan Africa, empowered by strategic alliances with global leaders in technology, manufacturing, and finance.',
+      imagePath: 'assets/images/event4.jpg',
+      imageLeft: true,
+    );
+  }
 }
 
-class _Renewable12State extends State<Renewable12> {
+class ResponsiveSection extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+  final bool imageLeft;
+
+  const ResponsiveSection({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imagePath,
+    this.imageLeft = true,
+  });
+
   @override
   Widget build(BuildContext context) {
-     return   ResponsiveWidget.isSmallScreen(context)
-          ? 
-              Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Center(
-                     child: Container(
-                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                       child: const Text(
-                         'Our Vision',
-                         style: TextStyle(
-                           color: Color(0xff32CD32),
-                       
-                           fontSize: 26,
-                           fontWeight: FontWeight.w700,
-                         ),
-                       ),
-                     ),
-                   ),
-                                      const SizedBox(height: 20),
+    final isSmallScreen = ResponsiveWidget.isSmallScreen(context);
 
-                   Center(
-                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 900),
-                       child: const Text(
-                       "To be the foremost partner for solar solutions across Sub-Saharan Africa, empowered by strategic alliances with global leaders in technology, manufacturing, and finance.",
-                             textAlign: TextAlign.justify, // This aligns both edges
+    if (isSmallScreen) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 30),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 350,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
 
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                        ),
-                     ),
-                   ),
-                 
-                                      const SizedBox(height: 30),
- Center(
-   child: ClipRRect(
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         'assets/images/event4.jpg', // Replace with your image path
-                         width: 380,
-                         height: 350,
-                         fit: BoxFit.cover,
-                       ),
-                     ),
- ),
-                  
-                 ],
-               ),
-             )
-             :
-       Padding(
-       padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
-         child: Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           children: [
-             // Left: Text Content
+    // Large screen layout
+    List<Widget> rowChildren = [
+      Expanded(
+        flex: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image.asset(
+            imagePath,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(width: 50),
+      Expanded(
+        flex: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xff32CD32),
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              description,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ];
 
-               Expanded(
-               flex: 6,
-               child: Column(
-                 children: [
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                         'assets/images/event4.jpg', // Replace with your image path
-                       width: 620,
-                       height: 350,
-                       fit: BoxFit.cover,
-                     ),
-                   ),
-                   
-                 ],
-               ),
-             ),
-           
-         
-             const SizedBox(width: 70),
-         
-             // Right: CEO Image and Name
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Center(
-                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1000),
-                     child: const Text(
-                           'Our Vision',
-                       style: TextStyle(
-                         color: Color(0xff32CD32),
-                     
-                         fontSize: 26,
-                         fontWeight: FontWeight.w700,
-                       ),
-                     ),
-                   ),
-                 ),
-                 const SizedBox(height: 20),
-                  Center(
-                    child: Container(
-padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 600),
-                      child: const Text(
-                       "To be the foremost partner for solar solutions across Sub-Saharan Africa, empowered by strategic alliances with global leaders in technology, manufacturing, and finance.",
-                             textAlign: TextAlign.justify, // This aligns both edges
-
-                       style: TextStyle(
-                         fontSize: 16,
-                         height: 1.5,
-                       ),
-                                       ),
-                    ),
-                  ),
-                              
-               ],
-             ),
-           ],
-         ),
-       );
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: imageLeft ? rowChildren : rowChildren.reversed.toList(),
+      ),
+    );
   }
 }
 
@@ -2813,275 +2542,159 @@ class Team extends StatefulWidget {
 }
 
 class _TeamState extends State<Team> {
-
   final services = [
-    // {
-    //   "icon": 'assets/images/vector.jpg',
-    //   "title": "Sustainable Infrastructure"
-    // },
-    // {
-    //   "icon": 'assets/images/vector2.jpg',
-    //   "title": "Renewable Energy Services"
-    // },
-       {
+    {
       "icon": 'assets/images/leroy.jpg',
       "title": "CHIEF EXECUTIVE",
-      'index': "1",
     },
     {
-      "icon": 'assets/images/efe.jpg' ,
+      "icon": 'assets/images/efe.jpg',
       "title": "BUSINESS MANAGEMENT",
-      'index': "2",
     },
     {
       "icon": 'assets/images/promise.jpg',
       "title": "OPERATION SERVICES",
-      'index': "3",
-
     },
     {
       "icon": 'assets/images/dona.jpg',
       "title": "PROJECT MANAGEMENT",
-      'index': "4",
-
     },
   ];
+
   @override
   Widget build(BuildContext context) {
-        var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
 
-           return   ResponsiveWidget.isSmallScreen(
-                context)
-            ? Container(
-              margin: const EdgeInsets.only(
-                left: 10, right: 10,
-              ),
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   const SizedBox(
-                      height: 45,
-                    ),
+    return ResponsiveWidget.isSmallScreen(context)
+        ? SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 45),
                 const Center(
-                              child: Text(
-                                                'Management Team',
-                                                style: TextStyle(
-                                                  color: Color(
-                                                      0xff32CD32),
-                                                  fontSize: 20,
-                                                  fontWeight:
-                                                      FontWeight
-                                                          .bold,
-                                                ),
-                                              ),
-                            ),
-                                 
-const SizedBox(height: 30),
-               Center(
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
-    child: Text(
-      'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
-      textAlign: TextAlign.justify, // This aligns both edges
-      style: TextStyle(
-        fontSize: screenSize.width * 0.03, // Adjusted for readability
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        height: 1.8,
-      ),
-    ),
-  ),
-),
-                              const SizedBox(
-                      height: 15,
+                  child: Text(
+                    'Management Team',
+                    style: TextStyle(
+                      color: Color(0xff32CD32),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Center(
-                      child: Container(
-                         padding: const EdgeInsets.all(30),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            )
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                                ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                       'assets/images/leroy.jpg', // Replace with your image path
-                       width: 350,
-                       height: 350,
-                       fit: BoxFit.contain,
-                     ),
-                   ),
-                   const SizedBox(height: 15),
-                   const Text(
-                     'CHIEF EXECUTIVE',
-                     style: TextStyle(
-                       fontSize: 17,
-                       fontWeight: FontWeight.w700,
-                       color: Colors.black87,
-                     ),
-                   ),
-                                      const SizedBox(height: 25),
-
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                       'assets/images/efe.jpg', // Replace with your image path
-                       width: 350,
-                       height: 350,
-                       fit: BoxFit.contain,
-                     ),
-                   ),
-                   const SizedBox(height: 15),
-                   const Text(
-                     'BUSINESS DEVELOPMENT',
-                     style: TextStyle(
-                       fontSize: 17,
-                       fontWeight: FontWeight.w700,
-                       color: Colors.black87,
-                     ),
-                   ),
-                    const SizedBox(height: 25),
-
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                       'assets/images/promise.jpg', // Replace with your image path
-                       width: 350,
-                       height: 350,
-                       fit: BoxFit.contain,
-                     ),
-                   ),
-                   const SizedBox(height: 15),
-                   const Text(
-                     'OPERATION SERVICES',
-                     style: TextStyle(
-                       fontSize: 17,
-                       fontWeight: FontWeight.w700,
-                       color: Colors.black87,
-                     ),
-                   ),
-                    const SizedBox(height: 25),
-
-                   ClipRRect(
-                     borderRadius: BorderRadius.circular(5),
-                     child: Image.asset(
-                       'assets/images/dona.jpg', // Replace with your image path
-                       width: 350,
-                       height: 350,
-                       fit: BoxFit.contain,
-                     ),
-                   ),
-                   const SizedBox(height: 15),
-                   const Text(
-                     'PROJECT DEVELOPMENT',
-                     style: TextStyle(
-                       fontSize: 17,
-                       fontWeight: FontWeight.w700,
-                       color: Colors.black87,
-                     ),
-                   ),
-                                  ],
-                                ),
-                      )
-                    )
-                      
-                                       
-                            ],
-                          ),
-                      
-                    )
-            : Container(
-              margin: const EdgeInsets.only(
-                left: 50, right: 40,
-              ),
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 40,
                   ),
-              const Center(
-                            child: Text(
-                                              'Management Team',
-                                              style: TextStyle(
-                                                color: Color(
-                                                    0xff32CD32),
-                                                fontSize: 30,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .bold,
-                                              ),
-                                            ),
-                          ),
-                          const SizedBox(height: 30),
-               Center(
-  child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-    constraints: const BoxConstraints(maxWidth: 1300), // Constrain width for better block layout
-    child: Text(
-      'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
-      textAlign: TextAlign.justify, // This aligns both edges
-      style: TextStyle(
-        fontSize: screenSize.width * 0.018, // Adjusted for readability
-        color: Colors.black,
-        fontWeight: FontWeight.w500,
-        height: 1.8,
-      ),
-    ),
-  ),
-),
-                            const SizedBox(
-                    height: 40,
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: screenSize.width * 0.04,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    height: 1.8,
                   ),
-                  SizedBox(
-          height: 480,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: services.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 1),
-            itemBuilder: (context, index) {
-              final service = services[index];
-              return Column(
-                children: [
-                  Column(
-                         children: [
-                           ClipRRect(
-                                                borderRadius: BorderRadius.circular(5),
-                                                child: Image.asset(
-                                                  service["icon"]!, // Replace with your image path
-                                                  width: 310,
-                                                  height: 360,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 15),
-                                      Text(
+                ),
+                const SizedBox(height: 30),
+                ...services.map((service) {
+                  return Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.asset(
+                          service["icon"]!,
+                          width: 250,
+                          height: 330,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
                         service["title"]!,
-                   style: const TextStyle(
-                     fontSize: 17,
-                     fontWeight: FontWeight.w700,
-                     color: Colors.black87,
-                   ),
-                                     ),
-                         ],
-                       ),
-                                     
-                  
-                                  
-                ],
-              );
-            },
-          ),
-        ),
-                
-                ],
-              ),
-            );
+                        style: const TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                    ],
+                  );
+                }).toList()
+              ],
+            ),
+          )
+        : SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                const Center(
+                  child: Text(
+                    'Management Team',
+                    style: TextStyle(
+                      color: Color(0xff32CD32),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    constraints: const BoxConstraints(maxWidth: 1300),
+                    child: Text(
+                      'Solevad Energy’s team is built on a foundation of technical excellence, industry expertise, and a shared vision for a sustainable future. Our team consists of highly skilled engineers, experienced project managers, and renewable energy specialists who leverage cutting-edge technologies and innovative strategies to deliver exceptional results. At the helm of our leadership is CEO Leroy Ahwinahwi, whose visionary leadership drives our commitment to excellence. Under his guidance, we foster a culture of collaboration, continuous improvement, and client-centric solutions. With our collective expertise, we develop energy solutions that meet, and often exceed, industry standards, contributing to a greener and more sustainable future.',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.018,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        height: 1.8,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Center(
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 1300),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Wrap(
+                      spacing: 40,
+                      runSpacing: 40,
+                      alignment: WrapAlignment.center,
+                      children: services.map((service) {
+                        return Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.asset(
+                                service["icon"]!,
+                                width: 250,
+                                height: 330,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              service["title"]!,
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ],
+            ),
+          );
   }
 }
 
